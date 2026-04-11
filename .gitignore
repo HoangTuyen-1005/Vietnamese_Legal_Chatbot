@@ -1,0 +1,9 @@
+/venv
+
+/data
+
+/__pycache__
+
+/qdrant_db_data
+
+*.pkl

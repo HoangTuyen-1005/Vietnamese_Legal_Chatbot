@@ -1,0 +1,17 @@
+﻿fastapi
+uvicorn
+pyvi
+rank-bm25
+qdrant-client
+sentence-transformers
+pypdf
+pdfplumber
+pymupdf
+torch==2.5.1+cu121
+torchaudio==2.5.1+cu121
+torchvision==0.20.1+cu121
+tqdm
+fastapi
+transformers
+bitsandbytes
+accelerate
