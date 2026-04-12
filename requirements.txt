@@ -1,4 +1,6 @@
-﻿fastapi
+﻿--extra-index-url https://download.pytorch.org/whl/cu121
+
+fastapi
 uvicorn
 pyvi
 rank-bm25
@@ -7,9 +9,10 @@ sentence-transformers
 pypdf
 pdfplumber
 pymupdf
-torch==2.5.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+torch==2.5.1
+torchvision==0.20.1
+torchaudio==2.5.1
 tqdm
-fastapi
 transformers
 bitsandbytes
 accelerate

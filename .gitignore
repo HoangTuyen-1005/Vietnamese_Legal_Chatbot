@@ -1,6 +1,8 @@
 /venv
 
-/data
+/data/cleaned
+/data/indexes
+/data/metadata
 
 /__pycache__
 
