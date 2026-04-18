@@ -4,8 +4,10 @@
 /data/indexes
 /data/metadata
 
-/__pycache__
+**/__pycache__
 
 /qdrant_db_data
 
-*.pkl
+*.
+
+.env

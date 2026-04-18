@@ -1,74 +1,36 @@
-﻿#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+﻿from __future__ import annotations
 
-"""
-Hierarchical chunking for Vietnamese legal texts.
-
-Pipeline:
-- Read cleaned .txt files
-- Split by legal structure: Chương -> Mục -> Điều -> Khoản -> Điểm
-- Export chunk records with metadata to JSON
-"""
-
-from __future__ import annotations
-
-import argparse
 import json
 import re
-import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 
-# =========================================================
-# 1. Core regex
-# =========================================================
-
-RE_PHAN = re.compile(
-    r"(?im)^\s*Phần\s+(?:thứ\s+\w+|[IVXLCDM0-9]+)\b.*$"
-)
-
-RE_TIEU_MUC = re.compile(
-    r"(?im)^\s*Tiểu mục\s+[IVXLCDM0-9]+\b.*$"
-)
-
-# Match only one heading line (no cross-line capture)
+RE_PHAN = re.compile(r"(?im)^\s*Phần\s+(?:thứ\s+\w+|[IVXLCDM0-9]+)\b.*$")
+RE_TIEU_MUC = re.compile(r"(?im)^\s*Tiểu mục\s+[IVXLCDM0-9]+\b.*$")
 RE_CHUONG = re.compile(
     r"(?im)^[ \t]*(Chương\s+[IVXLCDM0-9]+)(?:[ \t]*(?:[.\-:][ \t]*|[ \t]+)([^\n]+))?[ \t]*$"
 )
-
 RE_MUC = re.compile(
     r"(?im)^[ \t]*(Mục\s+[IVXLCDM0-9]+)(?:[ \t]*(?:[.\-:][ \t]*|[ \t]+)([^\n]+))?[ \t]*$"
 )
-
 RE_DIEU = re.compile(
     r"(?im)^[ \t]*(Điều\s+\d+[A-Za-z]?)[ \t]*(?:[.\-:][ \t]*)?([^\n]*)[ \t]*$"
 )
-
-# Clause markers: 1. ...
 RE_KHOAN = re.compile(r"(?im)^\s*(\d+)\.\s+")
-
-# Point markers: a) ... / đ) ...
 RE_DIEM = re.compile(r"(?im)^\s*([a-zA-ZđĐ])\)\s+")
 
-# Document-level metadata
 RE_SO_HIEU = re.compile(
     r"(?im)\b(\d{1,4}/(?:\d{4}/)?[A-ZĐ0-9\-]+(?:/[A-Z0-9\-]+)?)\b"
 )
-
 RE_LOAI_VAN_BAN = re.compile(
     r"(?im)\b(Luật|Bộ luật|Nghị định|Thông tư|Thông tư liên tịch|Nghị quyết|Quyết định|Pháp lệnh|Hiến pháp)\b"
 )
-
 RE_NGAY_BAN_HANH = re.compile(
     r"(?im)(?:ngày|ban hành ngày)\s+((?:\d{1,2}[/-]\d{1,2}[/-]\d{4})|(?:\d{1,2}\s+tháng\s+\d{1,2}\s+năm\s+\d{4}))"
 )
 
-
-# =========================================================
-# 2. Data model
-# =========================================================
 
 @dataclass
 class ChunkRecord:
@@ -91,11 +53,6 @@ class ChunkRecord:
     text: str = ""
 
 
-# =========================================================
-# 3. Normalization / utility
-# =========================================================
-
-
 def normalize_text(text: str) -> str:
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     text = re.sub(r"[ \t]+", " ", text)
@@ -113,6 +70,7 @@ def safe_strip(value: Optional[str]) -> Optional[str]:
 def normalize_doc_type(value: Optional[str]) -> Optional[str]:
     if not value:
         return None
+
     lookup = {
         "luật": "Luật",
         "bộ luật": "Bộ luật",
@@ -126,12 +84,6 @@ def normalize_doc_type(value: Optional[str]) -> Optional[str]:
     }
     key = value.strip().lower()
     return lookup.get(key, value.strip())
-
-
-def safe_console_print(message: str) -> None:
-    encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
-    safe_message = message.encode(encoding, errors="replace").decode(encoding, errors="replace")
-    print(safe_message)
 
 
 def is_structure_line(line: str) -> bool:
@@ -164,14 +116,15 @@ def is_probable_title_line(line: str, strict_upper: bool) -> bool:
     if strict_upper:
         return uppercase_ratio(s) >= 0.72 and len(s) <= 180
 
-    # For article titles we allow title-case, but avoid common body sentence endings.
     if len(s) > 130:
         return False
     if re.search(r"[.;:,]$", s):
         return False
+
     words = s.split()
     if len(words) > 20:
         return False
+
     return s[0].isupper()
 
 
@@ -180,10 +133,6 @@ def extract_title_after_marker(
     strict_upper: bool,
     max_lines: int = 2,
 ) -> Tuple[Optional[str], str]:
-    """
-    Try to read title lines immediately after a heading marker line.
-    Returns: (title or None, section_text_with_consumed_title_removed)
-    """
     lines = [ln.rstrip() for ln in section_text.splitlines()]
     if len(lines) <= 1:
         return None, section_text.strip()
@@ -218,7 +167,11 @@ def extract_title_after_marker(
     return " ".join(title_lines).strip(), "\n".join(kept_lines).strip()
 
 
-def ensure_dieu_title_in_text(dieu_text: str, dieu_label: Optional[str], ten_dieu: Optional[str]) -> str:
+def ensure_dieu_title_in_text(
+    dieu_text: str,
+    dieu_label: Optional[str],
+    ten_dieu: Optional[str],
+) -> str:
     if not dieu_text or not dieu_label or not ten_dieu:
         return dieu_text
 
@@ -238,36 +191,8 @@ def ensure_dieu_title_in_text(dieu_text: str, dieu_label: Optional[str], ten_die
     return dieu_text
 
 
-# =========================================================
-# 4. Document metadata extraction
-# =========================================================
-
-
-def extract_document_metadata(text: str, file_name: str) -> Dict[str, Optional[str]]:
-    header_zone = text[:5000]
-
-    so_hieu_match = RE_SO_HIEU.search(header_zone)
-    loai_match = RE_LOAI_VAN_BAN.search(header_zone)
-    ngay_match = RE_NGAY_BAN_HANH.search(header_zone)
-
-    ngay_ban_hanh = safe_strip(ngay_match.group(1)) if ngay_match else None
-
-    loai_van_ban = normalize_doc_type(loai_match.group(1) if loai_match else None)
-    if not loai_van_ban:
-        loai_van_ban = infer_doc_type_from_filename(file_name)
-
-    return {
-        "document_name": Path(file_name).stem,
-        "so_hieu": so_hieu_match.group(1) if so_hieu_match else None,
-        "loai_van_ban": loai_van_ban,
-        "ngay_ban_hanh": ngay_ban_hanh,
-    }
-
-
 def infer_doc_type_from_filename(file_name: str) -> Optional[str]:
     lower = file_name.lower()
-
-    # Keep specific matches before generic ones
     if "bo_luat" in lower:
         return "Bộ luật"
     if "nghi_dinh" in lower or "_nd_" in lower:
@@ -283,16 +208,28 @@ def infer_doc_type_from_filename(file_name: str) -> Optional[str]:
     return None
 
 
-# =========================================================
-# 5. Split by heading marker
-# =========================================================
+def extract_document_metadata(text: str, file_name: str = "document.txt") -> Dict[str, Optional[str]]:
+    header_zone = text[:5000]
+
+    so_hieu_match = RE_SO_HIEU.search(header_zone)
+    loai_match = RE_LOAI_VAN_BAN.search(header_zone)
+    ngay_match = RE_NGAY_BAN_HANH.search(header_zone)
+
+    ngay_ban_hanh = safe_strip(ngay_match.group(1)) if ngay_match else None
+    loai_van_ban = normalize_doc_type(loai_match.group(1) if loai_match else None)
+
+    if not loai_van_ban:
+        loai_van_ban = infer_doc_type_from_filename(file_name)
+
+    return {
+        "document_name": Path(file_name).stem,
+        "so_hieu": so_hieu_match.group(1) if so_hieu_match else None,
+        "loai_van_ban": loai_van_ban,
+        "ngay_ban_hanh": ngay_ban_hanh,
+    }
 
 
 def split_by_pattern(text: str, pattern: re.Pattern) -> List[Tuple[str, str, int, int]]:
-    """
-    Split text into sections using heading markers.
-    Returns tuples: (heading, section_text, start_idx, end_idx)
-    """
     matches = list(pattern.finditer(text))
     if not matches:
         return []
@@ -320,17 +257,7 @@ def split_by_pattern(text: str, pattern: re.Pattern) -> List[Tuple[str, str, int
     return sections
 
 
-# =========================================================
-# 6. Split points in one clause
-# =========================================================
-
-
 def split_diem_in_khoan(khoan_text: str) -> List[Dict[str, str]]:
-    """
-    Split one clause into points.
-    If a clause has intro text before point markers (a), b), ...),
-    we prepend that intro to each point chunk so context is not lost.
-    """
     diem_matches = list(RE_DIEM.finditer(khoan_text))
     if not diem_matches:
         return []
@@ -354,16 +281,7 @@ def split_diem_in_khoan(khoan_text: str) -> List[Dict[str, str]]:
     return diem_sections
 
 
-# =========================================================
-# 7. Split clauses in one article
-# =========================================================
-
-
 def split_khoan_in_dieu(dieu_text: str) -> List[Dict[str, Any]]:
-    """
-    Split one article into clauses.
-    If no numbered clauses exist, return [].
-    """
     matches = list(RE_KHOAN.finditer(dieu_text))
     if not matches:
         return []
@@ -381,11 +299,6 @@ def split_khoan_in_dieu(dieu_text: str) -> List[Dict[str, Any]]:
         })
 
     return result
-
-
-# =========================================================
-# 8. Parse heading fields
-# =========================================================
 
 
 def parse_chuong_heading(heading: str) -> Tuple[Optional[str], Optional[str]]:
@@ -409,11 +322,6 @@ def parse_dieu_heading(heading: str) -> Tuple[Optional[str], Optional[str]]:
     return safe_strip(m.group(1)), safe_strip(m.group(2))
 
 
-# =========================================================
-# 9. Chunk by hierarchy
-# =========================================================
-
-
 def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
     text = normalize_text(text)
     doc_meta = extract_document_metadata(text, file_name)
@@ -426,7 +334,6 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
         chunk_counter += 1
         return f"{doc_meta['document_name']}_{chunk_counter:06d}"
 
-    # Prefer splitting by chapter. If not found, process whole doc as one root block.
     chuong_sections = split_by_pattern(text, RE_CHUONG)
     pseudo_root = chuong_sections if chuong_sections else [("NO_CHUONG", text, 0, len(text))]
 
@@ -435,21 +342,15 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
             chuong_label, ten_chuong = None, None
         else:
             chuong_label, ten_chuong = parse_chuong_heading(chuong_heading)
-
-            # Fill chapter title from following uppercase line(s) when missing.
             if ten_chuong:
                 continuation, chuong_text = extract_title_after_marker(
-                    chuong_text,
-                    strict_upper=True,
-                    max_lines=2,
+                    chuong_text, strict_upper=True, max_lines=2
                 )
                 if continuation:
                     ten_chuong = f"{ten_chuong} {continuation}".strip()
             else:
                 inferred, chuong_text = extract_title_after_marker(
-                    chuong_text,
-                    strict_upper=True,
-                    max_lines=2,
+                    chuong_text, strict_upper=True, max_lines=2
                 )
                 ten_chuong = inferred
 
@@ -462,27 +363,19 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
                 muc_label, ten_muc = None, None
             else:
                 muc_label, ten_muc = parse_muc_heading(muc_heading)
-
-                # Fill/extend section title for wrapped headings.
                 if ten_muc:
                     continuation, muc_text = extract_title_after_marker(
-                        muc_text,
-                        strict_upper=True,
-                        max_lines=2,
+                        muc_text, strict_upper=True, max_lines=2
                     )
                     if continuation:
                         ten_muc = f"{ten_muc} {continuation}".strip()
                 else:
                     inferred, muc_text = extract_title_after_marker(
-                        muc_text,
-                        strict_upper=True,
-                        max_lines=2,
+                        muc_text, strict_upper=True, max_lines=2
                     )
                     ten_muc = inferred
 
             dieu_sections = split_by_pattern(muc_text, RE_DIEU)
-
-            # Skip blocks that do not contain real article markers.
             if not dieu_sections:
                 continue
 
@@ -490,12 +383,9 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
                 dieu_label, ten_dieu = parse_dieu_heading(dieu_heading)
                 had_inline_title = bool(ten_dieu)
 
-                # If article title is on the next line, infer it once.
                 if not ten_dieu:
                     inferred, dieu_text = extract_title_after_marker(
-                        dieu_text,
-                        strict_upper=False,
-                        max_lines=1,
+                        dieu_text, strict_upper=False, max_lines=1
                     )
                     ten_dieu = inferred
 
@@ -503,10 +393,8 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
                     dieu_text = ensure_dieu_title_in_text(dieu_text, dieu_label, ten_dieu)
 
                 khoan_sections = split_khoan_in_dieu(dieu_text)
-
                 parent_path = [x for x in [chuong_label, muc_label, dieu_label] if x]
 
-                # Case 1: article has no clauses -> chunk at article level.
                 if not khoan_sections:
                     records.append(
                         ChunkRecord(
@@ -531,13 +419,11 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
                     )
                     continue
 
-                # Case 2: article has clauses.
                 for khoan_obj in khoan_sections:
                     khoan_label = f"Khoản {khoan_obj['khoan']}"
                     khoan_text = khoan_obj["text"].strip()
                     diem_sections = split_diem_in_khoan(khoan_text)
 
-                    # Case 2a: clause has no points -> chunk at clause level.
                     if not diem_sections:
                         records.append(
                             ChunkRecord(
@@ -562,7 +448,6 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
                         )
                         continue
 
-                    # Case 2b: clause has points -> chunk at point level.
                     for diem_obj in diem_sections:
                         diem_label = f"Điểm {diem_obj['diem']}"
                         records.append(
@@ -590,89 +475,42 @@ def chunk_document(text: str, file_name: str) -> List[ChunkRecord]:
     return records
 
 
-# =========================================================
-# 10. Directory processing
-# =========================================================
+def _record_to_new_chunk(record: ChunkRecord) -> dict:
+    data = asdict(record)
+    text = data.pop("text", "").strip()
+
+    metadata = {
+        "source_file": data.get("source_file"),
+        "document_name": data.get("document_name"),
+        "so_hieu": data.get("so_hieu"),
+        "loai_van_ban": data.get("loai_van_ban"),
+        "ngay_ban_hanh": data.get("ngay_ban_hanh"),
+        "chuong": data.get("chuong"),
+        "ten_chuong": data.get("ten_chuong"),
+        "muc": data.get("muc"),
+        "ten_muc": data.get("ten_muc"),
+        "dieu": data.get("dieu"),
+        "ten_dieu": data.get("ten_dieu"),
+        "khoan": data.get("khoan"),
+        "diem": data.get("diem"),
+        "cap_chunk": data.get("cap_chunk"),
+        "parent_path": data.get("parent_path", []),
+    }
+
+    return {
+        "chunk_id": data["chunk_id"],
+        "content": text,
+        "metadata": metadata,
+    }
 
 
-def resolve_input_dir(input_dir: str) -> Path:
-    input_path = Path(input_dir)
-    if input_path.exists():
-        return input_path
-
-    fallback = Path("cleaned_output")
-    if input_path.as_posix() == "data/cleaned" and fallback.exists():
-        safe_console_print(
-            f"[WARN] Input dir '{input_path.as_posix()}' not found, fallback to '{fallback.as_posix()}'."
-        )
-        return fallback
-
-    raise FileNotFoundError(f"Input directory not found: {input_dir}")
+def chunk_legal_document(text: str, file_name: str = "document.txt") -> List[dict]:
+    records = chunk_document(text, file_name)
+    return [_record_to_new_chunk(record) for record in records]
 
 
-def process_directory(input_dir: str, output_file: str) -> None:
-    input_path = resolve_input_dir(input_dir)
-
-    txt_files = sorted(input_path.glob("*.txt"))
-    if not txt_files:
-        fallback = Path("cleaned_output")
-        if input_path.as_posix() == "data/cleaned" and fallback.exists():
-            txt_files = sorted(fallback.glob("*.txt"))
-            if txt_files:
-                safe_console_print(
-                    "[WARN] data/cleaned has no .txt files, fallback to cleaned_output."
-                )
-                input_path = fallback
-
-        if not txt_files:
-            raise FileNotFoundError(f"No .txt files found in: {input_path.as_posix()}")
-
-    all_records: List[ChunkRecord] = []
-
-    for txt_file in txt_files:
-        raw_text = txt_file.read_text(encoding="utf-8")
-        records = chunk_document(raw_text, txt_file.name)
-        all_records.extend(records)
-        safe_console_print(f"[OK] {txt_file.name}: {len(records)} chunks")
-
-    output_path = Path(output_file)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    with output_path.open("w", encoding="utf-8") as f:
-        json.dump([asdict(r) for r in all_records], f, ensure_ascii=False, indent=2)
-
-    safe_console_print(f"[DONE] Wrote {len(all_records)} chunks to: {output_path.as_posix()}")
-
-
-# =========================================================
-# 11. CLI
-# =========================================================
-
-
-def build_argparser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Hierarchical chunking for Vietnamese legal texts."
-    )
-    parser.add_argument(
-        "--input_dir",
-        type=str,
-        default="data/cleaned",
-        help="Directory containing cleaned .txt files (default: data/cleaned).",
-    )
-    parser.add_argument(
-        "--output_file",
-        type=str,
-        default="data/metadata/processed_data.json",
-        help="Output JSON path (default: data/metadata/processed_data.json).",
-    )
-    return parser
-
-
-def main() -> None:
-    parser = build_argparser()
-    args = parser.parse_args()
-    process_directory(args.input_dir, args.output_file)
-
-
-if __name__ == "__main__":
-    main()
+def save_chunks_to_json(chunks: List[dict], output_path: str) -> None:
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(chunks, f, ensure_ascii=False, indent=2)
