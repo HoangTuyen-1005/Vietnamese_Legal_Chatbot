@@ -2,6 +2,7 @@
 
 fastapi
 uvicorn
+gradio
 pyvi
 rank-bm25
 qdrant-client
@@ -9,6 +10,7 @@ sentence-transformers
 pypdf
 pdfplumber
 pymupdf
+pydantic
 pydantic_settings
 torch==2.5.1
 torchvision==0.20.1
