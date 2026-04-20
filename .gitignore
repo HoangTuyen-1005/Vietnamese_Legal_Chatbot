@@ -1,0 +1,13 @@
+/venv
+
+/data/cleaned
+/data/indexes
+/data/metadata
+
+**/__pycache__
+
+/qdrant_db_data
+
+*.
+
+.env
