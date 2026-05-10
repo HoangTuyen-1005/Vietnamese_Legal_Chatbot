@@ -11,6 +11,9 @@ from shared.config_utils import find_env_file, normalize_legacy_path
 _ENV_FILE = find_env_file(Path(__file__).resolve().parent)
 
 _LEGACY_PATH_MAP = {
+    "data/raw": "data_pipeline/data/raw",
+    "data/cleaned": "data_pipeline/data/cleaned",
+    "data/processed": "data_pipeline/data/processed",
     "data/indexes/bm25_index.pkl": "data_pipeline/data/indexes/bm25_index.pkl",
     "data/indexes/bm25_docs.pkl": "data_pipeline/data/indexes/bm25_docs.pkl",
     "data/indexes/qdrant_db": "data_pipeline/data/indexes/qdrant_db",
@@ -33,8 +36,13 @@ class RagEngineSettings(BaseSettings):
     QDRANT_URL: str | None = None
     QDRANT_HOST: str = "localhost"
     QDRANT_PORT: int = 6333
+    QDRANT_API_KEY: str | None = None
     QDRANT_COLLECTION: str = "legal_documents"
     QDRANT_PATH: str | None = None
+
+    RAW_DATA_DIR: str = "data_pipeline/data/raw"
+    CLEANED_DATA_DIR: str = "data_pipeline/data/cleaned"
+    PROCESSED_DATA_DIR: str = "data_pipeline/data/processed"
 
     BM25_INDEX_PATH: str = "data_pipeline/data/indexes/bm25_index.pkl"
     BM25_DOCS_PATH: str = "data_pipeline/data/indexes/bm25_docs.pkl"
@@ -124,6 +132,9 @@ class RagEngineSettings(BaseSettings):
         return parsed
 
     @field_validator(
+        "RAW_DATA_DIR",
+        "CLEANED_DATA_DIR",
+        "PROCESSED_DATA_DIR",
         "BM25_INDEX_PATH",
         "BM25_DOCS_PATH",
         "QDRANT_PATH",

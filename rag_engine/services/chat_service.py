@@ -95,7 +95,7 @@ class ChatService:
             f"Reranked to {len(reranked_chunks)} chunks in {rerank_ms:.2f} ms"
         )
 
-        if self._should_refuse_after_rerank(reranked_chunks):
+        if self._should_refuse_after_rerank(reranked_chunks, query_profile):
             latency_ms = (time.perf_counter() - start_time) * 1000
             return {
                 "question": question,
@@ -207,8 +207,8 @@ class ChatService:
     def _should_refuse_answer(self, chunks: list[dict], query_profile: dict) -> bool:
         return should_refuse_after_retrieval(chunks, query_profile=query_profile)
 
-    def _should_refuse_after_rerank(self, chunks: list[dict]) -> bool:
-        return should_refuse_after_rerank(chunks)
+    def _should_refuse_after_rerank(self, chunks: list[dict], query_profile: dict) -> bool:
+        return should_refuse_after_rerank(chunks, query_profile=query_profile)
 
     def _is_incomplete_generated_answer(self, answer: str) -> bool:
         text = (answer or "").strip()

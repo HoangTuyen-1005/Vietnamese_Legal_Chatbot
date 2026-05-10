@@ -33,11 +33,18 @@ class VectorStore:
     def _init_client(self) -> None:
         qdrant_path = getattr(self.settings, "QDRANT_PATH", None)
         qdrant_url = getattr(self.settings, "QDRANT_URL", None)
+        qdrant_api_key = getattr(self.settings, "QDRANT_API_KEY", None)
+
         qdrant_path = qdrant_path.strip() if isinstance(qdrant_path, str) else qdrant_path
         qdrant_url = qdrant_url.strip() if isinstance(qdrant_url, str) else qdrant_url
+        qdrant_api_key = qdrant_api_key.strip() if isinstance(qdrant_api_key, str) else qdrant_api_key
 
         if qdrant_url:
-            self.client = QdrantClient(url=qdrant_url)
+            self.client = QdrantClient(
+                url=qdrant_url, 
+                api_key=qdrant_api_key,
+                timeout=60
+            )
         elif qdrant_path:
             self.client = QdrantClient(path=qdrant_path)
         else:
@@ -100,7 +107,7 @@ class VectorStore:
         self.create_collection_if_not_exists()
         self._law_catalog_cache = None
 
-    def index_chunks(self, chunks: List[dict], batch_size: int = 32) -> None:
+    def index_chunks(self, chunks: List[dict], batch_size: int = 256) -> None:
         if self.client is None or self.embedding_model is None:
             raise RuntimeError("VectorStore is not initialized.")
 

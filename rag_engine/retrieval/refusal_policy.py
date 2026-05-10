@@ -96,13 +96,45 @@ def _keyword_coverage(query_keywords: list[str], chunks: Sequence[dict]) -> floa
             _safe_text(meta.get("dieu")),
             _safe_text(chunk.get("content", ""))[:600],
         ])
+        chunk_norm = _normalize_for_match(chunk_text)
         chunk_tokens = set(_tokenize_for_match(chunk_text))
         if not chunk_tokens:
             continue
 
         matched = len(query_set.intersection(chunk_tokens))
-        best = max(best, matched / max(len(query_set), 1))
+        token_coverage = matched / max(len(query_set), 1)
+        if len(query_set) >= 3 and matched < 2:
+            token_coverage = min(token_coverage, 0.03)
 
+        phrase_coverage = 0.0
+        for kw in query_keywords[:20]:
+            kw_norm = _normalize_for_match(kw)
+            if " " in kw_norm and len(kw_norm) >= 6 and kw_norm in chunk_norm:
+                phrase_coverage = 0.35
+                break
+
+        best = max(best, token_coverage, phrase_coverage)
+
+    return best
+
+
+def _max_law_overlap(mentioned_law: str, chunks: Sequence[dict]) -> float:
+    overlap = 0.0
+    for chunk in chunks:
+        overlap = max(
+            overlap,
+            _law_overlap_with_metadata(mentioned_law, chunk.get("metadata", {})),
+        )
+    return overlap
+
+
+def _max_metadata_boost(chunks: Sequence[dict]) -> float:
+    best = 0.0
+    for chunk in chunks:
+        try:
+            best = max(best, float(chunk.get("metadata_boost") or 0.0))
+        except (TypeError, ValueError):
+            continue
     return best
 
 
@@ -118,7 +150,7 @@ def should_refuse_after_retrieval(
 
     if query_profile is None:
         distinct_sources = _distinct_source_count(top_chunks)
-        return top_score < 0.01 or (distinct_sources >= 3 and top_score < 0.02)
+        return top_score <= 0.0 or (distinct_sources >= 4 and top_score < 0.008)
 
     mentioned_law = _safe_text(query_profile.get("mentioned_law"))
     keywords = [str(x) for x in (query_profile.get("keywords") or []) if len(str(x)) >= 2]
@@ -126,38 +158,54 @@ def should_refuse_after_retrieval(
     coverage = _keyword_coverage(keywords, top_chunks)
 
     if mentioned_law:
-        overlap = 0.0
-        for chunk in top_chunks:
-            overlap = max(
-                overlap,
-                _law_overlap_with_metadata(mentioned_law, chunk.get("metadata", {})),
-            )
+        overlap = _max_law_overlap(mentioned_law, top_chunks)
 
-        if overlap < 0.34:
-            return True
+        # Retrieval is only the first gate. If either law metadata or content
+        # keywords look plausible, let reranking and the final prompt decide.
+        if overlap >= 0.20 or coverage >= 0.08:
+            return False
+        return top_score < 0.012 and coverage < 0.05
 
-        if coverage < 0.08 and top_score < 0.025:
-            return True
-
-    else:
-        distinct_sources = _distinct_source_count(top_chunks)
-        if coverage < 0.08 and top_score < 0.02:
-            return True
-        if coverage < 0.05 and distinct_sources >= 3:
-            return True
-
-    if _distinct_source_count(top_chunks) >= 4 and top_score < 0.03 and coverage < 0.18:
-        return True
-
-    return False
+    distinct_sources = _distinct_source_count(top_chunks)
+    return top_score < 0.012 and coverage < 0.04 and distinct_sources >= 4
 
 
-def should_refuse_after_rerank(chunks: Sequence[dict]) -> bool:
+def should_refuse_after_rerank(
+    chunks: Sequence[dict],
+    query_profile: dict | None = None,
+) -> bool:
     if not chunks:
         return True
 
+    top_chunks = chunks[:5]
     top_rerank_score = float(chunks[0].get("rerank_score") or 0.0)
-    return top_rerank_score < 0.10
+    if query_profile is None:
+        return top_rerank_score < -1.0
+
+    mentioned_law = _safe_text(query_profile.get("mentioned_law"))
+    keywords = [str(x) for x in (query_profile.get("keywords") or []) if len(str(x)) >= 2]
+    coverage = _keyword_coverage(keywords, top_chunks)
+    law_overlap = _max_law_overlap(mentioned_law, top_chunks) if mentioned_law else 0.0
+    metadata_boost = _max_metadata_boost(top_chunks)
+
+    if (
+        top_rerank_score >= 0.05
+        or coverage >= 0.12
+        or law_overlap >= 0.20
+        or metadata_boost >= 0.15
+    ):
+        return False
+
+    # Cross-encoder scores are not stable enough to be a single hard refusal
+    # signal, so refuse only when every supporting signal is also weak.
+    if mentioned_law:
+        return top_rerank_score < -1.0 and coverage < 0.04 and law_overlap < 0.10
+
+    return (
+        top_rerank_score < -1.0
+        and coverage < 0.04
+        and metadata_boost <= 0.0
+    )
 
 
 def is_refusal_answer(answer: str) -> bool:

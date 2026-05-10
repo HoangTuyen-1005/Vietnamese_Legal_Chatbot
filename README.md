@@ -14,6 +14,7 @@ The system uses legal-aware document chunking, hybrid retrieval, reranking, and 
 
 ## Project Structure
 
+```text
 Vietnamese_Legal_Chatbot/
 │
 ├── app/
@@ -54,6 +55,7 @@ Vietnamese_Legal_Chatbot/
 ├── requirements.txt
 ├── README.md
 └── run.py
+```
 
 ## How to Run
 
