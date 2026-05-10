@@ -1,15 +1,28 @@
+<<<<<<< HEAD
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+requests
+bs4
+pypdf
+pdfplumber
+pymupdf
+=======
 ﻿--extra-index-url https://download.pytorch.org/whl/cu121
 
 fastapi
 uvicorn
 gradio
+>>>>>>> origin/main
 pyvi
 rank-bm25
 qdrant-client
 sentence-transformers
+<<<<<<< HEAD
+=======
 pypdf
 pdfplumber
 pymupdf
+>>>>>>> origin/main
 pydantic
 pydantic_settings
 torch==2.5.1
@@ -19,4 +32,7 @@ tqdm
 transformers
 bitsandbytes
 accelerate
+<<<<<<< HEAD
+=======
 google-generativeai
+>>>>>>> origin/main
