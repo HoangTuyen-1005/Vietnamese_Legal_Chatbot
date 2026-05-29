@@ -1,3 +1,6 @@
 gradio
 pydantic
 pydantic_settings
+sqlalchemy
+psycopg2-binary
+bcrypt

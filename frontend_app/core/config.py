@@ -9,6 +9,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from shared.config_utils import find_env_file
 
 _ENV_FILE = find_env_file(Path(__file__).resolve().parent)
+_APP_ROOT = Path(__file__).resolve().parents[1]
+_DEFAULT_DATABASE_URL = f"sqlite:///{(_APP_ROOT / 'app_data.sqlite3').as_posix()}"
 
 
 class FrontendSettings(BaseSettings):
@@ -21,6 +23,7 @@ class FrontendSettings(BaseSettings):
 
     RAG_ENGINE_BASE_URL: str = "http://127.0.0.1:8000"
     REQUEST_TIMEOUT_SECONDS: int = 120
+    DATABASE_URL: str = _DEFAULT_DATABASE_URL
 
     model_config = SettingsConfigDict(
         env_file=_ENV_FILE,
@@ -48,6 +51,15 @@ class FrontendSettings(BaseSettings):
         if parsed <= 0:
             raise ValueError("REQUEST_TIMEOUT_SECONDS must be > 0.")
         return parsed
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def parse_database_url(cls, value):
+        if value is None:
+            return _DEFAULT_DATABASE_URL
+
+        parsed = str(value).strip()
+        return parsed or _DEFAULT_DATABASE_URL
 
     @field_validator("FRONTEND_PORT", mode="before")
     @classmethod
