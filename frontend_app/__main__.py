@@ -54,7 +54,7 @@ def _build_theme():
     )
 
 
-def main():
+if __name__ == "__main__":
     current_dir = os.path.dirname(os.path.abspath(__file__))
     assets_dir = os.path.join(current_dir, "assets")
     gradio_temp_dir = os.path.join(current_dir, ".gradio_temp")
@@ -95,7 +95,3 @@ def main():
     else:
         print("Running on public URL: Da tat bang GRADIO_SHARE=0.", flush=True)
     demo.block_thread()
-
-
-if __name__ == "__main__":
-    main()
