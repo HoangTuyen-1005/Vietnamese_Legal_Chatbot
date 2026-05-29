@@ -2,7 +2,7 @@
 
 /data/cleaned
 /data/indexes
-/data/metadata
+/data/processed
 
 **/__pycache__
 
@@ -11,3 +11,5 @@
 *.
 
 .env
+
+/rag_engine/eval/ragas_runs

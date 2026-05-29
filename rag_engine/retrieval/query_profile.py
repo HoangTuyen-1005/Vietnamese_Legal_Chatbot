@@ -20,15 +20,15 @@ LEGAL_QUERY_TYPES = [
 LAW_MENTION_PATTERNS = [
     r"\b\d{1,3}/\d{4}/qh\d+\b",
     r"\b\d{1,3}/vbhn-vpqh\b",
-    r"\bbộ luật\s+[^\?,\.;:\n]+?(?=\s+(quy|được|là|gì|theo|những|bao|ở|gồm)\b|$)",
-    r"\bluật\s+[^\?,\.;:\n]+?(?=\s+(quy|được|là|gì|theo|những|bao|ở|gồm)\b|$)",
+    r"\bbộ luật\s+[^\?,\.;:\n]+?(?=\s+(quy|được|là|gì|theo|những|bao|ở|gồm|biện|áp|khi)\b|[\?,\.;:]|$)",
+    r"\bluật\s+[^\?,\.;:\n]+?(?=\s+(quy|được|là|gì|theo|những|bao|ở|gồm|biện|áp|khi)\b|[\?,\.;:]|$)",
 ]
 
 LAW_MENTION_PATTERNS_NO_ACCENTS = [
     r"\b\d{1,3}/\d{4}/qh\d+\b",
     r"\b\d{1,3}/vbhn-vpqh\b",
-    r"\bbo luat\s+[^\?,\.;:\n]+?(?=\s+(quy|duoc|la|gi|theo|nhung|bao|o|gom)\b|$)",
-    r"\bluat\s+[^\?,\.;:\n]+?(?=\s+(quy|duoc|la|gi|theo|nhung|bao|o|gom)\b|$)",
+    r"\bbo luat\s+[^\?,\.;:\n]+?(?=\s+(quy|duoc|la|gi|theo|nhung|bao|o|gom|bien|ap|khi)\b|[\?,\.;:]|$)",
+    r"\bluat\s+[^\?,\.;:\n]+?(?=\s+(quy|duoc|la|gi|theo|nhung|bao|o|gom|bien|ap|khi)\b|[\?,\.;:]|$)",
 ]
 
 
@@ -133,6 +133,10 @@ def detect_query_type(query: str) -> str:
         "trường hợp nào",
         "những trường hợp nào",
         "các trường hợp nào",
+        "áp dụng khi nào",
+        "được áp dụng khi nào",
+        "áp dụng trong trường hợp",
+        "áp dụng đối với trường hợp",
     ]):
         return "cases_circumstances"
 

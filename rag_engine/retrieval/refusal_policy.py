@@ -15,6 +15,10 @@ GENERATION_DISABLED_ANSWER = (
     "Vui long tham khao phan nguon trich dan de xem can cu phap ly."
 )
 
+RETRIEVAL_SCORE_FLOOR = 0.006
+RETRIEVAL_COVERAGE_FLOOR = 0.02
+RETRIEVAL_LAW_OVERLAP_FLOOR = 0.05
+
 
 def _safe_text(value) -> str:
     if value is None:
@@ -138,49 +142,130 @@ def _max_metadata_boost(chunks: Sequence[dict]) -> float:
     return best
 
 
-def should_refuse_after_retrieval(
+def _safe_float(value, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _retrieval_score(chunk: dict) -> float:
+    if "base_score" in chunk:
+        return _safe_float(chunk.get("base_score"))
+    return _safe_float(chunk.get("score"))
+
+
+def diagnose_retrieval_refusal(
     chunks: Sequence[dict],
     query_profile: dict | None = None,
-) -> bool:
-    if not chunks:
-        return True
+) -> dict:
+    top_chunks = list(chunks[:5])
+    if not top_chunks:
+        return {
+            "stage": "retrieval",
+            "should_refuse": True,
+            "reason": "no_candidates",
+            "top_score": 0.0,
+            "top_combined_score": 0.0,
+            "coverage": 0.0,
+            "law_overlap": 0.0,
+            "metadata_boost": 0.0,
+            "distinct_sources": 0,
+        }
 
-    top_chunks = chunks[:5]
-    top_score = float(top_chunks[0].get("score") or 0.0)
+    top_score = _retrieval_score(top_chunks[0])
+    top_combined_score = _safe_float(top_chunks[0].get("score"))
+    distinct_sources = _distinct_source_count(top_chunks)
+    metadata_boost = _max_metadata_boost(top_chunks)
 
     if query_profile is None:
-        distinct_sources = _distinct_source_count(top_chunks)
-        return top_score <= 0.0 or (distinct_sources >= 4 and top_score < 0.008)
+        should_refuse = (
+            top_score <= 0.0
+            or (distinct_sources >= 4 and top_score < RETRIEVAL_SCORE_FLOOR)
+        )
+        return {
+            "stage": "retrieval",
+            "should_refuse": should_refuse,
+            "reason": "weak_scores_without_profile" if should_refuse else "defer_to_reranker",
+            "top_score": top_score,
+            "top_combined_score": top_combined_score,
+            "coverage": 0.0,
+            "law_overlap": 0.0,
+            "metadata_boost": metadata_boost,
+            "distinct_sources": distinct_sources,
+        }
 
     mentioned_law = _safe_text(query_profile.get("mentioned_law"))
     keywords = [str(x) for x in (query_profile.get("keywords") or []) if len(str(x)) >= 2]
-
     coverage = _keyword_coverage(keywords, top_chunks)
+    law_overlap = _max_law_overlap(mentioned_law, top_chunks) if mentioned_law else 0.0
 
-    if mentioned_law:
-        overlap = _max_law_overlap(mentioned_law, top_chunks)
+    if mentioned_law and (
+        law_overlap >= 0.20
+        or coverage >= 0.08
+        or metadata_boost >= 0.15
+    ):
+        should_refuse = False
+        reason = "plausible_law_keyword_or_metadata_signal"
+    elif mentioned_law:
+        should_refuse = (
+            top_score < RETRIEVAL_SCORE_FLOOR
+            and coverage < RETRIEVAL_COVERAGE_FLOOR
+            and law_overlap < RETRIEVAL_LAW_OVERLAP_FLOOR
+            and metadata_boost <= 0.0
+        )
+        reason = "weak_law_and_keyword_signals" if should_refuse else "defer_to_reranker"
+    else:
+        should_refuse = (
+            top_score < RETRIEVAL_SCORE_FLOOR
+            and coverage < RETRIEVAL_COVERAGE_FLOOR
+            and distinct_sources >= 4
+            and metadata_boost <= 0.0
+        )
+        reason = "weak_keyword_signals_across_many_sources" if should_refuse else "defer_to_reranker"
 
-        # Retrieval is only the first gate. If either law metadata or content
-        # keywords look plausible, let reranking and the final prompt decide.
-        if overlap >= 0.20 or coverage >= 0.08:
-            return False
-        return top_score < 0.012 and coverage < 0.05
+    return {
+        "stage": "retrieval",
+        "should_refuse": should_refuse,
+        "reason": reason,
+        "top_score": top_score,
+        "top_combined_score": top_combined_score,
+        "coverage": coverage,
+        "law_overlap": law_overlap,
+        "metadata_boost": metadata_boost,
+        "distinct_sources": distinct_sources,
+        "mentioned_law": mentioned_law or None,
+    }
 
-    distinct_sources = _distinct_source_count(top_chunks)
-    return top_score < 0.012 and coverage < 0.04 and distinct_sources >= 4
 
-
-def should_refuse_after_rerank(
+def diagnose_rerank_refusal(
     chunks: Sequence[dict],
     query_profile: dict | None = None,
-) -> bool:
-    if not chunks:
-        return True
+) -> dict:
+    top_chunks = list(chunks[:5])
+    if not top_chunks:
+        return {
+            "stage": "rerank",
+            "should_refuse": True,
+            "reason": "no_reranked_candidates",
+            "top_rerank_score": 0.0,
+            "coverage": 0.0,
+            "law_overlap": 0.0,
+            "metadata_boost": 0.0,
+        }
 
-    top_chunks = chunks[:5]
-    top_rerank_score = float(chunks[0].get("rerank_score") or 0.0)
+    top_rerank_score = _safe_float(top_chunks[0].get("rerank_score"))
     if query_profile is None:
-        return top_rerank_score < -1.0
+        should_refuse = top_rerank_score < -1.0
+        return {
+            "stage": "rerank",
+            "should_refuse": should_refuse,
+            "reason": "weak_rerank_without_profile" if should_refuse else "rerank_score_passed",
+            "top_rerank_score": top_rerank_score,
+            "coverage": 0.0,
+            "law_overlap": 0.0,
+            "metadata_boost": 0.0,
+        }
 
     mentioned_law = _safe_text(query_profile.get("mentioned_law"))
     keywords = [str(x) for x in (query_profile.get("keywords") or []) if len(str(x)) >= 2]
@@ -194,18 +279,53 @@ def should_refuse_after_rerank(
         or law_overlap >= 0.20
         or metadata_boost >= 0.15
     ):
-        return False
+        should_refuse = False
+        reason = "supporting_signal_passed"
+    elif mentioned_law:
+        should_refuse = (
+            top_rerank_score < -1.0
+            and coverage < 0.04
+            and law_overlap < 0.10
+        )
+        reason = "weak_rerank_and_law_signals" if should_refuse else "defer_to_prompt"
+    else:
+        should_refuse = (
+            top_rerank_score < -1.0
+            and coverage < 0.04
+            and metadata_boost <= 0.0
+        )
+        reason = "weak_rerank_and_keyword_signals" if should_refuse else "defer_to_prompt"
 
-    # Cross-encoder scores are not stable enough to be a single hard refusal
-    # signal, so refuse only when every supporting signal is also weak.
-    if mentioned_law:
-        return top_rerank_score < -1.0 and coverage < 0.04 and law_overlap < 0.10
+    return {
+        "stage": "rerank",
+        "should_refuse": should_refuse,
+        "reason": reason,
+        "top_rerank_score": top_rerank_score,
+        "coverage": coverage,
+        "law_overlap": law_overlap,
+        "metadata_boost": metadata_boost,
+        "mentioned_law": mentioned_law or None,
+    }
 
-    return (
-        top_rerank_score < -1.0
-        and coverage < 0.04
-        and metadata_boost <= 0.0
-    )
+
+def should_refuse_after_retrieval(
+    chunks: Sequence[dict],
+    query_profile: dict | None = None,
+) -> bool:
+    return diagnose_retrieval_refusal(
+        chunks,
+        query_profile=query_profile,
+    )["should_refuse"]
+
+
+def should_refuse_after_rerank(
+    chunks: Sequence[dict],
+    query_profile: dict | None = None,
+) -> bool:
+    return diagnose_rerank_refusal(
+        chunks,
+        query_profile=query_profile,
+    )["should_refuse"]
 
 
 def is_refusal_answer(answer: str) -> bool:

@@ -1,4 +1,5 @@
 from rag_engine.retrieval.refusal_policy import (
+    diagnose_retrieval_refusal,
     should_refuse_after_rerank,
     should_refuse_after_retrieval,
 )
@@ -59,6 +60,27 @@ def test_retrieval_refuses_when_all_early_signals_are_weak():
     ]
 
     assert should_refuse_after_retrieval(chunks, query_profile) is True
+
+
+def test_retrieval_keeps_metadata_boosted_candidate_after_rescore():
+    query_profile = {
+        "mentioned_law": "luật mẫu",
+        "keywords": ["không khớp"],
+    }
+    chunk = make_chunk(
+        "Nội dung không có nhiều từ khóa trùng trực tiếp.",
+        score=0.001,
+        metadata_boost=0.20,
+        so_hieu="1/2024/QH15",
+        ten_dieu="Điều khoản phù hợp theo metadata",
+    )
+    chunk["base_score"] = 0.001
+    chunk["score"] = 0.225
+
+    diagnostics = diagnose_retrieval_refusal([chunk], query_profile)
+
+    assert diagnostics["should_refuse"] is False
+    assert diagnostics["reason"] == "plausible_law_keyword_or_metadata_signal"
 
 
 def test_rerank_keeps_negative_score_when_other_evidence_is_strong():

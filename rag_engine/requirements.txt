@@ -15,4 +15,7 @@ tqdm
 transformers
 bitsandbytes
 accelerate
-google-generativeai
+google-genai
+ragas
+datasets
+pandas
