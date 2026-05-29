@@ -31,6 +31,7 @@ class RagEngineSettings(BaseSettings):
     GEMINI_TEMPERATURE: float = 0.0
 
     QDRANT_URL: str | None = None
+    QDRANT_API_KEY: str | None = None
     QDRANT_HOST: str = "localhost"
     QDRANT_PORT: int = 6333
     QDRANT_COLLECTION: str = "legal_documents"
@@ -52,6 +53,8 @@ class RagEngineSettings(BaseSettings):
     FOLLOW_REFERENCED_DIEU: bool = True
     MAX_REFERENCED_DIEU_PER_CHUNK: int = 3
     MAX_REFERENCED_DIEU_TOTAL: int = 12
+    MAX_CONTEXT_CHUNKS: int = 32
+    MAX_CONTEXT_CHARS: int = 24000
 
     model_config = SettingsConfigDict(
         env_file=_ENV_FILE,
@@ -111,6 +114,19 @@ class RagEngineSettings(BaseSettings):
             raise ValueError("Referenced dieu limits must be integers.")
         if parsed < 0:
             raise ValueError("Referenced dieu limits must be >= 0.")
+        return parsed
+
+    @field_validator("MAX_CONTEXT_CHUNKS", "MAX_CONTEXT_CHARS", mode="before")
+    @classmethod
+    def validate_positive_context_budget(cls, value):
+        if value is None:
+            return 0
+        try:
+            parsed = int(value)
+        except (TypeError, ValueError):
+            raise ValueError("Context budget values must be integers.")
+        if parsed < 0:
+            raise ValueError("Context budget values must be >= 0.")
         return parsed
 
     @field_validator("RAG_ENGINE_PORT", mode="before")

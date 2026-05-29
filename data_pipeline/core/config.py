@@ -27,8 +27,9 @@ class DataPipelineSettings(BaseSettings):
     EMBEDDING_MODEL_NAME: str = "huyydangg/DEk21_hcmute_embedding"
 
     QDRANT_URL: str | None = None
-    QDRANT_HOST: str = "localhost"
-    QDRANT_PORT: int = 6333
+    QDRANT_HOST: str | None = "localhost" # Cho phép None
+    QDRANT_PORT: int | None = 6333        # Cho phép None để tránh lỗi parse chuỗi rỗng
+    QDRANT_API_KEY: str | None = None     # Thêm dòng này để nhận API Key từ Qdrant Cloud
     QDRANT_COLLECTION: str = "legal_documents"
     QDRANT_PATH: str | None = None
 

@@ -126,7 +126,9 @@ class Reranker:
         for chunk in top_chunks:
             chunk_id = chunk.get("chunk_id")
             if chunk_id:
-                merged[chunk_id] = chunk
+                item = dict(chunk)
+                item["_context_role"] = "reranked"
+                merged[chunk_id] = item
 
             meta = chunk.get("metadata", {})
             so_hieu = meta.get("so_hieu")
@@ -142,8 +144,10 @@ class Reranker:
 
             for related in related_chunks:
                 related_id = related.get("chunk_id")
-                if related_id:
-                    merged[related_id] = related
+                if related_id and related_id not in merged:
+                    item = dict(related)
+                    item["_context_role"] = "same_dieu"
+                    merged[related_id] = item
 
             if follow_referenced_dieu and max_referenced_dieu_per_chunk > 0:
                 refs = _extract_referenced_dieu_labels(
@@ -175,8 +179,10 @@ class Reranker:
                     )
                     for related in related_chunks:
                         related_id = related.get("chunk_id")
-                        if related_id:
-                            merged[related_id] = related
+                        if related_id and related_id not in merged:
+                            item = dict(related)
+                            item["_context_role"] = "referenced_dieu"
+                            merged[related_id] = item
                     fetched += 1
 
         def sort_key(item: dict):

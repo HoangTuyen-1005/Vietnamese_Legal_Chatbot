@@ -11,7 +11,7 @@ RAW_DIR = Path("data_pipeline/data/raw")
 INPUT_FILE = "data_pipeline/ChuDe.txt" # File chứa danh sách chủ đề/tên luật cần cào
 
 LISTING_URLS = [
-    "https://vbpl.vn/TW/Pages/vanban.aspx?idLoaiVanBan=16&dvid=13", # Bộ luật
+    "https://vbpl.vn/van-ban/trung-uong", # Bộ luật
     # "https://vbpl.vn/TW/Pages/vanban.aspx?idLoaiVanBan=17&dvid=13"  # Luật
 ]
 

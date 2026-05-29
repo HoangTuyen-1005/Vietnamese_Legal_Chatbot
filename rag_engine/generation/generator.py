@@ -4,12 +4,11 @@ import os
 from typing import Any
 
 try:
-    import google.generativeai as genai
-    from google.generativeai.types import GenerationConfig
-    from google.generativeai.types import HarmCategory, HarmBlockThreshold
+    from google import genai
+    from google.genai import types
 except Exception as exc:  # pragma: no cover
     genai = None
-    GenerationConfig = None
+    types = None
     _IMPORT_ERROR = exc
 else:  # pragma: no cover
     _IMPORT_ERROR = None
@@ -22,9 +21,9 @@ class AnswerGenerator:
         api_key: str | None = None,
         temperature: float = 0.0,
     ):
-        if genai is None or GenerationConfig is None:
+        if genai is None or types is None:
             raise ImportError(
-                "google-generativeai is not installed. Add it to requirements and reinstall dependencies."
+                "google-genai is not installed. Add it to requirements and reinstall dependencies."
             ) from _IMPORT_ERROR
 
         self.model_name = model_name
@@ -36,8 +35,7 @@ class AnswerGenerator:
                 "Missing GEMINI_API_KEY. Please set GEMINI_API_KEY in your .env file."
             )
 
-        genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel(model_name=self.model_name)
+        self.client = genai.Client(api_key=self.api_key)
 
     def _extract_text(self, response: Any) -> str:
         text = getattr(response, "text", None)
@@ -62,25 +60,32 @@ class AnswerGenerator:
         if max_new_tokens <= 0:
             raise ValueError("max_new_tokens must be > 0.")
 
-        response = self.model.generate_content(
-            prompt,
-            generation_config=GenerationConfig(
+        response = self.client.models.generate_content(
+            model=self.model_name,
+            contents=prompt,
+            config=types.GenerateContentConfig(
                 temperature=self.temperature,
                 max_output_tokens=max_new_tokens,
+                safety_settings=[
+                    types.SafetySetting(
+                        category="HARM_CATEGORY_HARASSMENT",
+                        threshold="BLOCK_NONE",
+                    ),
+                    types.SafetySetting(
+                        category="HARM_CATEGORY_HATE_SPEECH",
+                        threshold="BLOCK_NONE",
+                    ),
+                    types.SafetySetting(
+                        category="HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                        threshold="BLOCK_NONE",
+                    ),
+                    types.SafetySetting(
+                        category="HARM_CATEGORY_DANGEROUS_CONTENT",
+                        threshold="BLOCK_NONE",
+                    ),
+                ],
             ),
-            safety_settings={
-                    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-                    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-                }
         )
-
-        print(f"--- DEBUG INFO ---")
-        print(f"Finish Reason: {response.candidates[0].finish_reason}")
-        print(f"Safety Ratings: {response.candidates[0].safety_ratings}")
-        print(f"Full Text Received: {response.text}")
-        print(f"------------------")
 
         text = self._extract_text(response)
         if not text:

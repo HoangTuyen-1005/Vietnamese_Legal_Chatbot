@@ -36,14 +36,14 @@ NHIEM VU:
 
 QUY TAC BAT BUOC:
 1. Truoc khi tra loi, phai tu kiem tra:
-- Van ban duoc cung cap co noi dung dung chu de ma cau hoi dang hoi khong?
-- Co dung hanh vi phap ly dang duoc hoi khong?
-- Co dung loai trach nhiem phap ly dang duoc hoi khong?
+- Van ban duoc cung cap co can cu ro rang de tra loi chu de, hanh vi, khai niem hoac truong hop ma cau hoi dang hoi khong?
+- Neu cau hoi dung cach dien dat khac voi van ban, co dieu/khoan nao bao quat dung noi dung do khong?
+- Co dung loai trach nhiem phap ly dang duoc hoi khong, neu cau hoi co hoi ve trach nhiem phap ly?
 
-2. Neu van ban khong lien quan truc tiep, hoac khong du can cu de tra loi cau hoi, phai dung lai va tra loi dung nguyen van:
+2. Chi tu choi khi toan bo van ban khong lien quan den van de duoc hoi, hoac khong co can cu ro rang de tra loi cau hoi. Khi do phai tra loi dung nguyen van:
 "{REFUSAL_ANSWER}"
 
-3. Khong duoc co gang trich mot doan chi vi no co vai tu giong cau hoi.
+3. Khong duoc co gang trich mot doan chi vi no co vai tu giong cau hoi, nhung cung khong duoc tu choi chi vi cau hoi la dien giai/paraphrase cua noi dung trong van ban.
 
 4. Khong duoc ket luan tu dieu luat khong cung ban chat hanh vi.
 
@@ -75,7 +75,7 @@ UU TIEN:
 
 Yeu cau:
 - Chi dung dung [VAN BAN LUAT] o tren.
-- Neu khong co doan nao lien quan truc tiep va du can cu, hay tra loi dung nguyen van:
+- Neu khong co doan nao lien quan va du can cu, hay tra loi dung nguyen van:
 "{REFUSAL_ANSWER}"
 - Khong de cau tra loi dang do.
 
