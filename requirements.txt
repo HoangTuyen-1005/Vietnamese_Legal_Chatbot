@@ -17,6 +17,7 @@ torchvision==0.20.1
 torchaudio==2.5.1
 tqdm
 transformers
+safetensors
 bitsandbytes
 accelerate
 google-genai

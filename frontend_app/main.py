@@ -268,6 +268,56 @@ def _format_sources(sources: list[dict]) -> str:
     )
 
 
+def _extract_error_message(payload: str) -> str:
+    try:
+        data = json.loads(payload)
+    except json.JSONDecodeError:
+        return payload.strip()
+
+    if isinstance(data, dict):
+        for key in ("error_message", "message", "detail"):
+            value = data.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+            if isinstance(value, dict):
+                nested = value.get("message") or value.get("error_message")
+                if isinstance(nested, str) and nested.strip():
+                    return nested.strip()
+
+    return payload.strip()
+
+
+def _looks_like_provider_busy_error(status_code: int | None, message: str) -> bool:
+    if status_code in {429, 503}:
+        return True
+
+    normalized = " ".join((message or "").lower().split())
+    markers = [
+        "high demand",
+        "try again later",
+        "temporarily unavailable",
+        "service unavailable",
+        "overloaded",
+        "resource exhausted",
+        "unavailable",
+        "quá tải",
+        "tạm thời không khả dụng",
+        "tam thoi khong kha dung",
+    ]
+    return any(marker in normalized for marker in markers)
+
+
+def _format_http_error(exc: error.HTTPError, detail_payload: str) -> str:
+    message = _extract_error_message(detail_payload)
+    if _looks_like_provider_busy_error(exc.code, message):
+        return (
+            "Dịch vụ sinh câu trả lời đang quá tải hoặc tạm thời không khả dụng. "
+            "Vui lòng thử lại sau ít phút."
+        )
+
+    return f"RAG engine trả về lỗi HTTP {exc.code}.\n```\n{detail_payload}\n```"
+
+
 def _get_rag_response(question: str) -> str:
     def busy_message(detail: str = "") -> str:
         cleaned_detail = detail.strip()
@@ -286,7 +336,8 @@ def _get_rag_response(question: str) -> str:
         with request.urlopen(req, timeout=settings.REQUEST_TIMEOUT_SECONDS) as response:
             payload = response.read().decode("utf-8")
     except error.HTTPError as exc:
-        return busy_message(f"HTTP {exc.code}")
+        detail = exc.read().decode("utf-8", errors="replace")
+        return _format_http_error(exc, detail)
     except Exception as exc:
         return busy_message(str(exc))
 
@@ -298,8 +349,13 @@ def _get_rag_response(question: str) -> str:
         return busy_message(str(exc))
 
     answer = (result.get("answer") or "").strip()
-    formatted_sources = _format_sources(result.get("sources") or [])
-    return answer + (f"\n\n{formatted_sources}" if formatted_sources != "Không có nguồn trích dẫn." else "")
+    error_message = (result.get("error_message") or "").strip()
+    sources = result.get("sources") or []
+    
+    final_response = answer or error_message or "(Không có nội dung trả lời.)"
+    if sources:
+        final_response += f"\n\n---\n### 📚 Nguồn trích dẫn:\n{_format_sources(sources)}"
+    return final_response
 
 
 def _extract_text(msg_content):

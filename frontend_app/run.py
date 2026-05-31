@@ -74,7 +74,7 @@ def main():
     preferred_port = int(os.getenv("GRADIO_SERVER_PORT", settings.FRONTEND_PORT))
     server_port = _find_available_port(server_name, preferred_port)
     display_host = "127.0.0.1" if server_name in {"0.0.0.0", "::"} else server_name
-    enable_share = _env_flag("GRADIO_SHARE", default=True)
+    enable_share = _env_flag("GRADIO_SHARE", default=settings.FRONTEND_SHARE)
 
     _, local_url, share_url = demo.launch(
         server_name=server_name,

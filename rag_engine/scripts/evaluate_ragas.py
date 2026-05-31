@@ -345,7 +345,10 @@ def init_chat_service(settings, *, generation_enabled: bool | None = None):
     )
 
     vector_store = VectorStore(settings=settings)
-    reranker = Reranker(model_name=settings.RERANKER_MODEL_NAME)
+    reranker = Reranker(
+        model_name=settings.RERANKER_MODEL_NAME,
+        max_length=settings.RERANKER_MAX_LENGTH,
+    )
 
     if generation_enabled is None:
         generation_enabled = bool(settings.ENABLE_GENERATION)

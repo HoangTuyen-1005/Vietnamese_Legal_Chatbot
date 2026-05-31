@@ -16,6 +16,23 @@ def normalize_whitespace(text: str) -> str:
     return text.strip()
 
 
+def build_search_text(content: str, metadata: dict) -> str:
+    header_parts = [
+        metadata.get("document_name"),
+        metadata.get("so_hieu"),
+        metadata.get("loai_van_ban"),
+        metadata.get("ten_chuong"),
+        metadata.get("dieu"),
+        metadata.get("ten_dieu"),
+        metadata.get("khoan"),
+        metadata.get("diem"),
+    ]
+    header = " | ".join(str(part) for part in header_parts if part)
+    if header:
+        return normalize_whitespace(f"{header}\n{content}")
+    return normalize_whitespace(content)
+
+
 class BM25Store:
     def __init__(self):
         self.documents: List[Dict[str, Any]] = []
@@ -34,11 +51,12 @@ class BM25Store:
             self.documents.append({
                 "chunk_id": raw.get("chunk_id"),
                 "content": content,
+                "search_text": build_search_text(content, metadata),
                 "metadata": metadata,
             })
 
         self.tokenized_corpus = [
-            ViTokenizer.tokenize(doc["content"].lower()).split()
+            ViTokenizer.tokenize(doc.get("search_text", doc["content"]).lower()).split()
             for doc in self.documents
         ]
         self.bm25 = BM25Okapi(self.tokenized_corpus)

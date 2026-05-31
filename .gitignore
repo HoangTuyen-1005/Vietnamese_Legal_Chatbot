@@ -1,8 +1,8 @@
 /venv
 
-/data/cleaned
-/data/indexes
-/data/processed
+/data_pipeline/data/cleaned
+/data_pipeline/data/indexes
+/data_pipeline/data/processed
 
 **/__pycache__
 
@@ -13,3 +13,4 @@
 .env
 
 /rag_engine/eval/ragas_runs
+/.gradio

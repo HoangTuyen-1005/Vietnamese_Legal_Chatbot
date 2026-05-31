@@ -25,10 +25,14 @@ class RagEngineSettings(BaseSettings):
     RAG_ENGINE_PORT: int = 8000
 
     EMBEDDING_MODEL_NAME: str = "huyydangg/DEk21_hcmute_embedding"
-    RERANKER_MODEL_NAME: str = "BAAI/bge-reranker-v2-m3"
+    RERANKER_MODEL_NAME: str = "itdainb/PhoRanker"
+    RERANKER_MAX_LENGTH: int = 256
     GENERATOR_MODEL_NAME: str = "gemini-2.0-flash"
     GEMINI_API_KEY: str | None = None
     GEMINI_TEMPERATURE: float = 0.0
+    QUERY_PROFILE_MODEL_NAME: str = "gemini-2.0-flash"
+    QUERY_PROFILE_TEMPERATURE: float = 0.0
+    QUERY_PROFILE_MAX_OUTPUT_TOKENS: int = 2048
 
     QDRANT_URL: str | None = None
     QDRANT_API_KEY: str | None = None
@@ -41,8 +45,8 @@ class RagEngineSettings(BaseSettings):
     BM25_DOCS_PATH: str = "data_pipeline/data/indexes/bm25_docs.pkl"
     EVAL_QUESTIONS_PATH: str = "rag_engine/eval/eval_questions.json"
 
-    TOP_K_BM25: int = 10
-    TOP_K_VECTOR: int = 10
+    TOP_K_BM25: int = 15
+    TOP_K_VECTOR: int = 15
     TOP_K_RERANK: int = 5
     RRF_K: int = 60
 
@@ -88,6 +92,32 @@ class RagEngineSettings(BaseSettings):
             raise ValueError("MAX_NEW_TOKENS must be an integer.")
         if parsed <= 0:
             raise ValueError("MAX_NEW_TOKENS must be > 0.")
+        return parsed
+
+    @field_validator("RERANKER_MAX_LENGTH", mode="before")
+    @classmethod
+    def validate_reranker_max_length(cls, value):
+        if value is None:
+            return 256
+        try:
+            parsed = int(value)
+        except (TypeError, ValueError):
+            raise ValueError("RERANKER_MAX_LENGTH must be an integer.")
+        if parsed <= 0:
+            raise ValueError("RERANKER_MAX_LENGTH must be > 0.")
+        return parsed
+
+    @field_validator("QUERY_PROFILE_MAX_OUTPUT_TOKENS", mode="before")
+    @classmethod
+    def validate_query_profile_max_output_tokens(cls, value):
+        if value is None:
+            return 2048
+        try:
+            parsed = int(value)
+        except (TypeError, ValueError):
+            raise ValueError("QUERY_PROFILE_MAX_OUTPUT_TOKENS must be an integer.")
+        if parsed <= 0:
+            raise ValueError("QUERY_PROFILE_MAX_OUTPUT_TOKENS must be > 0.")
         return parsed
 
     @field_validator("MIN_COMPLETE_ANSWER_CHARS", mode="before")

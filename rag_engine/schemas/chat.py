@@ -22,6 +22,8 @@ class ChatResponse(BaseModel):
     retrieved_count: int
     reranked_count: int
     latency_ms: Optional[float] = None
+    error_code: Optional[str] = None
+    error_message: Optional[str] = None
 
 
 class RetrievedChunk(BaseModel):

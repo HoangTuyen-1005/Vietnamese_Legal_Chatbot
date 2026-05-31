@@ -3,7 +3,9 @@ from __future__ import annotations
 import re
 
 import torch
-from sentence_transformers import CrossEncoder
+
+RERANK_PRIOR_WEIGHT = 1.5
+RERANK_ANCHOR_THRESHOLD = 0.65
 
 RE_DIEU_REFERENCE = re.compile(
     r"(?i)\b(?:điều|dieu)\s+(\d+[A-Za-z]?)\b"
@@ -79,15 +81,27 @@ def _extract_referenced_dieu_labels(
     return refs
 
 
-class Reranker:
-    def __init__(self, model_name: str):
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        automodel_args = {"torch_dtype": torch.float16} if device == "cuda" else None
+def _safe_float(value, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
 
-        self.model = CrossEncoder(
-            model_name,
+
+def _retrieval_prior_strength(candidate: dict, rank: int, top_k: int) -> float:
+    score = max(0.0, min(_safe_float(candidate.get("score")), 1.5)) / 1.5
+    boost = max(0.0, min(_safe_float(candidate.get("metadata_boost")), 0.8)) / 0.8
+    rank_score = max(0.0, 1.0 - ((rank - 1) / max(top_k, 1)))
+    return (score * 0.45) + (boost * 0.45) + (rank_score * 0.10)
+
+
+class Reranker:
+    def __init__(self, model_name: str, max_length: int | None = None):
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.model = _TransformerCrossEncoder(
+            model_name=model_name,
             device=device,
-            automodel_args=automodel_args,
+            max_length=max_length,
         )
 
     def rerank(self, query: str, candidates: list[dict], top_k: int = 5) -> list[dict]:
@@ -101,13 +115,50 @@ class Reranker:
         for i, doc in enumerate(candidates):
             item = dict(doc)
             item["rerank_score"] = float(scores[i])
+            prior = _retrieval_prior_strength(
+                candidate=item,
+                rank=i + 1,
+                top_k=top_k,
+            )
+            item["retrieval_prior_score"] = prior
+            item["rerank_final_score"] = (
+                item["rerank_score"] + (prior * RERANK_PRIOR_WEIGHT)
+            )
             enriched.append(item)
 
-        enriched.sort(
-            key=lambda x: x.get("rerank_score", float("-inf")),
+        by_final_score = sorted(
+            enriched,
+            key=lambda x: x.get("rerank_final_score", float("-inf")),
             reverse=True,
         )
-        return enriched[:top_k]
+        anchored = [
+            item for item in enriched[: max(top_k, 5)]
+            if item.get("retrieval_prior_score", 0.0) >= RERANK_ANCHOR_THRESHOLD
+        ]
+        selected = []
+        selected_ids = set()
+        for item in anchored[: max(1, top_k // 2)]:
+            chunk_id = item.get("chunk_id")
+            if chunk_id in selected_ids:
+                continue
+            selected.append(item)
+            selected_ids.add(chunk_id)
+
+        for item in by_final_score:
+            chunk_id = item.get("chunk_id")
+            if chunk_id in selected_ids:
+                continue
+            selected.append(item)
+            selected_ids.add(chunk_id)
+            if len(selected) >= top_k:
+                break
+
+        selected.sort(
+            key=lambda x: x.get("rerank_final_score", float("-inf")),
+            reverse=True,
+        )
+
+        return selected[:top_k]
 
     def expand_legal_context(
         self,
@@ -196,3 +247,66 @@ class Reranker:
             )
 
         return sorted(merged.values(), key=sort_key)
+
+
+class _TransformerCrossEncoder:
+    def __init__(self, model_name: str, device: str, max_length: int | None = None):
+        _disable_transformers_optional_sklearn()
+        from transformers import AutoModelForSequenceClassification, AutoTokenizer
+        from transformers.utils import logging as hf_logging
+
+        hf_logging.set_verbosity_error()
+        if hasattr(hf_logging, "disable_progress_bar"):
+            hf_logging.disable_progress_bar()
+        self.device = device
+        self.max_length = max_length or 512
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model_kwargs = {"torch_dtype": torch.float16} if device == "cuda" else {}
+        self.model = AutoModelForSequenceClassification.from_pretrained(
+            model_name,
+            **model_kwargs,
+        )
+        self.model.to(device)
+        self.model.eval()
+
+    def predict(self, pairs: list[list[str]]) -> list[float]:
+        if not pairs:
+            return []
+
+        encoded = self.tokenizer(
+            [pair[0] for pair in pairs],
+            [pair[1] for pair in pairs],
+            padding=True,
+            truncation="only_second",
+            max_length=self.max_length,
+            return_tensors="pt",
+        )
+        encoded = {key: value.to(self.device) for key, value in encoded.items()}
+
+        with torch.no_grad():
+            logits = self.model(**encoded).logits
+
+        if logits.ndim == 1:
+            scores = logits
+        elif logits.shape[-1] == 1:
+            scores = logits[:, 0]
+        elif logits.shape[-1] == 2:
+            scores = logits[:, 1]
+        else:
+            scores = logits.max(dim=-1).values
+
+        return scores.detach().float().cpu().tolist()
+
+
+def _disable_transformers_optional_sklearn() -> None:
+    # Cross-encoder inference does not need Transformers' optional sklearn
+    # generation helper. Avoid importing sklearn -> pandas -> pyarrow on
+    # Windows, where the current environment can raise a native access violation.
+    try:
+        import transformers.utils as transformers_utils
+        import transformers.utils.import_utils as import_utils
+    except Exception:
+        return
+
+    transformers_utils.is_sklearn_available = lambda: False
+    import_utils.is_sklearn_available = lambda: False

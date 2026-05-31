@@ -1,1337 +1,1697 @@
 [
   {
-  "id": "q001",
-  "question": "Thế nào là người thành niên theo quy định của Bộ luật Dân sự?",
-  "category": "civil_law_capacity",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 20",
-  "khoan": "Khoản 1",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 1 Điều 20 Bộ luật Dân sự 2015, người thành niên là người từ đủ mười tám tuổi trở lên.",
-  "should_refuse": false,
-  "notes": "Kiểm tra truy xuất định nghĩa cơ bản."
-  },
-  {
-  "id": "q002",
-  "question": "Năng lực hành vi dân sự của cá nhân là gì?",
-  "category": "civil_law_capacity",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 19",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 19 Bộ luật Dân sự 2015, năng lực hành vi dân sự của cá nhân là khả năng của cá nhân bằng hành vi của mình xác lập, thực hiện quyền, nghĩa vụ dân sự.",
-  "should_refuse": false,
-  "notes": "Kiểm tra truy xuất định nghĩa năng lực hành vi."
-  },
-  {
-  "id": "q003",
-  "question": "Giao dịch dân sự vô hiệu do vi phạm điều cấm của luật được quy định như thế nào?",
-  "category": "civil_law_transaction",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 123",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 123 Bộ luật Dân sự 2015, giao dịch dân sự có mục đích, nội dung vi phạm điều cấm của luật, trái đạo đức xã hội thì vô hiệu.",
-  "should_refuse": false,
-  "notes": "Kiểm tra truy xuất điều kiện vô hiệu của giao dịch."
-  },
-  {
-  "id": "q004",
-  "question": "Thời hiệu khởi kiện yêu cầu bồi thường thiệt hại là bao lâu?",
-  "category": "civil_law_transaction",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 588",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 588 Bộ luật Dân sự 2015, thời hiệu khởi kiện yêu cầu bồi thường thiệt hại là 03 năm, kể từ ngày người có quyền yêu cầu biết hoặc phải biết quyền, lợi ích hợp pháp của mình bị xâm phạm.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thời hiệu trong bồi thường thiệt hại ngoài hợp đồng."
-  },
-  {
-  "id": "q005",
-  "question": "Trường hợp nào cá nhân có quyền yêu cầu Tòa án tuyên bố một người là đã chết?",
-  "category": "civil_law_capacity",
-  "difficulty": "hard",
-  "query_type": "cases_circumstances",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 71",
-  "khoan": "Khoản 1",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 1 Điều 71 Bộ luật Dân sự 2015, người có quyền, lợi ích liên quan có thể yêu cầu Tòa án ra quyết định tuyên bố một người là đã chết nếu thuộc các trường hợp như: sau 03 năm kể từ ngày quyết định tuyên bố mất tích có hiệu lực mà vẫn không có tin tức; biệt tích trong chiến tranh sau 05 năm; bị tai nạn, thảm họa sau 02 năm.",
-  "should_refuse": false,
-  "notes": "Kiểm tra khả năng tổng hợp các điều kiện pháp lý phức tạp."
-  },
-  {
-  "id": "q006",
-  "question": "Quyền xác định lại giới tính được quy định ra sao?",
-  "category": "civil_law_definition",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 36",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 36 Bộ luật Dân sự 2015, cá nhân có quyền xác định lại giới tính trong trường hợp giới tính bị khuyết tật bẩm sinh hoặc chưa định hình chính xác mà cần có sự can thiệp của y khoa.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quyền nhân thân."
-  },
-  {
-  "id": "q007",
-  "question": "Tài sản bao gồm những loại nào?",
-  "category": "civil_law_property",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 105",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 105 Bộ luật Dân sự 2015, tài sản là vật, tiền, giấy tờ có giá và quyền tài sản; tài sản bao gồm bất động sản và động sản.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa tài sản."
-  },
-  {
-  "id": "q008",
-  "question": "Người chưa đủ 6 tuổi xác lập giao dịch dân sự thì có hiệu lực không?",
-  "category": "civil_law_capacity",
-  "difficulty": "medium",
-  "query_type": "cases_circumstances",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 21",
-  "khoan": "Khoản 2",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 2 Điều 21 Bộ luật Dân sự 2015, giao dịch dân sự của người chưa đủ sáu tuổi do người đại diện theo pháp luật xác lập, thực hiện. Vì vậy, bản thân người chưa đủ 6 tuổi không tự mình xác lập giao dịch có hiệu lực.",
-  "should_refuse": false,
-  "notes": "Kiểm tra năng lực hành vi của trẻ em."
-  },
-  {
-  "id": "q009",
-  "question": "Hậu quả pháp lý của giao dịch dân sự vô hiệu là gì?",
-  "category": "civil_law_transaction",
-  "difficulty": "medium",
-  "query_type": "general_explanation",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 131",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 131 Bộ luật Dân sự 2015, giao dịch dân sự vô hiệu không làm phát sinh, thay đổi, chấm dứt quyền, nghĩa vụ dân sự của các bên kể từ thời điểm xác lập; các bên khôi phục lại tình trạng ban đầu, hoàn trả cho nhau những gì đã nhận.",
-  "should_refuse": false,
-  "notes": "Kiểm tra hệ quả pháp lý của vô hiệu."
-  },
-  {
-  "id": "q010",
-  "question": "Thời điểm xác lập quyền sở hữu đối với tài sản mua bán là khi nào?",
-  "category": "civil_law_property",
-  "difficulty": "hard",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 161",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 161 Bộ luật Dân sự 2015, thời điểm xác lập quyền sở hữu là thời điểm tài sản được chuyển giao, trừ trường hợp luật có quy định khác hoặc các bên có thỏa thuận khác.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thời điểm chuyển giao quyền sở hữu."
-  },
-  {
-  "id": "q011",
-  "question": "Ủy quyền có bắt buộc phải lập thành văn bản không?",
-  "category": "civil_law_transaction",
-  "difficulty": "medium",
-  "query_type": "general_explanation",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 138",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 138 Bộ luật Dân sự 2015, cá nhân, pháp nhân có thể ủy quyền cho cá nhân, pháp nhân khác xác lập, thực hiện giao dịch dân sự. Luật không quy định mọi trường hợp ủy quyền phải bằng văn bản, trừ trường hợp luật quy định hình thức cụ thể.",
-  "should_refuse": false,
-  "notes": "Kiểm tra hình thức đại diện ủy quyền."
-  },
-  {
-  "id": "q012",
-  "question": "Thứ tự ưu tiên thanh toán khi xử lý tài sản thế chấp?",
-  "category": "civil_law_property",
-  "difficulty": "hard",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 308",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 308 Bộ luật Dân sự 2015, khi một tài sản được dùng để bảo đảm thực hiện nhiều nghĩa vụ, thứ tự ưu tiên thanh toán được xác định theo thứ tự đăng ký hoặc thứ tự xác lập biện pháp bảo đảm nếu không đăng ký.",
-  "should_refuse": false,
-  "notes": "Kiểm tra kiến thức về thứ tự ưu tiên thanh toán."
-  },
-  {
-  "id": "q013",
-  "question": "Thừa kế theo pháp luật được áp dụng trong những trường hợp nào?",
-  "category": "civil_law_property",
-  "difficulty": "medium",
-  "query_type": "cases_circumstances",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 650",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 650 Bộ luật Dân sự 2015, thừa kế theo pháp luật áp dụng khi không có di chúc, di chúc không hợp lệ, người thừa kế theo di chúc chết trước người để lại di sản hoặc từ chối nhận di sản.",
-  "should_refuse": false,
-  "notes": "Kiểm tra điều kiện áp dụng thừa kế pháp luật."
-  },
-  {
-  "id": "q014",
-  "question": "Di chúc miệng có giá trị pháp lý khi nào?",
-  "category": "civil_law_property",
-  "difficulty": "hard",
-  "query_type": "conditions",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 629",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 629 Bộ luật Dân sự 2015, di chúc miệng được coi là hợp lệ nếu người di chúc thể hiện ý chí cuối cùng trước mặt ít nhất hai người làm chứng và sau đó được công chứng, chứng thực trong thời hạn 05 ngày làm việc.",
-  "should_refuse": false,
-  "notes": "Kiểm tra điều kiện hợp lệ của di chúc miệng."
-  },
-  {
-  "id": "q015",
-  "question": "Hàng thừa kế thứ nhất gồm những ai?",
-  "category": "civil_law_property",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "91/2015/QH13",
-  "dieu": "Điều 651",
-  "khoan": "Khoản 1",
-  "diem": "Điểm a"
-  }
-  ],
-  "reference": "Theo Điểm a Khoản 1 Điều 651 Bộ luật Dân sự 2015, hàng thừa kế thứ nhất gồm: vợ, chồng, cha đẻ, mẹ đẻ, cha nuôi, mẹ nuôi, con đẻ, con nuôi của người chết.",
-  "should_refuse": false,
-  "notes": "Kiểm tra xác định hàng thừa kế."
-  },
-  {
-  "id": "q016",
-  "question": "Thế nào là tội phạm nghiêm trọng theo Bộ luật Hình sự?",
-  "category": "criminal_law_article",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 9",
-  "khoan": "Khoản 1",
-  "diem": "Điểm b"
-  }
-  ],
-  "reference": "Theo Điểm b Khoản 1 Điều 9 Bộ luật Hình sự, tội phạm nghiêm trọng là tội phạm có tính chất và mức độ nguy hiểm cho xã hội lớn mà mức cao nhất của khung hình phạt là từ trên 03 năm tù đến 07 năm tù.",
-  "should_refuse": false,
-  "notes": "Kiểm tra phân loại tội phạm."
-  },
-  {
-  "id": "q017",
-  "question": "Tuổi chịu trách nhiệm hình sự được quy định như thế nào?",
-  "category": "criminal_law_article",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 12",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 12 Bộ luật Hình sự, người từ đủ 16 tuổi trở lên phải chịu trách nhiệm hình sự về mọi tội phạm. Người từ đủ 14 tuổi đến dưới 16 tuổi phải chịu trách nhiệm về tội phạm rất nghiêm trọng hoặc đặc biệt nghiêm trọng quy định tại một số điều cụ thể.",
-  "should_refuse": false,
-  "notes": "Kiểm tra độ tuổi chịu trách nhiệm hình sự."
-  },
-  {
-  "id": "q018",
-  "question": "Các trường hợp loại trừ trách nhiệm hình sự bao gồm những gì?",
-  "category": "criminal_law_article",
-  "difficulty": "hard",
-  "query_type": "cases_circumstances",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Chương IV",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Chương IV Bộ luật Hình sự (từ Điều 20 đến Điều 26), các trường hợp loại trừ trách nhiệm hình sự gồm: Sự kiện bất ngờ, Tình trạng không có năng lực trách nhiệm hình sự, Phòng vệ chính đáng, Tình thế cấp thiết, Gây thiệt hại trong khi bắt giữ người phạm tội, Rủi ro trong nghiên cứu, thử nghiệm, thực hiện mệnh lệnh của cấp trên.",
-  "should_refuse": false,
-  "notes": "Kiểm tra tổng hợp kiến thức chương IV."
-  },
-  {
-  "id": "q019",
-  "question": "Phòng vệ chính đáng là gì?",
-  "category": "criminal_law_article",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 22",
-  "khoan": "Khoản 1",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 1 Điều 22 Bộ luật Hình sự, phòng vệ chính đáng là hành vi của người vì bảo vệ quyền hoặc lợi ích chính đáng của mình, của người khác hoặc lợi ích của Nhà nước, của cơ quan, tổ chức mà chống trả lại một cách cần thiết người đang có hành vi xâm phạm các lợi ích nói trên.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa phòng vệ chính đáng."
-  },
-  {
-  "id": "q020",
-  "question": "Người phạm tội trong tình trạng say rượu có được miễn trách nhiệm hình sự không?",
-  "category": "criminal_law_paraphrase",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 13",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 13 Bộ luật Hình sự, người phạm tội trong tình trạng mất khả năng nhận thức hoặc khả năng điều khiển hành vi của mình do dùng rượu, bia hoặc chất kích thích mạnh khác, thì vẫn phải chịu trách nhiệm hình sự.",
-  "should_refuse": false,
-  "notes": "Kiểm tra trách nhiệm hình sự khi dùng chất kích thích."
-  },
-  {
-  "id": "q021",
-  "question": "Tội trộm cắp tài sản có mức hình phạt cao nhất là bao nhiêu?",
-  "category": "criminal_law_penalty",
-  "difficulty": "medium",
-  "query_type": "penalty_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 173",
-  "khoan": "Khoản 4",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 4 Điều 173 Bộ luật Hình sự, mức hình phạt cao nhất đối với tội trộm cắp tài sản là tù chung thân.",
-  "should_refuse": false,
-  "notes": "Kiểm tra khung hình phạt tội trộm cắp."
-  },
-  {
-  "id": "q022",
-  "question": "Hành vi che giấu tội phạm được quy định tại điều nào?",
-  "category": "criminal_law_article",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 18",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Hành vi che giấu tội phạm được quy định tại Điều 18 Bộ luật Hình sự.",
-  "should_refuse": false,
-  "notes": "Kiểm tra tra cứu điều luật cụ thể."
-  },
-  {
-  "id": "q023",
-  "question": "Thế nào là phạm tội có tổ chức?",
-  "category": "criminal_law_article",
-  "difficulty": "medium",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 17",
-  "khoan": "Khoản 3",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 3 Điều 17 Bộ luật Hình sự, phạm tội có tổ chức là hình thức đồng phạm có sự câu kết chặt chẽ giữa những người cùng thực hiện tội phạm.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa đồng phạm có tổ chức."
-  },
-  {
-  "id": "q024",
-  "question": "Mức phạt đối với tội vi phạm quy định về tham gia giao thông đường bộ?",
-  "category": "criminal_law_penalty",
-  "difficulty": "hard",
-  "query_type": "penalty_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 260",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 260 Bộ luật Hình sự, tùy theo mức độ thiệt hại về người và tài sản, hình phạt có thể từ phạt tiền 30-100 triệu, phạt cải tạo không giam giữ đến 3 năm, hoặc phạt tù từ 1 năm đến 15 năm.",
-  "should_refuse": false,
-  "notes": "Kiểm tra khung hình phạt tội giao thông."
-  },
-  {
-  "id": "q025",
-  "question": "Xóa án tích là gì và các trường hợp đương nhiên được xóa án tích?",
-  "category": "criminal_law_article",
-  "difficulty": "hard",
-  "query_type": "general_explanation",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 70",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 70 Bộ luật Hình sự, đương nhiên được xóa án tích áp dụng đối với người bị kết án không phải về các tội xâm phạm an ninh quốc gia và các tội phá hoại hòa bình, chống loài người, nếu từ khi chấp hành xong hình phạt chính hoặc hết thời gian thử thách án treo, người đó không thực hiện hành vi phạm tội mới trong thời hạn quy định.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quy định xóa án tích."
-  },
-  {
-  "id": "q026",
-  "question": "Thời hiệu truy cứu trách nhiệm hình sự đối với tội phạm đặc biệt nghiêm trọng là bao nhiêu năm?",
-  "category": "criminal_law_article",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 27",
-  "khoan": "Khoản 2",
-  "diem": "Điểm d"
-  }
-  ],
-  "reference": "Theo Điểm d Khoản 2 Điều 27 Bộ luật Hình sự, thời hiệu truy cứu trách nhiệm hình sự đối với tội phạm đặc biệt nghiêm trọng là 20 năm.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thời hiệu truy cứu."
-  },
-  {
-  "id": "q027",
-  "question": "Pháp nhân thương mại có phải chịu trách nhiệm hình sự không?",
-  "category": "criminal_law_article",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 2",
-  "khoan": "Khoản 2",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 2 Điều 2 Bộ luật Hình sự, chỉ pháp nhân thương mại nào phạm một tội quy định tại Điều 76 của Bộ luật này mới phải chịu trách nhiệm hình sự.",
-  "should_refuse": false,
-  "notes": "Kiểm tra đối tượng chịu trách nhiệm hình sự là pháp nhân."
-  },
-  {
-  "id": "q028",
-  "question": "Như thế nào được coi là tự ý nửa chừng chấm dứt việc phạm tội?",
-  "category": "criminal_law_article",
-  "difficulty": "medium",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 16",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 16 Bộ luật Hình sự, tự ý nửa chừng chấm dứt việc phạm tội là tự mình không thực hiện tội phạm đến cùng, tuy không có gì ngăn cản.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa tự ý nửa chừng chấm dứt phạm tội."
-  },
-  {
-  "id": "q029",
-  "question": "Hình phạt trục xuất được áp dụng đối với đối tượng nào?",
-  "category": "criminal_law_penalty",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 37",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 37 Bộ luật Hình sự, trục xuất là buộc người nước ngoài bị kết án phải rời khỏi lãnh thổ nước Cộng hòa xã hội chủ nghĩa Việt Nam.",
-  "should_refuse": false,
-  "notes": "Kiểm tra đối tượng bị áp dụng hình phạt trục xuất."
-  },
-  {
-  "id": "q030",
-  "question": "Tội giết người được quy định tại điều bao nhiêu?",
-  "category": "criminal_law_article",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "01/VBHN-VPQH",
-  "dieu": "Điều 123",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Tội giết người được quy định tại Điều 123 Bộ luật Hình sự.",
-  "should_refuse": false,
-  "notes": "Kiểm tra tra cứu điều luật giết người."
-  },
-  {
-  "id": "q031",
-  "question": "Luật Đất đai 2024 quy định những hành vi nào bị nghiêm cấm?",
-  "category": "land_law_prohibited_acts",
-  "difficulty": "medium",
-  "query_type": "prohibited_acts",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 11",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 11 Luật Đất đai 2024, các hành vi bị nghiêm cấm bao gồm: lấn chiếm đất đai; vi phạm quy hoạch, kế hoạch sử dụng đất; không sử dụng đất, sử dụng đất không đúng mục đích; giả mạo giấy tờ về đất đai...",
-  "should_refuse": false,
-  "notes": "Kiểm tra danh mục hành vi bị cấm trong Luật Đất đai."
-  },
-  {
-  "id": "q032",
-  "question": "Quyền của người sử dụng đất bao gồm những gì?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "general_explanation",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 26",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 26 Luật Đất đai 2024, người sử dụng đất có các quyền chung như: được cấp Giấy chứng nhận; hưởng thành quả lao động, kết quả đầu tư trên đất; được bồi thường khi Nhà nước thu hồi đất; khiếu nại, tố cáo, khởi kiện về hành vi vi phạm quyền sử dụng đất.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quyền chung của người sử dụng đất."
-  },
-  {
-  "id": "q033",
-  "question": "Nhà nước thu hồi đất vì mục đích quốc phòng, an ninh trong trường hợp nào?",
-  "category": "land_law_recovery",
-  "difficulty": "hard",
-  "query_type": "cases_circumstances",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 78",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 78 Luật Đất đai 2024, Nhà nước thu hồi đất cho mục đích quốc phòng, an ninh trong các trường hợp: làm nơi đóng quân, căn cứ quân sự; làm cảng, ga quân sự; xây dựng công trình phòng thủ quốc gia...",
-  "should_refuse": false,
-  "notes": "Kiểm tra các trường hợp thu hồi đất đặc thù."
-  },
-  {
-  "id": "q034",
-  "question": "Điều kiện để cá nhân được bồi thường về đất khi Nhà nước thu hồi đất là gì?",
-  "category": "land_law_recovery",
-  "difficulty": "hard",
-  "query_type": "conditions",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 95",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 95 Luật Đất đai 2024, cá nhân được bồi thường khi có Giấy chứng nhận hoặc đủ điều kiện cấp Giấy chứng nhận quyền sử dụng đất mà chưa được cấp, trừ trường hợp quy định tại Khoản 3 Điều này.",
-  "should_refuse": false,
-  "notes": "Kiểm tra điều kiện bồi thường đất."
-  },
-  {
-  "id": "q035",
-  "question": "Thời hạn sử dụng đất ổn định lâu dài được áp dụng cho loại đất nào?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 171",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 171 Luật Đất đai 2024, đất sử dụng ổn định lâu dài bao gồm: đất ở; đất rừng đặc dụng, đất rừng phòng hộ; đất tín ngưỡng; đất tôn giáo...",
-  "should_refuse": false,
-  "notes": "Kiểm tra loại đất có thời hạn lâu dài."
-  },
-  {
-  "id": "q036",
-  "question": "Hộ gia đình có còn là đối tượng được giao đất theo Luật Đất đai 2024 không?",
-  "category": "land_law_principle",
-  "difficulty": "hard",
-  "query_type": "general_explanation",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 4",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Luật Đất đai 2024 không còn quy định 'hộ gia đình' là một thực thể nhận giao đất mới như Luật 2013, thay vào đó tập trung vào cá nhân và tổ chức. Tuy nhiên, các hộ gia đình đã được giao đất trước đó vẫn tiếp tục thực hiện quyền theo quy định chuyển tiếp (Điều 4 quy định về người sử dụng đất).",
-  "should_refuse": false,
-  "notes": "Kiểm tra điểm mới của Luật Đất đai 2024 về chủ thể."
-  },
-  {
-  "id": "q037",
-  "question": "Sổ đỏ/Sổ hồng hiện nay được gọi chính thức là gì theo luật mới?",
-  "category": "land_law_definition",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 3",
-  "khoan": "Khoản 21",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 21 Điều 3 Luật Đất đai 2024, tên gọi chính thức là: Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thuật ngữ pháp lý mới."
-  },
-  {
-  "id": "q038",
-  "question": "Nhà nước cho thuê đất thu tiền thuê đất hàng năm hay một lần?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 120",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 120 Luật Đất đai 2024, Nhà nước cho thuê đất thu tiền thuê đất hằng năm hoặc thu tiền thuê đất một lần cho cả thời gian thuê, tùy thuộc vào trường hợp cụ thể quy định tại luật.",
-  "should_refuse": false,
-  "notes": "Kiểm tra hình thức thu tiền thuê đất."
-  },
-  {
-  "id": "q039",
-  "question": "Cơ quan nào có thẩm quyền cấp Giấy chứng nhận cho cá nhân tại địa phương?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "procedure_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 136",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 136 Luật Đất đai 2024, Ủy ban nhân dân cấp huyện có thẩm quyền cấp Giấy chứng nhận cho cá nhân, cộng đồng dân cư trong nước.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thẩm quyền cấp sổ."
-  },
-  {
-  "id": "q040",
-  "question": "Trường hợp nào người sử dụng đất bị thu hồi đất do vi phạm pháp luật về đất đai?",
-  "category": "land_law_recovery",
-  "difficulty": "hard",
-  "query_type": "cases_circumstances",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 81",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 81 Luật Đất đai 2024, các trường hợp thu hồi đất do vi phạm gồm: sử dụng đất không đúng mục đích; người sử dụng đất cố ý hủy hoại đất; đất được giao, cho thuê không đúng đối tượng...",
-  "should_refuse": false,
-  "notes": "Kiểm tra các lỗi vi phạm dẫn đến thu hồi đất."
-  },
-  {
-  "id": "q041",
-  "question": "Đất trồng lúa có được chuyển sang đất ở không?",
-  "category": "land_law_principle",
-  "difficulty": "hard",
-  "query_type": "conditions",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 121",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 121 Luật Đất đai 2024, việc chuyển mục đích sử dụng đất từ đất nông nghiệp (bao gồm đất trồng lúa) sang đất phi nông nghiệp (đất ở) phải được cơ quan nhà nước có thẩm quyền cho phép và phải phù hợp với quy hoạch sử dụng đất.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quy định về chuyển mục đích sử dụng đất."
-  },
-  {
-  "id": "q042",
-  "question": "Người Việt Nam định cư ở nước ngoài có được mua nhà gắn liền với quyền sử dụng đất không?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "general_explanation",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 4",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 4 Luật Đất đai 2024, người gốc Việt Nam định cư ở nước ngoài là đối tượng được Nhà nước giao đất, cho thuê đất, công nhận quyền sử dụng đất, do đó họ được quyền sở hữu nhà ở gắn liền với quyền sử dụng đất tại Việt Nam.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quyền của người Việt Nam định cư ở nước ngoài."
-  },
-  {
-  "id": "q043",
-  "question": "Giá đất được xác định theo nguyên tắc nào?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 158",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 158 Luật Đất đai 2024, việc định giá đất phải bảo đảm nguyên tắc thị trường, tuân thủ đúng phương pháp, trình tự, thủ tục định giá đất và bảo đảm tính độc lập, khách quan.",
-  "should_refuse": false,
-  "notes": "Kiểm tra nguyên tắc định giá đất mới."
-  },
-  {
-  "id": "q044",
-  "question": "Bảng giá đất được ban hành định kỳ bao lâu một lần?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 159",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 159 Luật Đất đai 2024, UBND cấp tỉnh xây dựng, trình HĐND cùng cấp quyết định Bảng giá đất lần đầu để công bố và áp dụng từ ngày 01/01/2026. Hằng năm, UBND cấp tỉnh có trách nhiệm trình HĐND cấp tỉnh điều chỉnh, sửa đổi, bổ sung bảng giá đất.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quy định về Bảng giá đất hàng năm."
-  },
-  {
-  "id": "q045",
-  "question": "Hòa giải tranh chấp đất đai tại UBND cấp xã có bắt buộc không?",
-  "category": "land_law_principle",
-  "difficulty": "medium",
-  "query_type": "procedure_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "31/2024/QH15",
-  "dieu": "Điều 235",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 235 Luật Đất đai 2024, Nhà nước khuyến khích các bên tranh chấp đất đai tự hòa giải hoặc hòa giải ở cơ sở. Tranh chấp đất đai mà các bên chưa hòa giải được thì gửi đơn đến UBND cấp xã nơi có đất để hòa giải.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thủ tục hòa giải tranh chấp đất đai."
-  },
-  {
-  "id": "q046",
-  "question": "Thế nào là Ngân hàng thương mại theo Luật Các tổ chức tín dụng 2024?",
-  "category": "banking_law_definition",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 4",
-  "khoan": "Khoản 21",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 21 Điều 4 Luật Các tổ chức tín dụng 2024, ngân hàng thương mại là loại hình ngân hàng được thực hiện toàn bộ các hoạt động ngân hàng và các hoạt động kinh doanh khác có liên quan vì mục tiêu lợi nhuận.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa ngân hàng thương mại."
-  },
-  {
-  "id": "q047",
-  "question": "Những hành vi nào bị nghiêm cấm trong hoạt động của tổ chức tín dụng?",
-  "category": "banking_law_operation",
-  "difficulty": "medium",
-  "query_type": "prohibited_acts",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 15",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 15 Luật Các tổ chức tín dụng 2024, nghiêm cấm tổ chức tín dụng thực hiện các hành vi như: kinh doanh không có giấy phép; can thiệp trái pháp luật vào hoạt động ngân hàng; thực hiện hoạt động ngân hàng ngoài phạm vi giấy phép...",
-  "should_refuse": false,
-  "notes": "Kiểm tra hành vi bị cấm trong lĩnh vực ngân hàng."
-  },
-  {
-  "id": "q048",
-  "question": "Giới hạn tỷ lệ sở hữu cổ phần của một cá nhân tại một ngân hàng thương mại là bao nhiêu?",
-  "category": "banking_law_operation",
-  "difficulty": "hard",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 63",
-  "khoan": "Khoản 1",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 1 Điều 63 Luật Các tổ chức tín dụng 2024, một cổ đông là cá nhân không được sở hữu vượt quá 5% vốn điều lệ của một tổ chức tín dụng.",
-  "should_refuse": false,
-  "notes": "Kiểm tra giới hạn sở hữu cổ phần cá nhân."
-  },
-  {
-  "id": "q049",
-  "question": "Tổ chức tín dụng có được kinh doanh bất động sản không?",
-  "category": "banking_law_operation",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 132",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 132 Luật Các tổ chức tín dụng 2024, tổ chức tín dụng không được kinh doanh bất động sản, trừ một số trường hợp như: mua, đầu tư, sở hữu bất động sản để làm trụ sở làm việc; dùng xử lý nợ...",
-  "should_refuse": false,
-  "notes": "Kiểm tra quy định về kinh doanh bất động sản của ngân hàng."
-  },
-  {
-  "id": "q050",
-  "question": "Hoạt động bao thanh toán là gì?",
-  "category": "banking_law_definition",
-  "difficulty": "medium",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 4",
-  "khoan": "Khoản 19",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 19 Điều 4 Luật Các tổ chức tín dụng 2024, bao thanh toán là hình thức cấp tín dụng cho bên bán hàng hoặc bên mua hàng thông qua việc mua lại các khoản phải thu hoặc các khoản phải trả phát sinh từ việc mua, bán hàng hóa, cung ứng dịch vụ.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa hoạt động bao thanh toán."
-  },
-  {
-  "id": "q051",
-  "question": "Vốn điều lệ tối thiểu của ngân hàng thương mại được quy định bởi ai?",
-  "category": "banking_law_operation",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 19",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 19 Luật Các tổ chức tín dụng 2024, mức vốn pháp định (vốn điều lệ tối thiểu) của tổ chức tín dụng do Chính phủ quy định.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thẩm quyền quy định vốn pháp định."
-  },
-  {
-  "id": "q052",
-  "question": "Tổ chức tín dụng phải thực hiện công khai báo cáo tài chính như thế nào?",
-  "category": "banking_law_operation",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 156",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 156 Luật Các tổ chức tín dụng 2024, trong thời hạn 120 ngày kể từ ngày kết thúc năm tài chính, tổ chức tín dụng phải công khai báo cáo tài chính theo quy định của pháp luật.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quy định về minh bạch tài chính."
-  },
-  {
-  "id": "q053",
-  "question": "Tổ chức tín dụng có được tham gia vào lĩnh vực bảo hiểm không?",
-  "category": "banking_law_operation",
-  "difficulty": "hard",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 113",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 113 Luật Các tổ chức tín dụng 2024, ngân hàng thương mại được thực hiện hoạt động đại lý bảo hiểm theo quy định của pháp luật về kinh doanh bảo hiểm, phù hợp với phạm vi giấy phép.",
-  "should_refuse": false,
-  "notes": "Kiểm tra quy định về bancassurance."
-  },
-  {
-  "id": "q054",
-  "question": "Việc tiết lộ thông tin khách hàng của ngân hàng được quy định thế nào?",
-  "category": "banking_law_operation",
-  "difficulty": "hard",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 14",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 14 Luật Các tổ chức tín dụng 2024, nhân viên, người quản lý, người điều hành của tổ chức tín dụng không được tiết lộ bí mật thông tin khách hàng, trừ trường hợp khách hàng đồng ý hoặc theo yêu cầu của cơ quan nhà nước có thẩm quyền.",
-  "should_refuse": false,
-  "notes": "Kiểm tra bảo mật thông tin khách hàng."
-  },
-  {
-  "id": "q055",
-  "question": "Hoạt động cho vay tiêu dùng của công ty tài chính được quy định ở đâu?",
-  "category": "banking_law_operation",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 115",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Hoạt động cho vay tiêu dùng của công ty tài chính được quy định tại Điều 115 Luật Các tổ chức tín dụng 2024.",
-  "should_refuse": false,
-  "notes": "Kiểm tra hoạt động của công ty tài chính."
-  },
-  {
-  "id": "q056",
-  "question": "Can thiệp sớm đối với tổ chức tín dụng là gì?",
-  "category": "banking_law_definition",
-  "difficulty": "hard",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 156",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 156 Luật Các tổ chức tín dụng 2024, Ngân hàng Nhà nước xem xét, quyết định thực hiện can thiệp sớm khi tổ chức tín dụng thuộc một trong các trường hợp như: số lỗ lũy kế lớn hơn 15% vốn điều lệ, hoặc bị xếp hạng dưới mức trung bình...",
-  "should_refuse": false,
-  "notes": "Kiểm tra kiến thức về kiểm soát ngân hàng."
-  },
-  {
-  "id": "q057",
-  "question": "Các loại hình tổ chức tín dụng phi ngân hàng bao gồm những gì?",
-  "category": "banking_law_definition",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "32/2024/QH15",
-  "dieu": "Điều 4",
-  "khoan": "Khoản 6",
-  "diem": null
-  }
-  ],
-  "reference": "Theo Khoản 6 Điều 4 Luật Các tổ chức tín dụng 2024, tổ chức tín dụng phi ngân hàng bao gồm công ty tài chính tổng hợp và công ty tài chính chuyên doanh.",
-  "should_refuse": false,
-  "notes": "Kiểm tra phân loại tổ chức tín dụng."
-  },
-  {
-  "id": "q058",
-  "question": "Chuyển đổi số được định nghĩa như thế nào trong Luật Chuyển đổi số 2025?",
-  "category": "digital_law_definition",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 3",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 3 Luật Chuyển đổi số 2025, chuyển đổi số là quá trình thay đổi tổng thể và toàn diện của cá nhân, tổ chức về cách sống, cách làm việc và phương thức sản xuất dựa trên các công nghệ số.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa cốt lõi của luật."
-  },
-  {
-  "id": "q059",
-  "question": "Nguyên tắc cơ bản trong chuyển đổi số là gì?",
-  "category": "digital_law_principle",
-  "difficulty": "medium",
-  "query_type": "principle_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 5",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 5 Luật Chuyển đổi số 2025, các nguyên tắc bao gồm: lấy người dân và doanh nghiệp làm trung tâm; bảo đảm an toàn thông tin mạng và an ninh mạng; đẩy mạnh đổi mới sáng tạo; bảo đảm tính thống nhất và kết nối.",
-  "should_refuse": false,
-  "notes": "Kiểm tra nguyên tắc thực hiện chuyển đổi số."
-  },
-  {
-  "id": "q060",
-  "question": "Các hành vi bị cấm trong lĩnh vực chuyển đổi số?",
-  "category": "digital_law_principle",
-  "difficulty": "medium",
-  "query_type": "prohibited_acts",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 9",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 9 Luật Chuyển đổi số 2025, các hành vi bị cấm bao gồm: cản trở hoạt động chuyển đổi số hợp pháp; lợi dụng chuyển đổi số để xâm phạm lợi ích quốc gia; phá hoại hạ tầng số; tiết lộ thông tin cá nhân trái phép.",
-  "should_refuse": false,
-  "notes": "Kiểm tra hành vi vi phạm pháp luật số."
-  },
-  {
-  "id": "q061",
-  "question": "Hạ tầng số quốc gia bao gồm những thành phần gì?",
-  "category": "digital_law_definition",
-  "difficulty": "hard",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 12",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 12 Luật Chuyển đổi số 2025, hạ tầng số bao gồm hạ tầng viễn thông băng rộng, hạ tầng trung tâm dữ liệu và điện toán đám mây, hạ tầng công nghệ số và các nền tảng số dùng chung.",
-  "should_refuse": false,
-  "notes": "Kiểm tra cấu trúc hạ tầng số."
-  },
-  {
-  "id": "q062",
-  "question": "Chính phủ số là gì?",
-  "category": "digital_law_definition",
-  "difficulty": "easy",
-  "query_type": "definition_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 3",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 3 Luật Chuyển đổi số 2025, chính phủ số là chính phủ sử dụng dữ liệu số và công nghệ số để thiết kế lại cách thức vận hành, nhằm cung cấp dịch vụ công tốt hơn cho người dân.",
-  "should_refuse": false,
-  "notes": "Kiểm tra định nghĩa về chính phủ số."
-  },
-  {
-  "id": "q063",
-  "question": "Trách nhiệm của cá nhân trong chuyển đổi số được quy định như thế nào?",
-  "category": "digital_law_principle",
-  "difficulty": "medium",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 25",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 25 Luật Chuyển đổi số 2025, cá nhân có trách nhiệm nâng cao kỹ năng số, bảo vệ thông tin cá nhân và tuân thủ các quy định về an toàn mạng khi tham gia các hoạt động trên môi trường số.",
-  "should_refuse": false,
-  "notes": "Kiểm tra nghĩa vụ của công dân số."
-  },
-  {
-  "id": "q064",
-  "question": "Kinh tế số được thúc đẩy thông qua các biện pháp nào?",
-  "category": "digital_law_principle",
-  "difficulty": "hard",
-  "query_type": "general_explanation",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 30",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 30 Luật Chuyển đổi số 2025, Nhà nước thúc đẩy kinh tế số thông qua việc hỗ trợ doanh nghiệp công nghệ số, khuyến khích thương mại điện tử và tạo môi trường thử nghiệm pháp lý (sandbox) cho các mô hình kinh doanh mới.",
-  "should_refuse": false,
-  "notes": "Kiểm tra chính sách phát triển kinh tế số."
-  },
-  {
-  "id": "q065",
-  "question": "Ngày Chuyển đổi số quốc gia là ngày nào?",
-  "category": "digital_law_definition",
-  "difficulty": "easy",
-  "query_type": "article_lookup",
-  "expected_sources": [
-  {
-  "so_hieu": "148/2025/QH15",
-  "dieu": "Điều 7",
-  "khoan": null,
-  "diem": null
-  }
-  ],
-  "reference": "Theo Điều 7 Luật Chuyển đổi số 2025, ngày 10 tháng 10 hằng năm là Ngày Chuyển đổi số quốc gia.",
-  "should_refuse": false,
-  "notes": "Kiểm tra thông tin ngày kỷ niệm ngành."
-  },
-  {
-  "id": "q066",
-  "question": "Điều kiện để nam nữ kết hôn với nhau là gì?",
-  "category": "out_of_scope_family_law",
-  "difficulty": "easy",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi ngoài corpus (Luật HNGĐ)."
-  },
-  {
-  "id": "q067",
-  "question": "Người lao động được nghỉ phép năm bao nhiêu ngày?",
-  "category": "out_of_scope_labor_law",
-  "difficulty": "easy",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi ngoài corpus (Bộ luật Lao động)."
-  },
-  {
-  "id": "q068",
-  "question": "Mức đóng bảo hiểm xã hội bắt buộc hiện nay là bao nhiêu?",
-  "category": "out_of_scope_social_insurance",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi ngoài corpus (Luật BHXH)."
-  },
-  {
-  "id": "q069",
-  "question": "Thủ tục quyết toán thuế thu nhập cá nhân được thực hiện như thế nào?",
-  "category": "out_of_scope_tax",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi ngoài corpus (Luật Thuế)."
-  },
-  {
-  "id": "q070",
-  "question": "Mức phạt nồng độ cồn khi lái xe máy là bao nhiêu?",
-  "category": "out_of_scope_traffic",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi ngoài corpus (Luật Giao thông/Nghị định xử phạt)."
-  },
-  {
-  "id": "q071",
-  "question": "Độ tuổi được phép lái xe ô tô hạng B2?",
-  "category": "out_of_scope_traffic",
-  "difficulty": "easy",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi ngoài corpus."
-  },
-  {
-  "id": "q072",
-  "question": "Thủ tục đăng ký khai sinh cho con có yếu tố nước ngoài?",
-  "category": "out_of_scope_family_law",
-  "difficulty": "hard",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi hộ tịch."
-  },
-  {
-  "id": "q073",
-  "question": "Mức lương tối thiểu vùng hiện nay tại Hà Nội là bao nhiêu?",
-  "category": "out_of_scope_labor_law",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi lương tối thiểu."
-  },
-  {
-  "id": "q074",
-  "question": "Quy định về thời gian thử việc của nhân viên văn phòng?",
-  "category": "out_of_scope_labor_law",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi lao động."
-  },
-  {
-  "id": "q075",
-  "question": "Trường hợp nào được hưởng bảo hiểm thất nghiệp?",
-  "category": "out_of_scope_social_insurance",
-  "difficulty": "hard",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi BH thất nghiệp."
-  },
-  {
-  "id": "q076",
-  "question": "Các loại hóa đơn điện tử hợp lệ theo quy định mới?",
-  "category": "out_of_scope_tax",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi thuế/hóa đơn."
-  },
-  {
-  "id": "q077",
-  "question": "Vượt đèn đỏ bị phạt tiền bao nhiêu theo nghị định 100?",
-  "category": "out_of_scope_traffic",
-  "difficulty": "easy",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi giao thông cụ thể."
-  },
-  {
-  "id": "q078",
-  "question": "Đơn phương chấm dứt hợp đồng lao động cần báo trước bao nhiêu ngày?",
-  "category": "out_of_scope_labor_law",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi hợp đồng lao động."
-  },
-  {
-  "id": "q079",
-  "question": "Thế nào là tài sản chung của vợ chồng trong thời kỳ hôn nhân?",
-  "category": "out_of_scope_family_law",
-  "difficulty": "medium",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi tài sản chung (HNGĐ)."
-  },
-  {
-  "id": "q080",
-  "question": "Người lao động nước ngoài tại Việt Nam có phải đóng bảo hiểm xã hội không?",
-  "category": "out_of_scope_social_insurance",
-  "difficulty": "hard",
-  "query_type": "out_of_scope",
-  "expected_sources": [],
-  "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
-  "should_refuse": true,
-  "notes": "Đánh giá khả năng từ chối câu hỏi bảo hiểm cho người nước ngoài."
-  }
-  ]
+    "id": "q001",
+    "question": "Các nguyên tắc cơ bản của pháp luật dân sự gồm những gì?",
+    "category": "civil_law_principle",
+    "difficulty": "easy",
+    "query_type": "principle_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 3",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 3 Bộ luật Dân sự 2015, 1. Mọi cá nhân, pháp nhân đều bình đẳng, không được lấy bất kỳ lý do nào để phân biệt đối xử; được pháp luật bảo hộ như nhau về các quyền nhân thân và tài sản. 2. Cá nhân, pháp nhân xác lập, thực hiện, chấm dứt quyền, nghĩa vụ dân sự của mình trên cơ sở tự do, tự nguyện cam kết, thỏa thuận. Mọi cam kết, thỏa thuận không vi phạm điều cấm của luật, không trái đạo đức xã hội có hiệu lực thực hiện đối với các bên và phải được chủ thể khác tôn trọng. 3. Cá nhân, pháp nhân phải xác lập, thực hiện, chấm dứt quyền, nghĩa vụ dân sự của mình một cách thiện chí, trung thực. 4. Việc xác lập, thực hiện, chấm dứt quyền, nghĩa vụ dân sự không được xâm phạm đến lợi ích quốc gia, dân tộc, lợi ích công cộng, quyền và lợi ích hợp pháp của người khác. 5. Cá nhân, pháp nhân phải tự chịu trách nhiệm về việc không thực hiện hoặc thực hiện không đúng nghĩa vụ dân sự.",
+    "should_refuse": false,
+    "notes": "Nguyên tắc nền tảng của BLDS. Source chunk: BLDS_2015_000008."
+  },
+  {
+    "id": "q002",
+    "question": "Khi không có thỏa thuận và pháp luật không quy định thì có được áp dụng tập quán không?",
+    "category": "civil_law_general",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 5",
+        "khoan": "Khoản 2",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 2 Điều 5 Bộ luật Dân sự 2015, 2. Trường hợp các bên không có thỏa thuận và pháp luật không quy định thì có thể áp dụng tập quán nhưng tập quán áp dụng không được trái với các nguyên tắc cơ bản của pháp luật dân sự quy định tại Điều 3 của Bộ luật này.",
+    "should_refuse": false,
+    "notes": "Áp dụng tập quán trong quan hệ dân sự. Source chunk: BLDS_2015_000014."
+  },
+  {
+    "id": "q003",
+    "question": "Quyền dân sự được xác lập từ những căn cứ nào?",
+    "category": "civil_law_general",
+    "difficulty": "easy",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 8",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 8 Bộ luật Dân sự 2015, 1. Hợp đồng. 2. Hành vi pháp lý đơn phương. 3. Quyết định của Tòa án, cơ quan có thẩm quyền khác theo quy định của luật. 4. Kết quả của lao động, sản xuất, kinh doanh; kết quả của hoạt động sáng tạo ra đối tượng quyền sở hữu trí tuệ. 5. Chiếm hữu tài sản. 6. Sử dụng tài sản, được lợi về tài sản không có căn cứ pháp luật. 7. Bị thiệt hại do hành vi trái pháp luật. 8. Thực hiện công việc không có ủy quyền. 9. Căn cứ khác do pháp luật quy định.",
+    "should_refuse": false,
+    "notes": "Căn cứ xác lập quyền dân sự. Source chunk: BLDS_2015_000019."
+  },
+  {
+    "id": "q004",
+    "question": "Khi quyền dân sự bị xâm phạm, chủ thể có thể yêu cầu những phương thức bảo vệ nào?",
+    "category": "civil_law_general",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 11",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 11 Bộ luật Dân sự 2015, 1. Công nhận, tôn trọng, bảo vệ và bảo đảm quyền dân sự của mình. 2. Buộc chấm dứt hành vi xâm phạm. 3. Buộc xin lỗi, cải chính công khai. 4. Buộc thực hiện nghĩa vụ. 5. Buộc bồi thường thiệt hại. 6. Hủy quyết định cá biệt trái pháp luật của cơ quan, tổ chức, người có thẩm quyền. 7. Yêu cầu khác theo quy định của luật.",
+    "should_refuse": false,
+    "notes": "Phương thức bảo vệ quyền dân sự. Source chunk: BLDS_2015_000035."
+  },
+  {
+    "id": "q005",
+    "question": "Năng lực pháp luật dân sự của cá nhân là gì?",
+    "category": "civil_law_capacity",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 16",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 16 Bộ luật Dân sự 2015, 1. Năng lực pháp luật dân sự của cá nhân là khả năng của cá nhân có quyền dân sự và nghĩa vụ dân sự.",
+    "should_refuse": false,
+    "notes": "Định nghĩa năng lực pháp luật dân sự. Source chunk: BLDS_2015_000044."
+  },
+  {
+    "id": "q006",
+    "question": "Năng lực hành vi dân sự của cá nhân là gì?",
+    "category": "civil_law_capacity",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 19",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 19 Bộ luật Dân sự 2015, Điều 19. Năng lực hành vi dân sự của cá nhân Năng lực hành vi dân sự của cá nhân là khả năng của cá nhân bằng hành vi của mình xác lập, thực hiện quyền, nghĩa vụ dân sự.",
+    "should_refuse": false,
+    "notes": "Định nghĩa năng lực hành vi dân sự. Source chunk: BLDS_2015_000051."
+  },
+  {
+    "id": "q007",
+    "question": "Thế nào là người thành niên?",
+    "category": "civil_law_capacity",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 20",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 20 Bộ luật Dân sự 2015, 1. Người thành niên là người từ đủ mười tám tuổi trở lên.",
+    "should_refuse": false,
+    "notes": "Định nghĩa người thành niên. Source chunk: BLDS_2015_000052."
+  },
+  {
+    "id": "q008",
+    "question": "Người chưa đủ sáu tuổi có tự mình xác lập giao dịch dân sự không?",
+    "category": "civil_law_capacity",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 21",
+        "khoan": "Khoản 2",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 2 Điều 21 Bộ luật Dân sự 2015, 2. Giao dịch dân sự của người chưa đủ sáu tuổi do người đại diện theo pháp luật của người đó xác lập, thực hiện.",
+    "should_refuse": false,
+    "notes": "Giao dịch của người chưa đủ sáu tuổi. Source chunk: BLDS_2015_000055."
+  },
+  {
+    "id": "q009",
+    "question": "Trường hợp nào Tòa án tuyên bố một người mất năng lực hành vi dân sự?",
+    "category": "civil_law_capacity",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 22",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 22 Bộ luật Dân sự 2015, 1. Khi một người do bị bệnh tâm thần hoặc mắc bệnh khác mà không thể nhận thức, làm chủ được hành vi thì theo yêu cầu của người có quyền, lợi ích liên quan hoặc của cơ quan, tổ chức hữu quan, Tòa án ra quyết định tuyên bố người này là người mất năng lực hành vi dân sự trên cơ sở kết luận giám định pháp y tâm thần. Khi không còn căn cứ tuyên bố một người mất năng lực hành vi dân sự thì theo yêu cầu của chính người đó hoặc của người có quyền, lợi ích liên quan hoặc của cơ quan, tổ chức hữu quan, Tòa án ra quyết đị...",
+    "should_refuse": false,
+    "notes": "Tuyên bố mất năng lực hành vi dân sự. Source chunk: BLDS_2015_000058."
+  },
+  {
+    "id": "q010",
+    "question": "Việc sử dụng hình ảnh của cá nhân phải đáp ứng điều kiện gì?",
+    "category": "civil_law_personal_rights",
+    "difficulty": "medium",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 32",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 32 Bộ luật Dân sự 2015, 1. Cá nhân có quyền đối với hình ảnh của mình. Việc sử dụng hình ảnh của cá nhân phải được người đó đồng ý. Việc sử dụng hình ảnh của người khác vì mục đích thương mại thì phải trả thù lao cho người có hình ảnh, trừ trường hợp các bên có thỏa thuận khác.",
+    "should_refuse": false,
+    "notes": "Quyền của cá nhân đối với hình ảnh. Source chunk: BLDS_2015_000104."
+  },
+  {
+    "id": "q011",
+    "question": "Cá nhân có quyền được bảo đảm an toàn về tính mạng, sức khỏe, thân thể như thế nào?",
+    "category": "civil_law_personal_rights",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 33",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 33 Bộ luật Dân sự 2015, 1. Cá nhân có quyền sống, quyền bất khả xâm phạm về tính mạng, thân thể, quyền được pháp luật bảo hộ về sức khỏe. Không ai bị tước đoạt tính mạng trái luật. 2. Khi phát hiện người bị tai nạn, bệnh tật mà tính mạng bị đe dọa thì người phát hiện có trách nhiệm hoặc yêu cầu cá nhân, cơ quan, tổ chức khác có điều kiện cần thiết đưa ngay đến cơ sở khám bệnh, chữa bệnh nơi gần nhất; cơ sở khám bệnh, chữa bệnh có trách nhiệm thực hiện việc khám bệnh, chữa bệnh theo quy định của pháp luật về khám bệnh, chữa bệnh. 3. Việc gây mê, mổ, cắt bỏ, cấy ghép mô, bộ phận cơ thể người; thực hiện kỹ thuật, phương pháp khám, chữa bệnh mới trên cơ thể người; thử nghiệm y học, dược học, khoa học hay bất cứ hình thức thử nghiệm nào khác trên cơ thể người phải được sự đồng ý của người đó và phải được tổ chức có thẩm quyền thực hiện. Trường hợp người được thử nghiệm là người chưa thành niên, người mất năng lực...",
+    "should_refuse": false,
+    "notes": "Quyền sống và an toàn thân thể. Source chunk: BLDS_2015_000108."
+  },
+  {
+    "id": "q012",
+    "question": "Cá nhân được xác định lại giới tính trong trường hợp nào?",
+    "category": "civil_law_personal_rights",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 36",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 36 Bộ luật Dân sự 2015, 1. Cá nhân có quyền xác định lại giới tính. Việc xác định lại giới tính của một người được thực hiện trong trường hợp giới tính của người đó bị khuyết tật bẩm sinh hoặc chưa định hình chính xác mà cần có sự can thiệp của y học nhằm xác định rõ giới tính. 2. Việc xác định lại giới tính được thực hiện theo quy định của pháp luật. 3. Cá nhân đã thực hiện việc xác định lại giới tính có quyền, nghĩa vụ đăng ký thay đổi hộ tịch theo quy định của pháp luật về hộ tịch; có quyền nhân thân phù hợp với giới tính đã được xác định lại theo quy định của Bộ luật này và luật khác có liên quan.",
+    "should_refuse": false,
+    "notes": "Quyền xác định lại giới tính. Source chunk: BLDS_2015_000123."
+  },
+  {
+    "id": "q013",
+    "question": "Thư tín, điện thoại, dữ liệu điện tử của cá nhân có được bảo đảm bí mật không?",
+    "category": "civil_law_personal_rights",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 38",
+        "khoan": "Khoản 3",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 3 Điều 38 Bộ luật Dân sự 2015, 3. Thư tín, điện thoại, điện tín, cơ sở dữ liệu điện tử và các hình thức trao đổi thông tin riêng tư khác của cá nhân được bảo đảm an toàn và bí mật. Việc bóc mở, kiểm soát, thu giữ thư tín, điện thoại, điện tín, cơ sở dữ liệu điện tử và các hình thức trao đổi thông tin riêng tư khác của người khác chỉ được thực hiện trong trường hợp luật quy định.",
+    "should_refuse": false,
+    "notes": "Bí mật đời sống riêng tư. Source chunk: BLDS_2015_000128."
+  },
+  {
+    "id": "q014",
+    "question": "Nơi cư trú của cá nhân được xác định theo tiêu chí nào?",
+    "category": "civil_law_personal_rights",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 40",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 40 Bộ luật Dân sự 2015, 1. Nơi cư trú của cá nhân là nơi người đó thường xuyên sinh sống.",
+    "should_refuse": false,
+    "notes": "Nơi cư trú của cá nhân. Source chunk: BLDS_2015_000132."
+  },
+  {
+    "id": "q015",
+    "question": "Cá nhân làm người giám hộ phải có những điều kiện gì?",
+    "category": "civil_law_guardianship",
+    "difficulty": "medium",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 49",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 49 Bộ luật Dân sự 2015, 1. Có năng lực hành vi dân sự đầy đủ. 2. Có tư cách đạo đức tốt và các điều kiện cần thiết để thực hiện quyền, nghĩa vụ của người giám hộ. 3. Không phải là người đang bị truy cứu trách nhiệm hình sự hoặc người bị kết án nhưng chưa được xoá án tích về một trong các tội cố ý xâm phạm tính mạng, sức khỏe, danh dự, nhân phẩm, tài sản của người khác. 4. Không phải là người bị Tòa án tuyên bố hạn chế quyền đối với con chưa thành niên.",
+    "should_refuse": false,
+    "notes": "Điều kiện làm người giám hộ. Source chunk: BLDS_2015_000155."
+  },
+  {
+    "id": "q016",
+    "question": "Ai có quyền cử người giám sát việc giám hộ?",
+    "category": "civil_law_guardianship",
+    "difficulty": "hard",
+    "query_type": "procedure_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 51",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 51 Bộ luật Dân sự 2015, 1. Người thân thích của người được giám hộ thỏa thuận cử người giám sát việc giám hộ trong số những người thân thích hoặc chọn cá nhân, pháp nhân khác làm người giám sát việc giám hộ. Việc cử, chọn người giám sát việc giám hộ phải được sự đồng ý của người đó. Trường hợp giám sát việc giám hộ liên quan đến quản lý tài sản của người được giám hộ thì người giám sát phải đăng ký tại Ủy ban nhân dân cấp xã nơi cư trú của người được giám hộ. Người thân thích của người được giám hộ là vợ, chồng, cha, mẹ, con của người được giám hộ; nếu không có ai trong số những người này thì người thân thích của người được giám hộ là ông, bà, anh ruột, chị ruột, em ruột của người được giám hộ; nếu cũng không có ai trong số những người này thì người thân thích của người được giám hộ là bác ruột, chú ruột, cậu ruột, cô ruột, dì ruột của người được giám hộ. 2. Trường hợp không có người thân thích của người đượ...",
+    "should_refuse": false,
+    "notes": "Giám sát việc giám hộ. Source chunk: BLDS_2015_000163."
+  },
+  {
+    "id": "q017",
+    "question": "Khi nào một người có thể bị Tòa án tuyên bố là đã chết?",
+    "category": "civil_law_capacity",
+    "difficulty": "hard",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 71",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 71 Bộ luật Dân sự 2015, 1. Người có quyền, lợi ích liên quan có thể yêu cầu Tòa án ra quyết định tuyên bố một người là đã chết trong trường hợp sau đây: b) Biệt tích trong chiến tranh sau 05 năm, kể từ ngày chiến tranh kết thúc mà vẫn không có tin tức xác thực là còn sống;",
+    "should_refuse": false,
+    "notes": "Các trường hợp tuyên bố chết. Source chunk: BLDS_2015_000234."
+  },
+  {
+    "id": "q018",
+    "question": "Tài sản theo Bộ luật Dân sự bao gồm những gì?",
+    "category": "civil_law_property",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 105",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 105 Bộ luật Dân sự 2015, 1. Tài sản là vật, tiền, giấy tờ có giá và quyền tài sản.",
+    "should_refuse": false,
+    "notes": "Khái niệm tài sản. Source chunk: BLDS_2015_000341."
+  },
+  {
+    "id": "q019",
+    "question": "Giao dịch dân sự là gì?",
+    "category": "civil_law_transaction",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 116",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 116 Bộ luật Dân sự 2015, Điều 116. Giao dịch dân sự Giao dịch dân sự là hợp đồng hoặc hành vi pháp lý đơn phương làm phát sinh, thay đổi hoặc chấm dứt quyền, nghĩa vụ dân sự.",
+    "should_refuse": false,
+    "notes": "Định nghĩa giao dịch dân sự. Source chunk: BLDS_2015_000367."
+  },
+  {
+    "id": "q020",
+    "question": "Giao dịch dân sự có hiệu lực khi đáp ứng điều kiện nào?",
+    "category": "civil_law_transaction",
+    "difficulty": "medium",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "91/2015/QH13",
+        "dieu": "Điều 117",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 117 Bộ luật Dân sự 2015, 1. Giao dịch dân sự có hiệu lực khi có đủ các điều kiện sau đây: b) Chủ thể tham gia giao dịch dân sự hoàn toàn tự nguyện;",
+    "should_refuse": false,
+    "notes": "Điều kiện có hiệu lực của giao dịch dân sự. Source chunk: BLDS_2015_000369."
+  },
+  {
+    "id": "q021",
+    "question": "Tội phạm là gì theo Bộ luật Hình sự?",
+    "category": "criminal_law_general",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 8",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 8 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Tội phạm là hành vi nguy hiểm cho xã hội được quy định trong Bộ luật Hình sự, do người có năng lực trách nhiệm hình sự hoặc pháp nhân thương mại thực hiện một cách cố ý hoặc vô ý, xâm phạm độc lập, chủ quyền, thống nhất, toàn vẹn lãnh thổ Tổ quốc, xâm phạm chế độ chính trị, chế độ kinh tế, nền văn hóa, quốc phòng, an ninh, trật tự, an toàn xã hội, quyền, lợi ích hợp pháp của tổ chức, xâm phạm quyền con người, quyền, lợi ích hợp pháp của công dân, xâm phạm những lĩnh vực khác của trật tự pháp luật xã hội chủ n...",
+    "should_refuse": false,
+    "notes": "Khái niệm tội phạm. Source chunk: BLHS_2015_SDBS_2017_TVPL_000026."
+  },
+  {
+    "id": "q022",
+    "question": "Tội phạm được phân loại như thế nào?",
+    "category": "criminal_law_general",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 9",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 9 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Căn cứ vào tính chất và mức độ nguy hiểm cho xã hội của hành vi phạm tội được quy định trong Bộ luật này, tội phạm được phân thành 04 loại sau đây: a) Tội phạm ít nghiêm trọng là tội phạm có tính chất và mức độ nguy hiểm cho xã hội không lớn mà mức cao nhất của khung hình phạt do Bộ luật này quy định đối với tội ấy là phạt tiền, phạt cải tạo không giam giữ hoặc phạt tù đến 03 năm; 1. Căn cứ vào tính chất và mức độ nguy hiểm cho xã hội của hành vi phạm tội được quy định trong Bộ luật này, tội phạm được phân thành 04 loại sau đây: b) Tội phạm nghiêm trọng là tội phạm có tính chất và mức độ nguy hiểm cho xã hội lớn mà mức cao nhất của khung hình phạt do Bộ luật này quy định đối với tội ấy là từ trên 03 năm tù đến 07 năm tù; 1. Căn cứ vào tính chất và mức độ nguy hiểm cho xã hội của hành vi phạm tội được quy định trong Bộ luật này, tội phạm được phân thành 04 loại sau đây: c) Tội phạm...",
+    "should_refuse": false,
+    "notes": "Phân loại tội phạm. Source chunk: BLHS_2015_SDBS_2017_TVPL_000032."
+  },
+  {
+    "id": "q023",
+    "question": "Người từ đủ bao nhiêu tuổi phải chịu trách nhiệm hình sự về mọi tội phạm?",
+    "category": "criminal_law_responsibility",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 12",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 12 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Người từ đủ 16 tuổi trở lên phải chịu trách nhiệm hình sự về mọi tội phạm, trừ những tội phạm mà Bộ luật này có quy định khác.",
+    "should_refuse": false,
+    "notes": "Tuổi chịu trách nhiệm hình sự. Source chunk: BLHS_2015_SDBS_2017_TVPL_000037."
+  },
+  {
+    "id": "q024",
+    "question": "Người phạm tội do dùng rượu, bia có phải chịu trách nhiệm hình sự không?",
+    "category": "criminal_law_responsibility",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 13",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 13 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, Điều 13. Phạm tội do dùng rượu, bia hoặc chất kích thích mạnh khác Người phạm tội trong tình trạng mất khả năng nhận thức hoặc khả năng điều khiển hành vi của mình do dùng rượu, bia hoặc chất kích thích mạnh khác, thì vẫn phải chịu trách nhiệm hình sự.",
+    "should_refuse": false,
+    "notes": "Trách nhiệm khi dùng rượu, bia hoặc chất kích thích. Source chunk: BLHS_2015_SDBS_2017_TVPL_000039."
+  },
+  {
+    "id": "q025",
+    "question": "Chuẩn bị phạm tội là gì?",
+    "category": "criminal_law_general",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 14",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 14 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Chuẩn bị phạm tội là tìm kiếm, sửa soạn công cụ, phương tiện hoặc tạo ra những điều kiện khác để thực hiện tội phạm hoặc thành lập, tham gia nhóm tội phạm, trừ trường hợp thành lập hoặc tham gia nhóm tội phạm quy định tại Điều 109, điểm a khoản 2 Điều 113 hoặc điểm a khoản 2 Điều 299 của Bộ luật này.",
+    "should_refuse": false,
+    "notes": "Khái niệm chuẩn bị phạm tội. Source chunk: BLHS_2015_SDBS_2017_TVPL_000040."
+  },
+  {
+    "id": "q026",
+    "question": "Phạm tội chưa đạt là gì?",
+    "category": "criminal_law_general",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 15",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 15 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, Điều 15. Phạm tội chưa đạt Phạm tội chưa đạt là cố ý thực hiện tội phạm nhưng không thực hiện được đến cùng vì những nguyên nhân ngoài ý muốn của người phạm tội. Người phạm tội chưa đạt phải chịu trách nhiệm hình sự về tội phạm chưa đạt.",
+    "should_refuse": false,
+    "notes": "Khái niệm phạm tội chưa đạt. Source chunk: BLHS_2015_SDBS_2017_TVPL_000043."
+  },
+  {
+    "id": "q027",
+    "question": "Đồng phạm là gì?",
+    "category": "criminal_law_general",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 17",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 17 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Đồng phạm là trường hợp có hai người trở lên cố ý cùng thực hiện một tội phạm.",
+    "should_refuse": false,
+    "notes": "Khái niệm đồng phạm. Source chunk: BLHS_2015_SDBS_2017_TVPL_000045."
+  },
+  {
+    "id": "q028",
+    "question": "Che giấu tội phạm được quy định ở đâu?",
+    "category": "criminal_law_article",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 18",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 18 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Người nào không hứa hẹn trước, nhưng sau khi biết tội phạm được thực hiện đã che giấu người phạm tội, dấu vết, tang vật của tội phạm hoặc có hành vi khác cản trở việc phát hiện, điều tra, xử lý người phạm tội, thì phải chịu trách nhiệm hình sự về tội che giấu tội phạm trong những trường hợp mà Bộ luật này quy định. 2. Người che giấu tội phạm là ông, bà, cha, mẹ, con, cháu, anh chị em ruột, vợ hoặc chồng của người phạm tội không phải chịu trách nhiệm hình sự theo quy định tại khoản 1 Điều này, trừ trường hợp che giấu các tội xâm phạm an ninh quốc gia hoặc tội đặc biệt nghiêm trọng khác quy định tại Điều 389 của Bộ luật này.",
+    "should_refuse": false,
+    "notes": "Định vị điều luật. Source chunk: BLHS_2015_SDBS_2017_TVPL_000050."
+  },
+  {
+    "id": "q029",
+    "question": "Phòng vệ chính đáng là gì?",
+    "category": "criminal_law_general",
+    "difficulty": "medium",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 22",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 22 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Phòng vệ chính đáng là hành vi của người vì bảo vệ quyền hoặc lợi ích chính đáng của mình, của người khác hoặc lợi ích của Nhà nước, của cơ quan, tổ chức mà chống trả lại một cách cần thiết người đang có hành vi xâm phạm các lợi ích nói trên. Phòng vệ chính đáng không phải là tội phạm.",
+    "should_refuse": false,
+    "notes": "Phòng vệ chính đáng. Source chunk: BLHS_2015_SDBS_2017_TVPL_000056."
+  },
+  {
+    "id": "q030",
+    "question": "Tình thế cấp thiết là gì?",
+    "category": "criminal_law_general",
+    "difficulty": "medium",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 23",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 23 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Tình thế cấp thiết là tình thế của người vì muốn tránh gây thiệt hại cho quyền, lợi ích hợp pháp của mình, của người khác hoặc lợi ích của Nhà nước, của cơ quan, tổ chức mà không còn cách nào khác là phải gây một thiệt hại nhỏ hơn thiệt hại cần ngăn ngừa. Hành vi gây thiệt hại trong tình thế cấp thiết không phải là tội phạm.",
+    "should_refuse": false,
+    "notes": "Tình thế cấp thiết. Source chunk: BLHS_2015_SDBS_2017_TVPL_000058."
+  },
+  {
+    "id": "q031",
+    "question": "Thời hiệu truy cứu trách nhiệm hình sự được quy định thế nào?",
+    "category": "criminal_law_responsibility",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 27",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 27 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Thời hiệu truy cứu trách nhiệm hình sự là thời hạn do Bộ luật này quy định mà khi hết thời hạn đó thì người phạm tội không bị truy cứu trách nhiệm hình sự. 2. Thời hiệu truy cứu trách nhiệm hình sự được quy định như sau: a) 05 năm đối với tội phạm ít nghiêm trọng; 2. Thời hiệu truy cứu trách nhiệm hình sự được quy định như sau: b) 10 năm đối với tội phạm nghiêm trọng; 2. Thời hiệu truy cứu trách nhiệm hình sự được quy định như sau: c) 15 năm đối với tội phạm rất nghiêm trọng; 2. Thời hiệu truy cứu trách nhiệm hình sự được quy định như sau: d) 20 năm đối với tội phạm đặc biệt nghiêm trọng. 3. Thời hiệu truy cứu trách nhiệm hình sự được tính từ ngày tội phạm được thực hiện. Nếu trong thời hạn quy định tại khoản 2 Điều này, người phạm tội lại thực hiện hành vi phạm tội mới mà Bộ luật này quy định mức cao nhất của khung hình phạt đối với tội ấy trên 01 năm tù, thì thời hiệu đối với tội...",
+    "should_refuse": false,
+    "notes": "Thời hiệu truy cứu trách nhiệm hình sự. Source chunk: BLHS_2015_SDBS_2017_TVPL_000064."
+  },
+  {
+    "id": "q032",
+    "question": "Những căn cứ nào có thể miễn trách nhiệm hình sự?",
+    "category": "criminal_law_responsibility",
+    "difficulty": "hard",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 29",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 29 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Người phạm tội được miễn trách nhiệm hình sự khi có một trong những căn cứ sau đây: a) Khi tiến hành điều tra, truy tố hoặc xét xử, do có sự thay đổi chính sách, pháp luật làm cho hành vi phạm tội không còn nguy hiểm cho xã hội nữa; 1. Người phạm tội được miễn trách nhiệm hình sự khi có một trong những căn cứ sau đây: b) Khi có quyết định đại xá. 2. Người phạm tội có thể được miễn trách nhiệm hình sự khi có một trong các căn cứ sau đây: a) Khi tiến hành điều tra, truy tố, xét xử do chuyển biến của tình hình mà người phạm tội không còn nguy hiểm cho xã hội nữa; 2. Người phạm tội có thể được miễn trách nhiệm hình sự khi có một trong các căn cứ sau đây: b) Khi tiến hành điều tra, truy tố, xét xử, người phạm tội mắc bệnh hiểm nghèo dẫn đến không còn khả năng gây nguy hiểm cho xã hội nữa; 2. Người phạm tội có thể được miễn trách nhiệm hình sự khi có một trong các căn cứ sau đây: c) Trướ...",
+    "should_refuse": false,
+    "notes": "Căn cứ miễn trách nhiệm hình sự. Source chunk: BLHS_2015_SDBS_2017_TVPL_000078."
+  },
+  {
+    "id": "q033",
+    "question": "Hình phạt là gì?",
+    "category": "criminal_law_penalty",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 30",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 30 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, Điều 30. Khái niệm hình phạt Hình phạt là biện pháp cưỡng chế nghiêm khắc nhất của Nhà nước được quy định trong Bộ luật này, do Tòa án quyết định áp dụng đối với người hoặc pháp nhân thương mại phạm tội nhằm tước bỏ hoặc hạn chế quyền, lợi ích của người, pháp nhân thương mại đó.",
+    "should_refuse": false,
+    "notes": "Khái niệm hình phạt. Source chunk: BLHS_2015_SDBS_2017_TVPL_000079."
+  },
+  {
+    "id": "q034",
+    "question": "Các hình phạt chính đối với người phạm tội gồm những hình phạt nào?",
+    "category": "criminal_law_penalty",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 32",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 32 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Hình phạt chính bao gồm: g) Tử hình.",
+    "should_refuse": false,
+    "notes": "Các hình phạt đối với người phạm tội. Source chunk: BLHS_2015_SDBS_2017_TVPL_000087."
+  },
+  {
+    "id": "q035",
+    "question": "Phạt tiền được áp dụng như hình phạt chính với đối tượng nào?",
+    "category": "criminal_law_penalty",
+    "difficulty": "medium",
+    "query_type": "penalty_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 35",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 35 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Phạt tiền được áp dụng là hình phạt chính đối với các trường hợp sau đây: a) Người phạm tội ít nghiêm trọng, phạm tội nghiêm trọng do Bộ luật này quy định;",
+    "should_refuse": false,
+    "notes": "Quy định về phạt tiền. Source chunk: BLHS_2015_SDBS_2017_TVPL_000104."
+  },
+  {
+    "id": "q036",
+    "question": "Tù có thời hạn tối thiểu và tối đa là bao lâu?",
+    "category": "criminal_law_penalty",
+    "difficulty": "easy",
+    "query_type": "penalty_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 38",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 38 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Tù có thời hạn là buộc người bị kết án phải chấp hành hình phạt tại cơ sở giam giữ trong một thời hạn nhất định. Tù có thời hạn đối với người phạm một tội có mức tối thiểu là 03 tháng và mức tối đa là 20 năm. Thời gian tạm giữ, tạm giam được trừ vào thời hạn chấp hành hình phạt tù, cứ 01 ngày tạm giữ, tạm giam bằng 01 ngày tù.",
+    "should_refuse": false,
+    "notes": "Mức tù có thời hạn. Source chunk: BLHS_2015_SDBS_2017_TVPL_000114."
+  },
+  {
+    "id": "q037",
+    "question": "Tử hình không áp dụng đối với những người nào?",
+    "category": "criminal_law_penalty",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 40",
+        "khoan": "Khoản 2",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 2 Điều 40 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 2. Không áp dụng hình phạt tử hình đối với người dưới 18 tuổi khi phạm tội, phụ nữ có thai, phụ nữ đang nuôi con dưới 36 tháng tuổi hoặc người đủ 75 tuổi trở lên khi phạm tội hoặc khi xét xử.",
+    "should_refuse": false,
+    "notes": "Trường hợp không áp dụng tử hình. Source chunk: BLHS_2015_SDBS_2017_TVPL_000118."
+  },
+  {
+    "id": "q038",
+    "question": "Các tình tiết giảm nhẹ trách nhiệm hình sự gồm những gì?",
+    "category": "criminal_law_penalty",
+    "difficulty": "hard",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 51",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 51 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Các tình tiết sau đây là tình tiết giảm nhẹ trách nhiệm hình sự: m) Phạm tội do lạc hậu;",
+    "should_refuse": false,
+    "notes": "Tình tiết giảm nhẹ. Source chunk: BLHS_2015_SDBS_2017_TVPL_000160."
+  },
+  {
+    "id": "q039",
+    "question": "Tái phạm hoặc phạm tội có tổ chức có phải là tình tiết tăng nặng không?",
+    "category": "criminal_law_penalty",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 52",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 52 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Chỉ các tình tiết sau đây mới là tình tiết tăng nặng trách nhiệm hình sự: a) Phạm tội có tổ chức;",
+    "should_refuse": false,
+    "notes": "Tình tiết tăng nặng. Source chunk: BLHS_2015_SDBS_2017_TVPL_000173."
+  },
+  {
+    "id": "q040",
+    "question": "Điều kiện để người bị phạt tù được hưởng án treo là gì?",
+    "category": "criminal_law_penalty",
+    "difficulty": "hard",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "01/VBHN-VPQH",
+        "dieu": "Điều 65",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 65 Bộ luật Hình sự 2015, sửa đổi bổ sung 2017, 1. Khi xử phạt tù không quá 03 năm, căn cứ vào nhân thân của người phạm tội và các tình tiết giảm nhẹ, nếu xét thấy không cần phải bắt chấp hành hình phạt tù, thì Tòa án cho hưởng án treo và ấn định thời gian thử thách từ 01 năm đến 05 năm và thực hiện các nghĩa vụ trong thời gian thử thách theo quy định của Luật Thi hành án hình sự.",
+    "should_refuse": false,
+    "notes": "Điều kiện hưởng án treo. Source chunk: BLHS_2015_SDBS_2017_TVPL_000236."
+  },
+  {
+    "id": "q041",
+    "question": "Người sử dụng đất gồm những đối tượng nào?",
+    "category": "land_law_general",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 4",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 4 Luật Đất đai 2024, 1. Tổ chức trong nước gồm: a) Cơ quan nhà nước, cơ quan Đảng Cộng sản Việt Nam, đơn vị vũ trang nhân dân, Mặt trận Tổ quốc Việt Nam, tổ chức chính trị - xã hội, tổ chức chính trị xã hội - nghề nghiệp, tổ chức xã hội, tổ chức xã hội - nghề nghiệp, đơn vị sự nghiệp công lập và tổ chức khác theo quy định của pháp luật; 1. Tổ chức trong nước gồm: b) Tổ chức kinh tế theo quy định của Luật Đầu tư, trừ trường hợp quy định tại khoản 7 Điều này (sau đây gọi là tổ chức kinh tế); 2. Tổ chức tôn giáo, tổ chức tôn giáo trực thuộc; 3. Cá nhân trong nước, người Việt Nam định cư ở nước ngoài là công dân Việt Nam (sau đây gọi là cá nhân); 4. Cộng đồng dân cư; 5. Tổ chức nước ngoài có chức năng ngoại giao gồm cơ quan đại diện ngoại giao, cơ quan lãnh sự, cơ quan đại diện khác của nước ngoài có chức năng ngoại giao được Chính phủ Việt Nam thừa nhận; cơ quan đại diện của tổ chức thuộc Liên hợp quốc, cơ q...",
+    "should_refuse": false,
+    "notes": "Người sử dụng đất. Source chunk: Luat_dat_dai_2024_000058."
+  },
+  {
+    "id": "q042",
+    "question": "Nguyên tắc sử dụng đất theo Luật Đất đai 2024 là gì?",
+    "category": "land_law_principle",
+    "difficulty": "easy",
+    "query_type": "principle_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 5",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 5 Luật Đất đai 2024, 1. Đúng mục đích sử dụng đất. 2. Bền vững, tiết kiệm, có hiệu quả đối với đất đai và tài nguyên trên bề mặt, trong lòng đất. 3. Bảo vệ đất, bảo vệ môi trường, thích ứng với biến đổi khí hậu, không được lạm dụng thuốc bảo vệ thực vật, phân hóa học làm ô nhiễm, thoái hóa đất. 4. Thực hiện quyền và nghĩa vụ của người sử dụng đất trong thời hạn sử dụng đất theo quy định của Luật này và quy định khác của pháp luật có liên quan; không xâm phạm quyền, lợi ích hợp pháp của người sử dụng đất liền kề và xung quanh.",
+    "should_refuse": false,
+    "notes": "Nguyên tắc sử dụng đất. Source chunk: Luat_dat_dai_2024_000062."
+  },
+  {
+    "id": "q043",
+    "question": "Đất đai được phân loại thành những nhóm nào?",
+    "category": "land_law_general",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 9",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 9 Luật Đất đai 2024, 1. Căn cứ vào mục đích sử dụng, đất đai được phân loại bao gồm nhóm đất nông nghiệp, nhóm đất phi nông nghiệp, nhóm đất chưa sử dụng. 2. Nhóm đất nông nghiệp bao gồm các loại đất sau đây: a) Đất trồng cây hằng năm, gồm đất trồng lúa và đất trồng cây hằng năm khác; 2. Nhóm đất nông nghiệp bao gồm các loại đất sau đây: b) Đất trồng cây lâu năm; 2. Nhóm đất nông nghiệp bao gồm các loại đất sau đây: c) Đất lâm nghiệp, gồm đất rừng đặc dụng, đất rừng phòng hộ, đất rừng sản xuất; 2. Nhóm đất nông nghiệp bao gồm các loại đất sau đây: d) Đất nuôi trồng thủy sản; 2. Nhóm đất nông nghiệp bao gồm các loại đất sau đây: đ) Đất chăn nuôi tập trung; 2. Nhóm đất nông nghiệp bao gồm các loại đất sau đây: e) Đất làm muối; 2. Nhóm đất nông nghiệp bao gồm các loại đất sau đây: g) Đất nông nghiệp khác. 3. Nhóm đất phi nông nghiệp bao gồm các loại đất sau đây: a) Đất ở, gồm đất ở tại nông thôn, đất ở tại đ...",
+    "should_refuse": false,
+    "notes": "Phân loại đất. Source chunk: Luat_dat_dai_2024_000104."
+  },
+  {
+    "id": "q044",
+    "question": "Những hành vi nào bị nghiêm cấm trong lĩnh vực đất đai?",
+    "category": "land_law_prohibited_acts",
+    "difficulty": "easy",
+    "query_type": "prohibited_acts",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 11",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 11 Luật Đất đai 2024, 1. Lấn đất, chiếm đất, hủy hoại đất. 2. Vi phạm quy định của pháp luật về quản lý nhà nước về đất đai. 3. Vi phạm chính sách về đất đai đối với đồng bào dân tộc thiểu số. 4. Lợi dụng chức vụ, quyền hạn để làm trái quy định của pháp luật về quản lý đất đai. 5. Không cung cấp thông tin hoặc cung cấp thông tin đất đai không chính xác, không đáp ứng yêu cầu về thời hạn theo quy định của pháp luật. 6. Không ngăn chặn, không xử lý hành vi vi phạm pháp luật về đất đai. 7. Không thực hiện đúng quy định của pháp luật khi thực hiện quyền của người sử dụng đất. 8. Sử dụng đất, thực hiện giao dịch về quyền sử dụng đất mà không đăng ký với cơ quan có thẩm quyền. 9. Không thực hiện hoặc thực hiện không đầy đủ nghĩa vụ tài chính đối với Nhà nước. 10. Cản trở, gây khó khăn đối với việc sử dụng đất, việc thực hiện quyền của người sử dụng đất theo quy định của pháp luật. 11. Phân biệt đối xử về giới tr...",
+    "should_refuse": false,
+    "notes": "Hành vi bị nghiêm cấm. Source chunk: Luat_dat_dai_2024_000109."
+  },
+  {
+    "id": "q045",
+    "question": "Đất đai thuộc sở hữu của ai?",
+    "category": "land_law_principle",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 12",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 12 Luật Đất đai 2024, Điều 12. Sở hữu đất đai Đất đai thuộc sở hữu toàn dân do Nhà nước đại diện chủ sở hữu và thống nhất quản lý. Nhà nước trao quyền sử dụng đất cho người sử dụng đất theo quy định của Luật này.",
+    "should_refuse": false,
+    "notes": "Sở hữu đất đai. Source chunk: Luat_dat_dai_2024_000120."
+  },
+  {
+    "id": "q046",
+    "question": "Công dân có quyền gì đối với đất đai?",
+    "category": "land_law_rights",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 23",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 23 Luật Đất đai 2024, 1. Tham gia xây dựng, góp ý, giám sát trong việc hoàn thiện và tổ chức thực hiện chính sách, pháp luật về đất đai. 2. Tham gia quản lý nhà nước, góp ý, thảo luận và kiến nghị, phản ánh với cơ quan nhà nước về công tác quản lý, sử dụng đất đai. 3. Quyền về bình đẳng, bình đẳng giới trong quản lý, sử dụng đất đai. 4. Tham gia đấu giá quyền sử dụng đất, đấu thầu lựa chọn nhà đầu tư thực hiện dự án có sử dụng đất theo quy định của pháp luật; đề nghị Nhà nước giao đất, cho thuê đất không đấu giá quyền sử dụng đất, không đấu thầu lựa chọn nhà đầu tư thực hiện dự án có sử dụng đất theo quy định của pháp luật. 5. Nhận chuyển nhượng, nhận tặng cho, nhận thừa kế, nhận góp vốn, thuê quyền sử dụng đất; mua, bán, nhận chuyển nhượng cổ phần, phần vốn góp là giá trị quyền sử dụng đất theo quy định của pháp luật. 6. Thực hiện các quyền của người sử dụng đất theo quy định của Luật này.",
+    "should_refuse": false,
+    "notes": "Quyền của công dân đối với đất đai. Source chunk: Luat_dat_dai_2024_000197."
+  },
+  {
+    "id": "q047",
+    "question": "Người sử dụng đất có quyền chung nào?",
+    "category": "land_law_rights",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 26",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 26 Luật Đất đai 2024, 1. Được cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất khi có đủ điều kiện theo quy định của pháp luật về đất đai. 2. Hưởng thành quả lao động, kết quả đầu tư trên đất sử dụng hợp pháp. 3. Hưởng các lợi ích khi Nhà nước đầu tư để bảo vệ, cải tạo và phát triển đất nông nghiệp. 4. Được Nhà nước hướng dẫn và giúp đỡ trong việc cải tạo, phục hồi đất nông nghiệp. 5. Được Nhà nước bảo hộ khi người khác xâm phạm quyền, lợi ích hợp pháp về đất đai của mình. 6. Được quyền chuyển mục đích sử dụng đất theo quy định của Luật này và quy định khác của pháp luật có liên quan. 7. Được bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất theo quy định của Luật này. 8. Khiếu nại, tố cáo, khởi kiện về những hành vi vi phạm quyền sử dụng đất hợp pháp của mình và những hành vi khác vi phạm pháp luật về đất đai.",
+    "should_refuse": false,
+    "notes": "Quyền chung của người sử dụng đất. Source chunk: Luat_dat_dai_2024_000215."
+  },
+  {
+    "id": "q048",
+    "question": "Người sử dụng đất có nghĩa vụ chung gì?",
+    "category": "land_law_rights",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 31",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 31 Luật Đất đai 2024, 1. Sử dụng đất đúng mục đích, đúng ranh giới thửa đất, đúng quy định về sử dụng độ sâu trong lòng đất và chiều cao trên không, bảo vệ các công trình công cộng trong lòng đất và tuân thủ quy định khác của pháp luật có liên quan. 2. Thực hiện kê khai đăng ký đất đai; thực hiện đầy đủ thủ tục khi chuyển đổi, chuyển nhượng, cho thuê, cho thuê lại, thừa kế, tặng cho quyền sử dụng đất, thế chấp, góp vốn bằng quyền sử dụng đất theo quy định của pháp luật. 3. Thực hiện nghĩa vụ tài chính về đất đai theo quy định của pháp luật. 4. Thực hiện biện pháp bảo vệ đất; xử lý, cải tạo và phục hồi đất đối với khu vực đất bị ô nhiễm, thoái hóa do mình gây ra. 5. Tuân thủ quy định về bảo vệ môi trường, không làm tổn hại đến tài sản và lợi ích hợp pháp của người sử dụng đất có liên quan. 6. Tuân thủ quy định của pháp luật về việc tìm thấy vật trong lòng đất. 7. Bàn giao lại đất khi Nhà nước có quyết định...",
+    "should_refuse": false,
+    "notes": "Nghĩa vụ chung của người sử dụng đất. Source chunk: Luat_dat_dai_2024_000255."
+  },
+  {
+    "id": "q049",
+    "question": "Điều kiện thực hiện quyền chuyển nhượng, tặng cho, thế chấp quyền sử dụng đất là gì?",
+    "category": "land_law_rights",
+    "difficulty": "hard",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 45",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 45 Luật Đất đai 2024, 1. Người sử dụng đất được thực hiện các quyền chuyển đổi, chuyển nhượng, cho thuê, cho thuê lại, thừa kế, tặng cho quyền sử dụng đất; thế chấp, góp vốn bằng quyền sử dụng đất khi có đủ các điều kiện sau đây: a) Có Giấy chứng nhận quyền sử dụng đất hoặc Giấy chứng nhận quyền sở hữu nhà ở và quyền sử dụng đất ở hoặc Giấy chứng nhận quyền sử dụng đất, quyền sở hữu nhà ở và tài sản khác gắn liền với đất hoặc Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất, trừ trường hợp thừa kế quyền sử dụng đất, chuyển đổi đất nông nghiệp khi dồn điền, đổi thửa, tặng cho quyền sử dụng đất cho Nhà nước, cộng đồng dân cư và trường hợp quy định tại khoản 7 Điều 124 và điểm a khoản 4 Điều 127 của Luật này; 1. Người sử dụng đất được thực hiện các quyền chuyển đổi, chuyển nhượng, cho thuê, cho thuê lại, thừa kế, tặng cho quyền sử dụng đất; thế chấp, góp vốn bằng quyền sử dụng đất khi...",
+    "should_refuse": false,
+    "notes": "Điều kiện thực hiện quyền của người sử dụng đất. Source chunk: Luat_dat_dai_2024_000354."
+  },
+  {
+    "id": "q050",
+    "question": "Hộ gia đình, cá nhân được chuyển đổi quyền sử dụng đất nông nghiệp khi nào?",
+    "category": "land_law_rights",
+    "difficulty": "medium",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 47",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 47 Luật Đất đai 2024, Điều 47. Điều kiện chuyển đổi quyền sử dụng đất nông nghiệp Cá nhân sử dụng đất nông nghiệp do được Nhà nước giao đất, do chuyển đổi, nhận chuyển nhượng, nhận thừa kế, nhận tặng cho quyền sử dụng đất hợp pháp từ người khác thì chỉ được chuyển đổi quyền sử dụng đất nông nghiệp trong cùng đơn vị hành chính cấp tỉnh cho cá nhân khác và không phải nộp thuế thu nhập từ việc chuyển đổi quyền sử dụng đất và lệ phí trước bạ.",
+    "should_refuse": false,
+    "notes": "Điều kiện chuyển đổi quyền sử dụng đất nông nghiệp. Source chunk: Luat_dat_dai_2024_000376."
+  },
+  {
+    "id": "q051",
+    "question": "Nguyên tắc lập quy hoạch, kế hoạch sử dụng đất là gì?",
+    "category": "land_law_planning",
+    "difficulty": "medium",
+    "query_type": "principle_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 60",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 60 Luật Đất đai 2024, 1. Việc lập quy hoạch sử dụng đất các cấp phải tuân thủ nguyên tắc và mối quan hệ giữa các loại quy hoạch theo quy định của Luật Quy hoạch. Quy hoạch sử dụng đất các cấp phải tổng hợp, cân đối nhu cầu sử dụng đất của các ngành, lĩnh vực có sử dụng đất. 2. Quy hoạch sử dụng đất quốc gia phải bảo đảm tính đặc thù, liên kết vùng; bảo đảm sự cân bằng giữa nhu cầu sử dụng đất của các ngành, lĩnh vực, địa phương và phù hợp với tiềm năng đất đai của quốc gia nhằm sử dụng đất tiết kiệm, hiệu quả. 3. Quy hoạch, kế hoạch sử dụng đất được lập ở cấp quốc gia, cấp tỉnh và cấp huyện phải đáp ứng yêu cầu thực hiện chiến lược phát triển kinh tế - xã hội nhanh, bền vững; bảo đảm quốc phòng, an ninh. 4. Bảo đảm tính thống nhất, đồng bộ; quy hoạch sử dụng đất của cấp trên bảo đảm nhu cầu sử dụng đất của cấp dưới; quy hoạch sử dụng đất của cấp dưới phải phù hợp với quy hoạch sử dụng đất của cấp trên; quy...",
+    "should_refuse": false,
+    "notes": "Nguyên tắc lập quy hoạch. Source chunk: Luat_dat_dai_2024_000474."
+  },
+  {
+    "id": "q052",
+    "question": "Những trường hợp nào Nhà nước thu hồi đất để phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng?",
+    "category": "land_law_recovery",
+    "difficulty": "hard",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 79",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 79 Luật Đất đai 2024, 1. Xây dựng công trình giao thông, bao gồm: đường ô tô cao tốc, đường ô tô, đường trong đô thị, đường nông thôn kể cả đường tránh, đường cứu nạn và đường trên đồng ruộng phục vụ nhu cầu đi lại chung của mọi người, điểm dừng xe, điểm đón trả khách, trạm thu phí giao thông, công trình kho bãi, nhà để xe ô tô; bến phà, bến xe, trạm dừng nghỉ; các loại hình đường sắt; nhà ga đường sắt; các loại cầu, hầm phục vụ giao thông; công trình đường thủy nội địa, công trình hàng hải; công trình hàng không; tuyến cáp treo và nhà ga cáp treo; cảng cá, cảng cạn; các công trình trụ sở, văn phòng, cơ sở kinh doanh dịch vụ trong ga, cảng, bến xe; hành lang bảo vệ an toàn công trình giao thông mà phải thu hồi đất để lưu không; các kết cấu khác phục vụ giao thông vận tải; 2. Xây dựng công trình thủy lợi, bao gồm: đê điều, kè, cống, đập, tràn xả lũ, hồ chứa nước, đường hầm thủy công, hệ thống cấp nước, thoá...",
+    "should_refuse": false,
+    "notes": "Thu hồi đất để phát triển kinh tế - xã hội. Source chunk: Luat_dat_dai_2024_000673."
+  },
+  {
+    "id": "q053",
+    "question": "Căn cứ và điều kiện thu hồi đất vì mục đích quốc phòng, an ninh hoặc phát triển kinh tế - xã hội là gì?",
+    "category": "land_law_recovery",
+    "difficulty": "hard",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 80",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 80 Luật Đất đai 2024, 1. Việc thu hồi đất vì mục đích quốc phòng, an ninh; phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng phải căn cứ quy định tại Điều 78 hoặc Điều 79 của Luật này, đồng thời phải thuộc một trong các trường hợp sau đây: a) Dự án có trong kế hoạch sử dụng đất hằng năm cấp huyện đã được cơ quan có thẩm quyền phê duyệt; 1. Việc thu hồi đất vì mục đích quốc phòng, an ninh; phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng phải căn cứ quy định tại Điều 78 hoặc Điều 79 của Luật này, đồng thời phải thuộc một trong các trường hợp sau đây: b) Dự án đã có quyết định đầu tư theo quy định của pháp luật về đầu tư công, quyết định phê duyệt dự án đầu tư theo quy định của pháp luật về đầu tư theo phương thức đối tác công tư; 1. Việc thu hồi đất vì mục đích quốc phòng, an ninh; phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng phải căn cứ quy định tại Điều 78 hoặc Điều 79 của...",
+    "should_refuse": false,
+    "notes": "Căn cứ, điều kiện thu hồi đất. Source chunk: Luat_dat_dai_2024_000686."
+  },
+  {
+    "id": "q054",
+    "question": "Các trường hợp thu hồi đất do vi phạm pháp luật về đất đai gồm những gì?",
+    "category": "land_law_recovery",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 81",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 81 Luật Đất đai 2024, 1. Sử dụng đất không đúng mục đích đã được Nhà nước giao, cho thuê, công nhận quyền sử dụng đất và đã bị xử phạt vi phạm hành chính về hành vi sử dụng đất không đúng mục đích mà tiếp tục vi phạm. 2. Người sử dụng đất hủy hoại đất và đã bị xử phạt vi phạm hành chính về hành vi hủy hoại đất mà tiếp tục vi phạm. 3. Đất được giao, cho thuê không đúng đối tượng hoặc không đúng thẩm quyền. 4. Đất do nhận chuyển nhượng, nhận tặng cho từ người được Nhà nước giao đất, cho thuê đất mà người được giao đất, cho thuê đất không được chuyển nhượng, tặng cho theo quy định của Luật này. 5. Đất được Nhà nước giao quản lý mà để bị lấn đất, chiếm đất. 6. Người sử dụng đất không thực hiện nghĩa vụ tài chính với Nhà nước. 7. Đất trồng cây hằng năm, đất nuôi trồng thủy sản không được sử dụng trong thời gian 12 tháng liên tục, đất trồng cây lâu năm không được sử dụng trong thời gian 18 tháng liên tục, đất tr...",
+    "should_refuse": false,
+    "notes": "Thu hồi đất do vi phạm pháp luật. Source chunk: Luat_dat_dai_2024_000698."
+  },
+  {
+    "id": "q055",
+    "question": "Trình tự, thủ tục bồi thường, hỗ trợ, tái định cư khi thu hồi đất được quy định ở điều nào?",
+    "category": "land_law_recovery",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 87",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 87 Luật Đất đai 2024, 1. Trước khi thông báo thu hồi đất được ban hành, Ủy ban nhân dân cấp xã nơi có đất thu hồi chủ trì phối hợp với Ủy ban Mặt trận Tổ quốc Việt Nam cùng cấp, đơn vị, tổ chức thực hiện nhiệm vụ bồi thường, hỗ trợ, tái định cư và các cơ quan có liên quan, tổ chức họp với người có đất trong khu vực thu hồi để phổ biến, tiếp nhận ý kiến về các nội dung sau đây: a) Mục đích, ý nghĩa, tầm quan trọng của dự án, công trình được triển khai trên vùng đất dự kiến thu hồi; 1. Trước khi thông báo thu hồi đất được ban hành, Ủy ban nhân dân cấp xã nơi có đất thu hồi chủ trì phối hợp với Ủy ban Mặt trận Tổ quốc Việt Nam cùng cấp, đơn vị, tổ chức thực hiện nhiệm vụ bồi thường, hỗ trợ, tái định cư và các cơ quan có liên quan, tổ chức họp với người có đất trong khu vực thu hồi để phổ biến, tiếp nhận ý kiến về các nội dung sau đây: b) Các quy định của Nhà nước về chính sách bồi thường, hỗ trợ, tái định cư...",
+    "should_refuse": false,
+    "notes": "Thủ tục bồi thường, hỗ trợ, tái định cư. Source chunk: Luat_dat_dai_2024_000766."
+  },
+  {
+    "id": "q056",
+    "question": "Nguyên tắc bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất là gì?",
+    "category": "land_law_recovery",
+    "difficulty": "medium",
+    "query_type": "principle_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 91",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 91 Luật Đất đai 2024, 1. Việc bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất phải bảo đảm dân chủ, khách quan, công bằng, công khai, minh bạch, kịp thời và đúng quy định của pháp luật; vì lợi ích chung, sự phát triển bền vững, văn minh và hiện đại của cộng đồng, của địa phương; quan tâm đến đối tượng chính sách xã hội, đối tượng trực tiếp sản xuất nông nghiệp. 2. Việc bồi thường về đất được thực hiện bằng việc giao đất có cùng mục đích sử dụng với loại đất thu hồi, trường hợp không có đất để bồi thường thì được bồi thường bằng tiền theo giá đất cụ thể của loại đất thu hồi do Ủy ban nhân dân cấp có thẩm quyền quyết định tại thời điểm phê duyệt phương án bồi thường, hỗ trợ, tái định cư. Trường hợp người có đất thu hồi được bồi thường bằng đất, bằng nhà ở mà có nhu cầu được bồi thường bằng tiền thì được bồi thường bằng tiền theo nguyện vọng đã đăng ký khi lập phương án bồi thường, hỗ trợ, tái định c...",
+    "should_refuse": false,
+    "notes": "Nguyên tắc bồi thường, hỗ trợ, tái định cư. Source chunk: Luat_dat_dai_2024_000812."
+  },
+  {
+    "id": "q057",
+    "question": "Điều kiện được bồi thường về đất khi Nhà nước thu hồi đất vì mục đích quốc phòng, an ninh là gì?",
+    "category": "land_law_recovery",
+    "difficulty": "hard",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 95",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 95 Luật Đất đai 2024, 1. Các trường hợp được bồi thường về đất khi Nhà nước thu hồi đất vì mục đích quốc phòng, an ninh; phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng bao gồm: a) Hộ gia đình, cá nhân đang sử dụng đất không phải là đất thuê trả tiền thuê đất hằng năm; 1. Các trường hợp được bồi thường về đất khi Nhà nước thu hồi đất vì mục đích quốc phòng, an ninh; phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng bao gồm: b) Cộng đồng dân cư đang sử dụng đất có công trình là chùa, đình, đền, miếu, am, nhà thờ họ, công trình tín ngưỡng khác; đất nông nghiệp quy định tại khoản 4 Điều 178 của Luật này và đất đó không có tranh chấp, được Ủy ban nhân dân cấp xã nơi có đất xác nhận là đất sử dụng chung cho cộng đồng; 1. Các trường hợp được bồi thường về đất khi Nhà nước thu hồi đất vì mục đích quốc phòng, an ninh; phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng bao gồm: c) Người...",
+    "should_refuse": false,
+    "notes": "Điều kiện được bồi thường về đất. Source chunk: Luat_dat_dai_2024_000844."
+  },
+  {
+    "id": "q058",
+    "question": "Định giá đất phải tuân theo nguyên tắc nào?",
+    "category": "land_law_principle",
+    "difficulty": "medium",
+    "query_type": "principle_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 158",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 158 Luật Đất đai 2024, 1. Việc định giá đất phải bảo đảm các nguyên tắc sau đây: a) Phương pháp định giá đất theo nguyên tắc thị trường; 1. Việc định giá đất phải bảo đảm các nguyên tắc sau đây: b) Tuân thủ đúng phương pháp, trình tự, thủ tục định giá đất; 1. Việc định giá đất phải bảo đảm các nguyên tắc sau đây: c) Bảo đảm trung thực, khách quan, công khai, minh bạch; 1. Việc định giá đất phải bảo đảm các nguyên tắc sau đây: d) Bảo đảm tính độc lập giữa tổ chức tư vấn xác định giá đất, Hội đồng thẩm định bảng giá đất, Hội đồng thẩm định giá đất cụ thể và cơ quan hoặc người có thẩm quyền quyết định giá đất; 1. Việc định giá đất phải bảo đảm các nguyên tắc sau đây: đ) Bảo đảm hài hòa lợi ích giữa Nhà nước, người sử dụng đất và nhà đầu tư. 2. Căn cứ định giá đất bao gồm: a) Mục đích sử dụng đất được đưa ra định giá; 2. Căn cứ định giá đất bao gồm: b) Thời hạn sử dụng đất. Đối với đất nông nghiệp đã được Nhà n...",
+    "should_refuse": false,
+    "notes": "Nguyên tắc định giá đất. Source chunk: Luat_dat_dai_2024_001378."
+  },
+  {
+    "id": "q059",
+    "question": "Bảng giá đất được xây dựng và áp dụng như thế nào?",
+    "category": "land_law_principle",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 159",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 159 Luật Đất đai 2024, 1. Bảng giá đất được áp dụng cho các trường hợp sau đây: a) Tính tiền sử dụng đất khi Nhà nước công nhận quyền sử dụng đất ở của hộ gia đình, cá nhân; chuyển mục đích sử dụng đất của hộ gia đình, cá nhân; 1. Bảng giá đất được áp dụng cho các trường hợp sau đây: b) Tính tiền thuê đất khi Nhà nước cho thuê đất thu tiền thuê đất hằng năm; 1. Bảng giá đất được áp dụng cho các trường hợp sau đây: c) Tính thuế sử dụng đất; 1. Bảng giá đất được áp dụng cho các trường hợp sau đây: d) Tính thuế thu nhập từ chuyển quyền sử dụng đất đối với hộ gia đình, cá nhân; 1. Bảng giá đất được áp dụng cho các trường hợp sau đây: đ) Tính lệ phí trong quản lý, sử dụng đất đai; 1. Bảng giá đất được áp dụng cho các trường hợp sau đây: e) Tính tiền xử phạt vi phạm hành chính trong lĩnh vực đất đai; 1. Bảng giá đất được áp dụng cho các trường hợp sau đây: g) Tính tiền bồi thường cho Nhà nước khi gây thiệt hại tr...",
+    "should_refuse": false,
+    "notes": "Bảng giá đất. Source chunk: Luat_dat_dai_2024_001392."
+  },
+  {
+    "id": "q060",
+    "question": "Tách thửa đất, hợp thửa đất phải bảo đảm những yêu cầu gì?",
+    "category": "land_law_certificate",
+    "difficulty": "hard",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 220",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 220 Luật Đất đai 2024, 1. Việc tách thửa đất, hợp thửa đất phải bảo đảm các nguyên tắc, điều kiện sau đây: a) Thửa đất đã được cấp một trong các loại giấy chứng nhận: Giấy chứng nhận quyền sử dụng đất, Giấy chứng nhận quyền sở hữu nhà ở và quyền sử dụng đất ở, Giấy chứng nhận quyền sử dụng đất, quyền sở hữu nhà ở và tài sản khác gắn liền với đất, Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất; 1. Việc tách thửa đất, hợp thửa đất phải bảo đảm các nguyên tắc, điều kiện sau đây: b) Thửa đất còn trong thời hạn sử dụng đất; 1. Việc tách thửa đất, hợp thửa đất phải bảo đảm các nguyên tắc, điều kiện sau đây: c) Đất không có tranh chấp, không bị kê biên để bảo đảm thi hành án, không bị áp dụng biện pháp khẩn cấp tạm thời của cơ quan nhà nước có thẩm quyền. Trường hợp đất có tranh chấp nhưng xác định được phạm vi diện tích, ranh giới đang tranh chấp thì phần diện tích, ranh giới còn lại khô...",
+    "should_refuse": false,
+    "notes": "Tách thửa, hợp thửa đất. Source chunk: Luat_dat_dai_2024_001847."
+  },
+  {
+    "id": "q061",
+    "question": "Tranh chấp đất đai có bắt buộc hòa giải tại UBND cấp xã không?",
+    "category": "land_law_dispute",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 235",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 235 Luật Đất đai 2024, 1. Nhà nước khuyến khích các bên tranh chấp đất đai tự hòa giải, hòa giải ở cơ sở theo quy định của pháp luật về hòa giải ở cơ sở, hòa giải theo quy định của pháp luật về hòa giải thương mại hoặc cơ chế hòa giải khác theo quy định của pháp luật. 2. Trước khi cơ quan nhà nước có thẩm quyền giải quyết tranh chấp đất đai quy định tại Điều 236 của Luật này, các bên tranh chấp phải thực hiện hòa giải tại Ủy ban nhân dân cấp xã nơi có đất tranh chấp. Việc hòa giải tranh chấp đất đai tại Ủy ban nhân dân cấp xã nơi có đất tranh chấp được thực hiện như sau: a) Sau khi nhận được đơn yêu cầu hòa giải tranh chấp đất đai, Chủ tịch Ủy ban nhân dân cấp xã có trách nhiệm thành lập Hội đồng hòa giải tranh chấp đất đai để thực hiện hòa giải tranh chấp đất đai; 2. Trước khi cơ quan nhà nước có thẩm quyền giải quyết tranh chấp đất đai quy định tại Điều 236 của Luật này, các bên tranh chấp phải thực hiện...",
+    "should_refuse": false,
+    "notes": "Hòa giải tranh chấp đất đai. Source chunk: Luat_dat_dai_2024_001961."
+  },
+  {
+    "id": "q062",
+    "question": "Người vi phạm pháp luật về đất đai bị xử lý như thế nào?",
+    "category": "land_law_penalty",
+    "difficulty": "medium",
+    "query_type": "penalty_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "31/2024/QH15",
+        "dieu": "Điều 239",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 239 Luật Đất đai 2024, Điều 239. Xử lý đối với người có hành vi vi phạm pháp luật về đất đai Người có hành vi vi phạm pháp luật về đất đai thì tùy theo tính chất, mức độ vi phạm mà bị xử lý kỷ luật, xử lý vi phạm hành chính hoặc bị truy cứu trách nhiệm hình sự, nếu gây thiệt hại thì phải bồi thường theo quy định của pháp luật.",
+    "should_refuse": false,
+    "notes": "Xử lý vi phạm pháp luật về đất đai. Source chunk: Luat_dat_dai_2024_001977."
+  },
+  {
+    "id": "q063",
+    "question": "Tổ chức tín dụng là gì?",
+    "category": "banking_law_definition",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 4",
+        "khoan": "Khoản 38",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 38 Điều 4 Luật Các tổ chức tín dụng 2024, 38. Tổ chức tín dụng là tổ chức kinh tế có tư cách pháp nhân thực hiện một, một số hoặc tất cả hoạt động ngân hàng theo quy định của Luật này. Tổ chức tín dụng bao gồm ngân hàng, tổ chức tín dụng phi ngân hàng, tổ chức tài chính vi mô và quỹ tín dụng nhân dân.",
+    "should_refuse": false,
+    "notes": "Giải thích từ ngữ trong luật các tổ chức tín dụng. Source chunk: Luat_cac_to_chuc_tin_dung_000062."
+  },
+  {
+    "id": "q064",
+    "question": "Tổ chức có được sử dụng cụm từ ngân hàng khi không phải tổ chức tín dụng không?",
+    "category": "banking_law_operation",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 5",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 5 Luật Các tổ chức tín dụng 2024, Điều 5. Sử dụng từ ngữ liên quan đến hoạt động ngân hàng Tổ chức không phải là tổ chức tín dụng, chi nhánh ngân hàng nước ngoài không được phép sử dụng cụm từ “tổ chức tín dụng”, “ngân hàng”, “công ty tài chính”, “công ty cho thuê tài chính”, “tổ chức tài chính vi mô”, “quỹ tín dụng nhân dân” hoặc cụm từ, từ ngữ khác trong tên của tổ chức, chức danh hoặc trong phần phụ thêm của tên, chức danh hoặc trong giấy tờ giao dịch hoặc quảng cáo của mình nếu việc sử dụng cụm từ, từ ngữ đó có thể gây nhầm lẫn cho khách hàng về việc tổ chức đó là một tổ chức tín dụng, chi nhánh ngân hàng nước ngoài.",
+    "should_refuse": false,
+    "notes": "Sử dụng từ ngữ liên quan đến hoạt động ngân hàng. Source chunk: Luat_cac_to_chuc_tin_dung_000070."
+  },
+  {
+    "id": "q065",
+    "question": "Tổ chức tín dụng được hoạt động ngân hàng trong phạm vi nào?",
+    "category": "banking_law_operation",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 8",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 8 Luật Các tổ chức tín dụng 2024, Điều 8. Quyền hoạt động ngân hàng Tổ chức có đủ điều kiện theo quy định của Luật này và quy định khác của pháp luật có liên quan được Ngân hàng Nhà nước cấp Giấy phép thì được thực hiện một hoặc một số hoạt động ngân hàng theo quy định của Luật này.",
+    "should_refuse": false,
+    "notes": "Quyền hoạt động ngân hàng. Source chunk: Luat_cac_to_chuc_tin_dung_000079."
+  },
+  {
+    "id": "q066",
+    "question": "Tổ chức tín dụng phải bảo mật thông tin khách hàng như thế nào?",
+    "category": "banking_law_operation",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 13",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 13 Luật Các tổ chức tín dụng 2024, 1. Người quản lý, người điều hành, nhân viên của tổ chức tín dụng, chi nhánh ngân hàng nước ngoài không được tiết lộ thông tin khách hàng, bí mật kinh doanh của tổ chức tín dụng, chi nhánh ngân hàng nước ngoài. 2. Tổ chức tín dụng, chi nhánh ngân hàng nước ngoài phải bảo đảm bí mật thông tin khách hàng của tổ chức tín dụng, chi nhánh ngân hàng nước ngoài theo quy định của Chính phủ. 3. Tổ chức tín dụng, chi nhánh ngân hàng nước ngoài không được cung cấp thông tin khách hàng của tổ chức tín dụng, chi nhánh ngân hàng nước ngoài cho tổ chức, cá nhân khác, trừ trường hợp có yêu cầu của cơ quan nhà nước có thẩm quyền theo quy định của luật hoặc được sự chấp thuận của khách hàng.",
+    "should_refuse": false,
+    "notes": "Bảo mật thông tin. Source chunk: Luat_cac_to_chuc_tin_dung_000095."
+  },
+  {
+    "id": "q067",
+    "question": "An toàn dữ liệu và hoạt động liên tục của tổ chức tín dụng được yêu cầu ra sao?",
+    "category": "banking_law_operation",
+    "difficulty": "medium",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 14",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 14 Luật Các tổ chức tín dụng 2024, Điều 14. An toàn dữ liệu và bảo đảm hoạt động liên tục Tổ chức tín dụng, chi nhánh ngân hàng nước ngoài phải bảo đảm an toàn hệ thống thông tin, bảo mật dữ liệu và hoạt động liên tục theo quy định của Thống đốc Ngân hàng Nhà nước và quy định khác của pháp luật có liên quan.",
+    "should_refuse": false,
+    "notes": "An toàn dữ liệu và hoạt động liên tục. Source chunk: Luat_cac_to_chuc_tin_dung_000097."
+  },
+  {
+    "id": "q068",
+    "question": "Những hành vi nào bị nghiêm cấm trong hoạt động tổ chức tín dụng?",
+    "category": "banking_law_prohibited_acts",
+    "difficulty": "easy",
+    "query_type": "prohibited_acts",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 15",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 15 Luật Các tổ chức tín dụng 2024, 1. Tổ chức tín dụng, chi nhánh ngân hàng nước ngoài thực hiện hoạt động ngân hàng, hoạt động kinh doanh khác ngoài hoạt động ghi trong Giấy phép được Ngân hàng Nhà nước cấp cho tổ chức tín dụng, chi nhánh ngân hàng nước ngoài. 2. Tổ chức, cá nhân không phải là tổ chức tín dụng, chi nhánh ngân hàng nước ngoài thực hiện hoạt động ngân hàng, trừ giao dịch ký quỹ, giao dịch mua bán lại chứng khoán của công ty chứng khoán. 3. Tổ chức, cá nhân can thiệp trái pháp luật vào hoạt động ngân hàng, hoạt động kinh doanh khác của tổ chức tín dụng, chi nhánh ngân hàng nước ngoài. 4. Tổ chức tín dụng, chi nhánh ngân hàng nước ngoài thực hiện hành vi hạn chế cạnh tranh hoặc hành vi cạnh tranh không lành mạnh có nguy cơ gây tổn hại hoặc gây tổn hại đến việc thực hiện chính sách tiền tệ quốc gia, an toàn của hệ thống tổ chức tín dụng, lợi ích của Nhà nước, quyền và lợi ích hợp pháp của tổ chức, cá nhân....",
+    "should_refuse": false,
+    "notes": "Hành vi bị nghiêm cấm. Source chunk: Luat_cac_to_chuc_tin_dung_000100."
+  },
+  {
+    "id": "q069",
+    "question": "Cơ quan nào có thẩm quyền cấp, sửa đổi, thu hồi Giấy phép của tổ chức tín dụng?",
+    "category": "banking_law_license",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 27",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 27 Luật Các tổ chức tín dụng 2024, 1. Ngân hàng Nhà nước có thẩm quyền cấp, sửa đổi, bổ sung và thu hồi Giấy phép theo quy định của Luật này. 2. Giấy phép thành lập và hoạt động của tổ chức tín dụng đồng thời là Giấy chứng nhận đăng ký doanh nghiệp hoặc Giấy chứng nhận đăng ký hợp tác xã. 3. Giấy phép thành lập chi nhánh ngân hàng nước ngoài, Giấy phép thành lập văn phòng đại diện nước ngoài đồng thời là Giấy chứng nhận đăng ký hoạt động chi nhánh ngân hàng nước ngoài, Giấy chứng nhận đăng ký hoạt động văn phòng đại diện nước ngoài. 4. Thống đốc Ngân hàng Nhà nước quy định việc thông báo thông tin về cấp, sửa đổi, bổ sung, thu hồi Giấy phép; thông tin về việc bổ nhiệm Tổng giám đốc (Giám đốc) chi nhánh ngân hàng nước ngoài, Trưởng văn phòng đại diện nước ngoài và các thông tin có liên quan cho cơ quan đăng ký kinh doanh để cập nhật vào hệ thống thông tin quốc gia về đăng ký doanh nghiệp, hợp tác xã.",
+    "should_refuse": false,
+    "notes": "Thẩm quyền cấp, sửa đổi, thu hồi giấy phép. Source chunk: Luat_cac_to_chuc_tin_dung_000130."
+  },
+  {
+    "id": "q070",
+    "question": "Điều kiện cấp Giấy phép đối với tổ chức tín dụng là gì?",
+    "category": "banking_law_license",
+    "difficulty": "hard",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 29",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 29 Luật Các tổ chức tín dụng 2024, 1. Tổ chức tín dụng được cấp Giấy phép khi đáp ứng đầy đủ các điều kiện sau đây: a) Có vốn điều lệ tối thiểu bằng mức vốn pháp định; 1. Tổ chức tín dụng được cấp Giấy phép khi đáp ứng đầy đủ các điều kiện sau đây: b) Chủ sở hữu của tổ chức tín dụng là công ty trách nhiệm hữu hạn một thành viên, cổ đông sáng lập, thành viên sáng lập là pháp nhân đang hoạt động hợp pháp và có đủ năng lực tài chính để tham gia góp vốn; cổ đông sáng lập, thành viên sáng lập là cá nhân có năng lực hành vi dân sự đầy đủ và có cam kết đủ khả năng tài chính để góp vốn; 1. Tổ chức tín dụng được cấp Giấy phép khi đáp ứng đầy đủ các điều kiện sau đây: c) Người quản lý, người điều hành, thành viên Ban kiểm soát có đủ các tiêu chuẩn, điều kiện quy định tại Điều 41 của Luật này; 1. Tổ chức tín dụng được cấp Giấy phép khi đáp ứng đầy đủ các điều kiện sau đây: d) Điều lệ phù hợp với quy định của Luật này và quy định...",
+    "should_refuse": false,
+    "notes": "Điều kiện cấp giấy phép. Source chunk: Luat_cac_to_chuc_tin_dung_000155."
+  },
+  {
+    "id": "q071",
+    "question": "Hồ sơ, thủ tục cấp Giấy phép tổ chức tín dụng được quy định ở đâu?",
+    "category": "banking_law_license",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 30",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 30 Luật Các tổ chức tín dụng 2024, Điều 30. Hồ sơ, thủ tục cấp Giấy phép Thống đốc Ngân hàng Nhà nước quy định hồ sơ, thủ tục cấp Giấy phép lần đầu, cấp đổi Giấy phép.",
+    "should_refuse": false,
+    "notes": "Hồ sơ, thủ tục cấp giấy phép. Source chunk: Luat_cac_to_chuc_tin_dung_000156."
+  },
+  {
+    "id": "q072",
+    "question": "Thời hạn cấp Giấy phép cho tổ chức tín dụng là bao lâu?",
+    "category": "banking_law_license",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 31",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 31 Luật Các tổ chức tín dụng 2024, 1. Trong thời hạn 180 ngày kể từ ngày nhận đủ hồ sơ hợp lệ, Ngân hàng Nhà nước cấp Giấy phép hoặc từ chối cấp Giấy phép thành lập và hoạt động của tổ chức tín dụng, Giấy phép thành lập chi nhánh ngân hàng nước ngoài. 2. Trong thời hạn 60 ngày kể từ ngày nhận đủ hồ sơ hợp lệ, Ngân hàng Nhà nước cấp Giấy phép hoặc từ chối cấp Giấy phép thành lập văn phòng đại diện nước ngoài. 3. Trường hợp từ chối cấp Giấy phép, Ngân hàng Nhà nước phải thông báo bằng văn bản và nêu rõ lý do.",
+    "should_refuse": false,
+    "notes": "Thời hạn cấp giấy phép. Source chunk: Luat_cac_to_chuc_tin_dung_000159."
+  },
+  {
+    "id": "q073",
+    "question": "Những trường hợp nào không được đảm nhiệm chức vụ trong tổ chức tín dụng?",
+    "category": "banking_law_governance",
+    "difficulty": "hard",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 42",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 42 Luật Các tổ chức tín dụng 2024, 1. Những người sau đây không được là thành viên Hội đồng quản trị, thành viên Hội đồng thành viên, thành viên Ban kiểm soát, Tổng giám đốc (Giám đốc), Phó Tổng giám đốc (Phó giám đốc) và chức danh tương đương theo quy định tại Điều lệ của tổ chức tín dụng: a) Người thuộc đối tượng quy định tại khoản 2 Điều này; 1. Những người sau đây không được là thành viên Hội đồng quản trị, thành viên Hội đồng thành viên, thành viên Ban kiểm soát, Tổng giám đốc (Giám đốc), Phó Tổng giám đốc (Phó giám đốc) và chức danh tương đương theo quy định tại Điều lệ của tổ chức tín dụng: b) Người thuộc đối tượng không được tham gia quản lý, điều hành doanh nghiệp, hợp tác xã theo quy định của pháp luật về cán bộ, công chức, viên chức và pháp luật về phòng, chống tham nhũng; 1. Những người sau đây không được là thành viên Hội đồng quản trị, thành viên Hội đồng thành viên, thành viên Ban kiểm soát, Tổng giám đố...",
+    "should_refuse": false,
+    "notes": "Trường hợp không được đảm nhiệm chức vụ. Source chunk: Luat_cac_to_chuc_tin_dung_000265."
+  },
+  {
+    "id": "q074",
+    "question": "Tỷ lệ sở hữu cổ phần của cổ đông trong tổ chức tín dụng được giới hạn như thế nào?",
+    "category": "banking_law_governance",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 63",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 63 Luật Các tổ chức tín dụng 2024, 1. Một cổ đông là cá nhân không được sở hữu cổ phần vượt quá 05% vốn điều lệ của một tổ chức tín dụng. 2. Một cổ đông là tổ chức không được sở hữu cổ phần vượt quá 10% vốn điều lệ của một tổ chức tín dụng. 3. Cổ đông và người có liên quan của cổ đông đó không được sở hữu cổ phần vượt quá 15% vốn điều lệ của một tổ chức tín dụng. Cổ đông lớn của một tổ chức tín dụng và người có liên quan của cổ đông đó không được sở hữu cổ phần từ 05% vốn điều lệ trở lên của một tổ chức tín dụng khác. 4. Quy định tại khoản 2 và khoản 3 Điều này không áp dụng đối với các trường hợp sau đây: a) Sở hữu cổ phần tại công ty con, công ty liên kết là tổ chức tín dụng quy định tại khoản 2 và khoản 3 Điều 111 của Luật này; 4. Quy định tại khoản 2 và khoản 3 Điều này không áp dụng đối với các trường hợp sau đây: b) Sở hữu cổ phần nhà nước tại tổ chức tín dụng cổ phần hóa; 4. Quy định tại khoản 2 và khoản 3 Điều...",
+    "should_refuse": false,
+    "notes": "Tỷ lệ sở hữu cổ phần. Source chunk: Luat_cac_to_chuc_tin_dung_000422."
+  },
+  {
+    "id": "q075",
+    "question": "Nội dung hoạt động được phép của tổ chức tín dụng gồm những gì?",
+    "category": "banking_law_operation",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 99",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 99 Luật Các tổ chức tín dụng 2024, 1. Nội dung hoạt động ngân hàng, hoạt động kinh doanh khác của tổ chức tín dụng được ghi trong Giấy phép cấp cho từng tổ chức tín dụng. 2. Hoạt động ngân hàng của tổ chức tín dụng quy định tại Luật này thực hiện theo quy định của Thống đốc Ngân hàng Nhà nước.",
+    "should_refuse": false,
+    "notes": "Nội dung hoạt động được phép. Source chunk: Luat_cac_to_chuc_tin_dung_000740."
+  },
+  {
+    "id": "q076",
+    "question": "Tổ chức tín dụng công khai báo cáo tài chính trong thời hạn nào?",
+    "category": "banking_law_operation",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 154",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 154 Luật Các tổ chức tín dụng 2024, Điều 154. Công khai báo cáo tài chính Trong thời hạn 120 ngày kể từ ngày kết thúc năm tài chính, tổ chức tín dụng, chi nhánh ngân hàng nước ngoài phải công khai các báo cáo tài chính theo quy định của pháp luật, trừ trường hợp tổ chức tín dụng đang được kiểm soát đặc biệt.",
+    "should_refuse": false,
+    "notes": "Công khai báo cáo tài chính. Source chunk: Luat_cac_to_chuc_tin_dung_001069."
+  },
+  {
+    "id": "q077",
+    "question": "Khi nào tổ chức tín dụng được thực hiện can thiệp sớm?",
+    "category": "banking_law_operation",
+    "difficulty": "hard",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "32/2024/QH15",
+        "dieu": "Điều 156",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 156 Luật Các tổ chức tín dụng 2024, 1. Ngân hàng Nhà nước xem xét, quyết định thực hiện can thiệp sớm khi tổ chức tín dụng, chi nhánh ngân hàng nước ngoài thuộc một hoặc một số trường hợp sau đây: a) Số lỗ lũy kế của tổ chức tín dụng, chi nhánh ngân hàng nước ngoài lớn hơn 15% giá trị của vốn điều lệ, vốn được cấp và các quỹ dự trữ ghi trong báo cáo tài chính đã được kiểm toán gần nhất hoặc theo kết luận thanh tra, kiểm toán của cơ quan nhà nước có thẩm quyền và vi phạm tỷ lệ an toàn vốn tối thiểu quy định tại điểm b khoản 1 Điều 138 của Luật này; 1. Ngân hàng Nhà nước xem xét, quyết định thực hiện can thiệp sớm khi tổ chức tín dụng, chi nhánh ngân hàng nước ngoài thuộc một hoặc một số trường hợp sau đây: b) Xếp hạng dưới mức trung bình theo quy định của Thống đốc Ngân hàng Nhà nước; 1. Ngân hàng Nhà nước xem xét, quyết định thực hiện can thiệp sớm khi tổ chức tín dụng, chi nhánh ngân hàng nước ngoài thuộc một hoặc một...",
+    "should_refuse": false,
+    "notes": "Thực hiện can thiệp sớm. Source chunk: Luat_cac_to_chuc_tin_dung_001083."
+  },
+  {
+    "id": "q078",
+    "question": "Luật Chuyển đổi số áp dụng với đối tượng nào?",
+    "category": "digital_law_general",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 2",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 2 Luật Chuyển đổi số 2025, Điều 2. Đối tượng áp dụng Luật này áp dụng đối với cơ quan, tổ chức, cá nhân trong nước và ngoài nước trực tiếp tham gia hoặc có liên quan đến chuyển đổi số tại Việt Nam.",
+    "should_refuse": false,
+    "notes": "Đối tượng áp dụng. Source chunk: luat_chuyen_doi_so_000003."
+  },
+  {
+    "id": "q079",
+    "question": "Chuyển đổi số là gì?",
+    "category": "digital_law_definition",
+    "difficulty": "easy",
+    "query_type": "definition_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 3",
+        "khoan": "Khoản 1",
+        "diem": null
+      }
+    ],
+    "reference": "Theo Khoản 1 Điều 3 Luật Chuyển đổi số 2025, 1. Chuyển đổi số là quá trình chuyển đổi phương thức hoạt động, quản trị và cung cấp dịch vụ dựa trên công nghệ số, dữ liệu số, hệ thống số, nền tảng số, quy trình số nhằm tạo ra giá trị mới, hiệu quả và minh bạch.",
+    "should_refuse": false,
+    "notes": "Giải thích từ ngữ. Source chunk: luat_chuyen_doi_so_000004."
+  },
+  {
+    "id": "q080",
+    "question": "Hoạt động chuyển đổi số gồm những hoạt động nào?",
+    "category": "digital_law_general",
+    "difficulty": "medium",
+    "query_type": "cases_circumstances",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 4",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 4 Luật Chuyển đổi số 2025, 1. Xây dựng, ban hành, tổ chức thực hiện chiến lược, chương trình, kế hoạch, kiến trúc, quy chế, yêu cầu kỹ thuật, tiêu chuẩn và quy chuẩn kỹ thuật về chuyển đổi số; quản lý, điều phối, thống kê, đo lường, giám sát, kiểm toán hoạt động chuyển đổi số; đánh giá mức độ chuyển đổi số, hiệu quả chuyển đổi số. 2. Xây dựng, phát triển, nâng cấp, tích hợp, kết nối, quản lý, giám sát, vận hành, bảo trì, duy trì hạ tầng số, hạ tầng số công cộng, hệ thống số, nền tảng số, phần mềm dùng chung, phần mềm chuyên ngành, cơ sở dữ liệu. 3. Xây dựng, phát triển, bảo vệ, quản trị, xử lý, sử dụng dữ liệu; điều phối, kết nối, chia sẻ, mở, giám sát, đánh giá, khai thác, kiểm toán, xếp hạng dữ liệu và các hoạt động khác theo quy định của pháp luật về dữ liệu. 4. Số hóa thông tin, dữ liệu, tài liệu; số hóa quy trình; đổi mới, tái cấu trúc quy trình, mô hình tổ chức và phương thức hoạt động quản trị nội bộ, lã...",
+    "should_refuse": false,
+    "notes": "Hoạt động chuyển đổi số. Source chunk: luat_chuyen_doi_so_000039."
+  },
+  {
+    "id": "q081",
+    "question": "Những hành vi nào bị nghiêm cấm trong chuyển đổi số?",
+    "category": "digital_law_prohibited_acts",
+    "difficulty": "easy",
+    "query_type": "prohibited_acts",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 5",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 5 Luật Chuyển đổi số 2025, 1. Cản trở, phá hoại hoạt động chuyển đổi số; làm gián đoạn, đình trệ, gây mất an toàn cho hệ thống số của cơ quan, tổ chức, cá nhân. 2. Truy cập, can thiệp trái phép, làm sai lệch, vô hiệu hóa, gây tổn hại đến hệ thống số, dữ liệu số, nền tảng số và dịch vụ số. 3. Thu thập, sử dụng, chia sẻ, mua, bán, khai thác dữ liệu số trái quy định của pháp luật. 4. Lợi dụng chuyển đổi số để lừa đảo, thao túng, trục lợi, xâm phạm quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân. 5. Lợi dụng chức trách, quyền hạn để gây cản trở, phân biệt đối xử, tạo độc quyền, cát cứ, hạn chế cạnh tranh trong phát triển, vận hành, khai thác hệ thống số.",
+    "should_refuse": false,
+    "notes": "Hành vi bị nghiêm cấm. Source chunk: luat_chuyen_doi_so_000042."
+  },
+  {
+    "id": "q082",
+    "question": "Nguyên tắc chuyển đổi số là gì?",
+    "category": "digital_law_principle",
+    "difficulty": "easy",
+    "query_type": "principle_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 6",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 6 Luật Chuyển đổi số 2025, 1. Thúc đẩy đổi mới sáng tạo, lấy người sử dụng làm trung tâm, nâng cao chất lượng dịch vụ và tạo giá trị mới cho cơ quan, tổ chức, doanh nghiệp và người dân. 2. Tăng cường kết nối, chia sẻ và sử dụng lại dữ liệu, khai báo một lần là mặc định để nâng cao hiệu quả quản lý, hạn chế trùng lặp, giảm thủ tục và nâng cao năng lực ra quyết định. 3. Bảo đảm an ninh mạng, bảo vệ dữ liệu và quyền riêng tư theo quy định của pháp luật; khuyến khích áp dụng các biện pháp tiên tiến để nâng cao mức độ an toàn. 4. Được triển khai linh hoạt, thích ứng với sự phát triển nhanh của công nghệ; khuyến khích thử nghiệm, ứng dụng công nghệ mới phù hợp với đặc thù từng lĩnh vực. 5. Bảo đảm tính bao trùm, tạo điều kiện để mọi tổ chức và cá nhân đều có cơ hội tiếp cận, sử dụng dịch vụ số thuận lợi, an toàn và hiệu quả. 6. Bảo đảm minh bạch và trách nhiệm giải trình đối với quyết định dựa trên công nghệ số nhằm...",
+    "should_refuse": false,
+    "notes": "Nguyên tắc chuyển đổi số. Source chunk: luat_chuyen_doi_so_000050."
+  },
+  {
+    "id": "q083",
+    "question": "Hệ thống số phải đáp ứng yêu cầu tối thiểu nào?",
+    "category": "digital_law_conditions",
+    "difficulty": "medium",
+    "query_type": "conditions",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 8",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 8 Luật Chuyển đổi số 2025, 1. Yêu cầu tối thiểu đối với hệ thống số được áp dụng bắt buộc đối với hệ thống thông tin, nền tảng số, cơ sở dữ liệu và dịch vụ số của cơ quan nhà nước, hệ thống số phục vụ lợi ích công, dịch vụ số thiết yếu và hệ thống số của tổ chức, doanh nghiệp được cơ quan nhà nước giao cung cấp dịch vụ công. Đối với hệ thống số của tổ chức, doanh nghiệp khác, Nhà nước khuyến khích áp dụng theo khả năng và nhu cầu. 2. Bảo đảm an ninh mạng theo cấp độ; có cơ chế giám sát, phát hiện, cảnh báo, ứng cứu và khôi phục hoạt động khi xảy ra sự cố. 3. Bảo đảm khả năng kết nối và chia sẻ dữ liệu theo chuẩn với các hệ thống khác; hỗ trợ giao diện lập trình ứng dụng theo tiêu chuẩn, quy chuẩn kỹ thuật; sử dụng chuẩn dữ liệu quốc gia, chuẩn mở, tiêu chuẩn, quy chuẩn kỹ thuật theo quy định. 4. Dữ liệu được xử lý bởi hệ thống số phải được lưu trữ, sao lưu, bảo vệ và phục hồi theo phương án bảo đảm tính toàn vẹ...",
+    "should_refuse": false,
+    "notes": "Yêu cầu tối thiểu đối với hệ thống số. Source chunk: luat_chuyen_doi_so_000063."
+  },
+  {
+    "id": "q084",
+    "question": "Thử nghiệm có kiểm soát trong chuyển đổi số được quy định như thế nào?",
+    "category": "digital_law_procedure",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 28",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 28 Luật Chuyển đổi số 2025, Điều 28. Thử nghiệm có kiểm soát Cơ quan, tổ chức, doanh nghiệp được triển khai thử nghiệm có kiểm soát đối với quy trình, giải pháp, sản phẩm, dịch vụ và mô hình kinh doanh trong chuyển đổi số theo quy định của pháp luật về khoa học, công nghệ và đổi mới sáng tạo, pháp luật về công nghiệp công nghệ số, pháp luật về dữ liệu và pháp luật khác có liên quan.",
+    "should_refuse": false,
+    "notes": "Thử nghiệm có kiểm soát. Source chunk: luat_chuyen_doi_so_000178."
+  },
+  {
+    "id": "q085",
+    "question": "Quyền con người, quyền công dân trên môi trường số được bảo đảm ra sao?",
+    "category": "digital_law_rights",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [
+      {
+        "so_hieu": "148/2025/QH15",
+        "dieu": "Điều 41",
+        "khoan": null,
+        "diem": null
+      }
+    ],
+    "reference": "Theo Điều 41 Luật Chuyển đổi số 2025, 1. Quyền con người, quyền công dân được công nhận, tôn trọng, bảo vệ và không bị phủ nhận chỉ vì được thực hiện trên môi trường số. 2. Đăng ký, sử dụng và quản lý tài khoản danh tính điện tử, tài khoản giao dịch điện tử, chữ ký số theo quy định của pháp luật về định danh và xác thực điện tử, giao dịch điện tử. 3. Được bảo vệ dữ liệu cá nhân theo pháp luật về bảo vệ dữ liệu cá nhân. 4. Được phổ cập năng lực số cơ bản. 5. Được lựa chọn sử dụng hoặc ngừng sử dụng sản phẩm, dịch vụ số trên cơ sở được cung cấp thông tin đầy đủ, rõ ràng, chính xác, minh bạch, kịp thời về điều khoản, điều kiện sử dụng; không bị áp đặt điều kiện bất hợp lý hoặc bị phân biệt đối xử khi sử dụng sản phẩm, dịch vụ số. 6. Được bảo đảm điều kiện tiếp cận công bằng, an toàn, đặc biệt là đối tượng dễ bị tổn thương trên môi trường số. 7. Được yêu cầu cơ quan có thẩm quyền bảo vệ quyền hợp pháp trên môi trường số. 8. Đ...",
+    "should_refuse": false,
+    "notes": "Quyền con người, quyền công dân trên môi trường số. Source chunk: luat_chuyen_doi_so_000237."
+  },
+  {
+    "id": "q086",
+    "question": "Kết hôn cần đáp ứng điều kiện gì theo Luật Hôn nhân và gia đình?",
+    "category": "out_of_scope_family_law",
+    "difficulty": "easy",
+    "query_type": "conditions",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q087",
+    "question": "Vợ hoặc chồng muốn ly hôn đơn phương thì thủ tục như thế nào?",
+    "category": "out_of_scope_family_law",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q088",
+    "question": "Đăng ký khai sinh cho trẻ em quá hạn cần hồ sơ gì?",
+    "category": "out_of_scope_family_law",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q089",
+    "question": "Người lao động được nghỉ phép năm bao nhiêu ngày?",
+    "category": "out_of_scope_labor_law",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q090",
+    "question": "Hợp đồng lao động xác định thời hạn được ký tối đa bao lâu?",
+    "category": "out_of_scope_labor_law",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q091",
+    "question": "Mức lương tối thiểu vùng hiện nay là bao nhiêu?",
+    "category": "out_of_scope_labor_law",
+    "difficulty": "easy",
+    "query_type": "article_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q092",
+    "question": "Điều kiện hưởng bảo hiểm xã hội một lần là gì?",
+    "category": "out_of_scope_social_insurance",
+    "difficulty": "medium",
+    "query_type": "conditions",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q093",
+    "question": "Hồ sơ hưởng bảo hiểm thất nghiệp gồm những gì?",
+    "category": "out_of_scope_social_insurance",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q094",
+    "question": "Cách quyết toán thuế thu nhập cá nhân cuối năm như thế nào?",
+    "category": "out_of_scope_tax",
+    "difficulty": "medium",
+    "query_type": "procedure_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q095",
+    "question": "Doanh nghiệp phải lập hóa đơn điện tử khi nào?",
+    "category": "out_of_scope_tax",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q096",
+    "question": "Thuế thu nhập doanh nghiệp được tính theo thuế suất nào?",
+    "category": "out_of_scope_tax",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q097",
+    "question": "Vượt đèn đỏ bằng xe máy bị phạt bao nhiêu tiền?",
+    "category": "out_of_scope_traffic",
+    "difficulty": "easy",
+    "query_type": "penalty_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q098",
+    "question": "Nồng độ cồn khi lái xe bị xử phạt thế nào?",
+    "category": "out_of_scope_traffic",
+    "difficulty": "medium",
+    "query_type": "penalty_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q099",
+    "question": "Giấy phép lái xe hạng B được điều khiển loại xe nào?",
+    "category": "out_of_scope_traffic",
+    "difficulty": "medium",
+    "query_type": "article_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  },
+  {
+    "id": "q100",
+    "question": "Xe máy không đội mũ bảo hiểm bị xử phạt bao nhiêu?",
+    "category": "out_of_scope_traffic",
+    "difficulty": "easy",
+    "query_type": "penalty_lookup",
+    "expected_sources": [],
+    "reference": "Xin lỗi, dữ liệu pháp luật hiện tại của tôi không đề cập đến vấn đề này.",
+    "should_refuse": true,
+    "notes": "Ngoài phạm vi 5 PDF luật hiện có."
+  }
+]

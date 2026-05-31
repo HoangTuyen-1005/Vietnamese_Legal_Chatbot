@@ -19,6 +19,23 @@ def _stable_point_id(chunk_id: str) -> int:
     return int(digest[:12], 16)
 
 
+def _build_search_text(content: str, metadata: dict) -> str:
+    header_parts = [
+        metadata.get("document_name"),
+        metadata.get("so_hieu"),
+        metadata.get("loai_van_ban"),
+        metadata.get("ten_chuong"),
+        metadata.get("dieu"),
+        metadata.get("ten_dieu"),
+        metadata.get("khoan"),
+        metadata.get("diem"),
+    ]
+    header = " | ".join(str(part) for part in header_parts if part)
+    if header:
+        return f"{header}\n{content or ''}".strip()
+    return str(content or "").strip()
+
+
 class VectorStore:
     def __init__(self, settings):
         self.settings = settings
@@ -26,6 +43,7 @@ class VectorStore:
         self.embedding_model: SentenceTransformer | None = None
         self.collection_name = settings.QDRANT_COLLECTION
         self._law_catalog_cache: list[dict] | None = None
+        self._metadata_chunk_cache: dict[tuple[str, str | None, int], list[dict]] = {}
 
         self._init_client()
         self._init_embedding_model()
@@ -106,16 +124,24 @@ class VectorStore:
 
         self.create_collection_if_not_exists()
         self._law_catalog_cache = None
+        self._metadata_chunk_cache.clear()
 
     def index_chunks(self, chunks: List[dict], batch_size: int = 256) -> None:
         if self.client is None or self.embedding_model is None:
             raise RuntimeError("VectorStore is not initialized.")
 
         self._law_catalog_cache = None
+        self._metadata_chunk_cache.clear()
 
         for start in range(0, len(chunks), batch_size):
             batch = chunks[start : start + batch_size]
-            batch_texts = [item.get("content", "") for item in batch]
+            batch_texts = [
+                _build_search_text(
+                    content=item.get("content", ""),
+                    metadata=item.get("metadata", {}) or {},
+                )
+                for item in batch
+            ]
 
             batch_ids = [
                 _stable_point_id(str(item.get("chunk_id", f"chunk_{start+i}")))
@@ -186,6 +212,11 @@ class VectorStore:
         if self.client is None:
             raise RuntimeError("VectorStore is not initialized.")
 
+        cache_key = (str(so_hieu), str(dieu) if dieu else None, int(limit))
+        cached = self._metadata_chunk_cache.get(cache_key)
+        if cached is not None:
+            return [dict(item) for item in cached]
+
         must_conditions = [
             FieldCondition(key="so_hieu", match=MatchValue(value=so_hieu)),
         ]
@@ -214,6 +245,7 @@ class VectorStore:
                 "source": "vector_context",
             })
 
+        self._metadata_chunk_cache[cache_key] = [dict(item) for item in results]
         return results
 
     def get_law_catalog(self, refresh: bool = False, max_points: int = 10000) -> list[dict]:

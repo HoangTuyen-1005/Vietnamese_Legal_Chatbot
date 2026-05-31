@@ -83,6 +83,51 @@ def test_retrieval_keeps_metadata_boosted_candidate_after_rescore():
     assert diagnostics["reason"] == "plausible_law_keyword_or_metadata_signal"
 
 
+def test_retrieval_refuses_likely_out_of_scope_domain_even_with_overlap():
+    query_profile = {
+        "mentioned_law": None,
+        "raw_query": "Nguoi lao dong duoc nghi phep nam bao nhieu ngay?",
+        "keywords": ["nguoi lao dong", "nghi phep nam"],
+    }
+    chunks = [
+        make_chunk(
+            "Nguoi dai dien va nguoi lao dong trong mot quy dinh khac.",
+            score=0.032,
+            metadata_boost=0.45,
+            so_hieu="91/2015/QH13",
+            ten_dieu="Dai dien",
+        )
+    ]
+
+    diagnostics = diagnose_retrieval_refusal(chunks, query_profile)
+
+    assert diagnostics["should_refuse"] is True
+    assert diagnostics["reason"] == "unsupported_legal_domain_signal"
+    assert diagnostics["scope_status"] == "likely_out_of_scope"
+
+
+def test_scope_guard_does_not_block_explicit_supported_law_reference():
+    query_profile = {
+        "mentioned_law": "bo luat hinh su",
+        "raw_query": "Toi cuong ep ket hon theo Bo luat Hinh su bi xu ly the nao?",
+        "keywords": ["toi cuong ep ket hon"],
+    }
+    chunks = [
+        make_chunk(
+            "Toi cuong ep ket hon bi xu ly theo Bo luat Hinh su.",
+            score=0.020,
+            metadata_boost=0.30,
+            so_hieu="01/VBHN-VPQH",
+            ten_dieu="Toi cuong ep ket hon",
+        )
+    ]
+
+    diagnostics = diagnose_retrieval_refusal(chunks, query_profile)
+
+    assert diagnostics["should_refuse"] is False
+    assert diagnostics["scope_status"] == "mixed_scope"
+
+
 def test_rerank_keeps_negative_score_when_other_evidence_is_strong():
     query_profile = {
         "mentioned_law": None,
@@ -111,6 +156,24 @@ def test_rerank_refuses_when_score_and_evidence_are_weak():
             rerank_score=-1.2,
             metadata_boost=0.0,
             ten_dieu="Quyền sở hữu",
+        )
+    ]
+
+    assert should_refuse_after_rerank(chunks, query_profile) is True
+
+
+def test_rerank_refuses_likely_out_of_scope_even_with_positive_score():
+    query_profile = {
+        "mentioned_law": None,
+        "raw_query": "Vuot den do bi phat tien bao nhieu theo nghi dinh 100?",
+        "keywords": ["vuot den do", "phat tien"],
+    }
+    chunks = [
+        make_chunk(
+            "Quy dinh ve tien va tai san trong van ban hien co.",
+            rerank_score=2.5,
+            metadata_boost=0.40,
+            ten_dieu="Tien va tai san",
         )
     ]
 

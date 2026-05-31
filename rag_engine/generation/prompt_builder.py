@@ -1,4 +1,4 @@
-﻿from rag_engine.retrieval.refusal_policy import REFUSAL_ANSWER
+from rag_engine.retrieval.refusal_policy import REFUSAL_ANSWER
 
 
 def format_context_blocks(chunks: list[dict]) -> str:
@@ -43,11 +43,13 @@ QUY TAC BAT BUOC:
 2. Chi tu choi khi toan bo van ban khong lien quan den van de duoc hoi, hoac khong co can cu ro rang de tra loi cau hoi. Khi do phai tra loi dung nguyen van:
 "{REFUSAL_ANSWER}"
 
-3. Khong duoc co gang trich mot doan chi vi no co vai tu giong cau hoi, nhung cung khong duoc tu choi chi vi cau hoi la dien giai/paraphrase cua noi dung trong van ban.
+3. Neu co it nhat mot van ban dieu chinh truc tiep hanh vi, hau qua, muc phat, dieu kien, thu tuc hoac khai niem ma cau hoi dang hoi, khong duoc tu choi. Hay tra loi dua tren van ban lien quan nhat va bo qua cac van ban nhieu hon.
 
-4. Khong duoc ket luan tu dieu luat khong cung ban chat hanh vi.
+4. Khong duoc co gang trich mot doan chi vi no co vai tu giong cau hoi, nhung cung khong duoc tu choi chi vi cau hoi la dien giai/paraphrase cua noi dung trong van ban.
 
-5. Neu tim thay noi dung phu hop, phai tra loi dung dinh dang sau:
+5. Khong duoc ket luan tu dieu luat khong cung ban chat hanh vi.
+
+6. Neu tim thay noi dung phu hop, phai tra loi dung dinh dang sau:
 
 Trich dan nguyen van:
 - [Trích dẫn đầy đủ nội dung điều/khoản liên quan trực tiếp. Không được cắt ngắn làm mất ý nghĩa của văn bản pháp luật]
@@ -59,9 +61,9 @@ Ket luan:
 - [Trả lời trực tiếp câu hỏi của người dùng dựa trên căn cứ đã trích dẫn ở trên]
 - [Nếu chưa đủ căn cứ, ghi rõ nội dung còn thiếu]
 
-6. Khong duoc noi ve muc an cu the neu phan van ban trich ra khong neu ro muc an do.
-7. Khong duoc dao vai nguoi hoi, nan nhan, nguoi vi pham neu van ban khong neu ro.
-8. Bat buoc tra loi day du ca 3 muc: Trich dan nguyen van, Can cu phap ly, Ket luan.
+7. Khong duoc noi ve muc an cu the neu phan van ban trich ra khong neu ro muc an do.
+8. Khong duoc dao vai nguoi hoi, nan nhan, nguoi vi pham neu van ban khong neu ro.
+9. Bat buoc tra loi day du ca 3 muc: Trich dan nguyen van, Can cu phap ly, Ket luan.
 
 UU TIEN:
 - Do chinh xac phap ly quan trong hon viec tra loi dai.

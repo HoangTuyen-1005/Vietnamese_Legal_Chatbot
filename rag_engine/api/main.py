@@ -28,7 +28,10 @@ async def lifespan(app: FastAPI):
     )
 
     vector_store = VectorStore(settings=settings)
-    reranker = Reranker(model_name=settings.RERANKER_MODEL_NAME)
+    reranker = Reranker(
+        model_name=settings.RERANKER_MODEL_NAME,
+        max_length=settings.RERANKER_MAX_LENGTH,
+    )
 
     generator = None
     if settings.ENABLE_GENERATION:
@@ -86,4 +89,3 @@ def health():
 def chat(request: ChatRequest):
     result = app.state.chat_service.answer_question(request.question)
     return ChatResponse(**result)
-

@@ -1,11 +1,15 @@
-﻿import time
+import time
 import unicodedata
 
 from rag_engine.generation.prompt_builder import build_legal_prompt
 from rag_engine.retrieval.hybrid_search import hybrid_search
 from rag_engine.retrieval.law_hint_expander import augment_with_law_hints
 from rag_engine.retrieval.metadata_rescorer import rescore_candidates
-from rag_engine.retrieval.query_profile import build_query_profile
+from rag_engine.retrieval.query_profile import (
+    QUERY_PROFILE_PROVIDER_ERROR_ANSWER,
+    QueryProfileProviderError,
+    QueryProfiler,
+)
 from rag_engine.retrieval.refusal_policy import (
     GENERATION_DISABLED_ANSWER,
     REFUSAL_ANSWER,
@@ -13,6 +17,13 @@ from rag_engine.retrieval.refusal_policy import (
     diagnose_retrieval_refusal,
     should_refuse_after_rerank,
     should_refuse_after_retrieval,
+)
+
+
+GENERATION_PROVIDER_BUSY_ANSWER = (
+    "Dịch vụ sinh câu trả lời đang quá tải hoặc tạm thời không khả dụng. "
+    "Vui lòng thử lại sau ít phút. Các nguồn trích dẫn bên dưới là kết quả "
+    "truy xuất liên quan đã tìm được."
 )
 
 
@@ -25,6 +36,7 @@ class ChatService:
         generator,
         settings,
         logger,
+        query_profiler=None,
     ):
         self.bm25_store = bm25_store
         self.vector_store = vector_store
@@ -32,6 +44,13 @@ class ChatService:
         self.generator = generator
         self.settings = settings
         self.logger = logger
+        self.query_profiler = query_profiler or QueryProfiler(
+            model_name=getattr(settings, "QUERY_PROFILE_MODEL_NAME", None),
+            api_key=getattr(settings, "GEMINI_API_KEY", None),
+            temperature=getattr(settings, "QUERY_PROFILE_TEMPERATURE", 0.0),
+            max_output_tokens=getattr(settings, "QUERY_PROFILE_MAX_OUTPUT_TOKENS", 1024),
+            logger=logger,
+        )
 
     def answer_question(self, question: str, return_trace: bool = False) -> dict:
         start_time = time.perf_counter()
@@ -39,7 +58,33 @@ class ChatService:
         trace = {} if return_trace else None
 
         profile_start = time.perf_counter()
-        query_profile = build_query_profile(question)
+        try:
+            query_profile = self.query_profiler.profile(question)
+        except QueryProfileProviderError as exc:
+            latency_ms = (time.perf_counter() - start_time) * 1000
+            self.logger.warning(
+                "Query profile provider failed | error_code=%s | error=%s",
+                exc.error_code,
+                str(exc),
+            )
+            if trace is not None:
+                trace["query_profile_error"] = {
+                    "error_code": exc.error_code,
+                    "error_message": str(exc),
+                }
+            result = {
+                "question": question,
+                "answer": QUERY_PROFILE_PROVIDER_ERROR_ANSWER,
+                "sources": [],
+                "retrieved_count": 0,
+                "reranked_count": 0,
+                "latency_ms": latency_ms,
+                "error_code": exc.error_code,
+                "error_message": QUERY_PROFILE_PROVIDER_ERROR_ANSWER,
+            }
+            if trace is not None:
+                result["trace"] = trace
+            return result
         if trace is not None:
             trace["query_profile"] = query_profile
         profile_ms = (time.perf_counter() - profile_start) * 1000
@@ -47,11 +92,15 @@ class ChatService:
             f"Query profile built in {profile_ms:.2f} ms | profile={query_profile}"
         )
 
+        retrieval_query = self._build_retrieval_query(question, query_profile)
+        if trace is not None:
+            trace["retrieval_query"] = retrieval_query
+
         retrieval_start = time.perf_counter()
         candidate_pool_k = self.settings.TOP_K_BM25 + self.settings.TOP_K_VECTOR
 
         retrieved_chunks = hybrid_search(
-            query=question,
+            query=retrieval_query,
             bm25_store=self.bm25_store,
             vector_store=self.vector_store,
             top_k_bm25=self.settings.TOP_K_BM25,
@@ -234,28 +283,61 @@ class ChatService:
             len(prompt_contexts),
         )
         generation_start = time.perf_counter()
-        answer = self.generator.generate(
-            prompt=prompt,
-            max_new_tokens=self.settings.MAX_NEW_TOKENS,
-        )
-        if (
-            self.settings.RETRY_INCOMPLETE_ANSWER
-            and self._is_incomplete_generated_answer(answer)
-        ):
-            self.logger.warning(
-                "Generated answer looks incomplete. Retrying once with stricter output constraints."
-            )
-            retry_prompt = (
-                f"{prompt}\n\n"
-                "BO SUNG BAT BUOC CHO LAN TRA LOI NAY:\n"
-                "- Tra loi day du 3 muc: Trich dan nguyen van, Can cu phap ly, Ket luan.\n"
-                "- Moi trich dan chi toi da 40 tu de tranh tra loi bi dung giua chung.\n"
-                "- Khong duoc de cau dang do hoac thieu dau ket thuc.\n"
-            )
+        try:
             answer = self.generator.generate(
-                prompt=retry_prompt,
+                prompt=prompt,
                 max_new_tokens=self.settings.MAX_NEW_TOKENS,
             )
+            if (
+                self.settings.RETRY_INCOMPLETE_ANSWER
+                and self._is_incomplete_generated_answer(answer)
+            ):
+                self.logger.warning(
+                    "Generated answer looks incomplete. Retrying once with stricter output constraints."
+                )
+                retry_prompt = (
+                    f"{prompt}\n\n"
+                    "BO SUNG BAT BUOC CHO LAN TRA LOI NAY:\n"
+                    "- Tra loi day du 3 muc: Trich dan nguyen van, Can cu phap ly, Ket luan.\n"
+                    "- Moi trich dan chi toi da 40 tu de tranh tra loi bi dung giua chung.\n"
+                    "- Khong duoc de cau dang do hoac thieu dau ket thuc.\n"
+                )
+                answer = self.generator.generate(
+                    prompt=retry_prompt,
+                    max_new_tokens=self.settings.MAX_NEW_TOKENS,
+                )
+        except Exception as exc:
+            generation_ms = (time.perf_counter() - generation_start) * 1000
+            if self._is_generation_provider_busy_error(exc):
+                self.logger.warning(
+                    "Generation provider is busy/unavailable | error=%s",
+                    str(exc),
+                )
+                if trace is not None:
+                    trace["generation_ms"] = generation_ms
+                    trace["generation_error"] = {
+                        "error_code": "generation_provider_busy",
+                        "error_message": str(exc),
+                    }
+                latency_ms = (time.perf_counter() - start_time) * 1000
+                result = {
+                    "question": question,
+                    "answer": GENERATION_PROVIDER_BUSY_ANSWER,
+                    "sources": self._format_sources(prompt_contexts),
+                    "retrieved_count": len(retrieved_chunks),
+                    "reranked_count": len(reranked_chunks),
+                    "latency_ms": latency_ms,
+                    "error_code": "generation_provider_busy",
+                    "error_message": (
+                        "Dịch vụ sinh câu trả lời đang quá tải. "
+                        "Vui lòng thử lại sau ít phút."
+                    ),
+                }
+                if trace is not None:
+                    result["trace"] = trace
+                return result
+
+            raise
 
         generation_ms = (time.perf_counter() - generation_start) * 1000
         self.logger.info(f"Generated answer in {generation_ms:.2f} ms")
@@ -274,6 +356,29 @@ class ChatService:
         if trace is not None:
             result["trace"] = trace
         return result
+
+    def _build_retrieval_query(self, question: str, query_profile: dict) -> str:
+        parts = [question]
+        for key in ("retrieval_queries", "legal_concepts", "keywords"):
+            for value in query_profile.get(key) or []:
+                text = str(value).strip()
+                if text:
+                    parts.append(text)
+
+        seen = set()
+        selected = []
+        total_chars = 0
+        for part in parts:
+            normalized = self._normalize_for_match(part)
+            if not normalized or normalized in seen:
+                continue
+            seen.add(normalized)
+            if selected and total_chars + len(part) > 1800:
+                break
+            selected.append(part)
+            total_chars += len(part)
+
+        return "\n".join(selected)
 
     def _limit_contexts_for_prompt(
         self,
@@ -296,9 +401,9 @@ class ChatService:
 
         ranked.sort(key=lambda item: (item[0], -item[1]), reverse=True)
 
-        selected: list[tuple[int, dict]] = []
+        selected: list[dict] = []
         selected_chars = 0
-        for _, index, chunk in ranked:
+        for _, _, chunk in ranked:
             content_chars = len(chunk.get("content", "") or "")
             if max_chunks > 0 and len(selected) >= max_chunks:
                 continue
@@ -309,14 +414,13 @@ class ChatService:
             ):
                 continue
 
-            selected.append((index, chunk))
+            selected.append(chunk)
             selected_chars += content_chars
 
         if not selected:
             return contexts[:1]
 
-        selected.sort(key=lambda item: item[0])
-        return [chunk for _, chunk in selected]
+        return selected
 
     def _context_relevance_score(
         self,
@@ -337,10 +441,10 @@ class ChatService:
         score = 0.0
         if chunk_id in top_ids:
             score += 100.0
-        if role == "referenced_dieu":
-            score += 40.0
-        elif role == "same_dieu":
+        if role == "same_dieu":
             score += 15.0
+        elif role == "referenced_dieu":
+            score += 6.0
 
         if (meta.get("so_hieu"), meta.get("dieu")) in top_dieu_keys:
             score += 10.0
@@ -357,6 +461,7 @@ class ChatService:
             ])
         )
         body_norm = self._normalize_for_match(str(chunk.get("content", ""))[:1800])
+        score += self._constraint_context_score(query_profile, f"{title_norm} {body_norm}")
 
         for keyword in (query_profile.get("keywords") or [])[:24]:
             keyword_norm = self._normalize_for_match(str(keyword))
@@ -381,6 +486,49 @@ class ChatService:
 
         return score
 
+    def _constraint_context_score(self, query_profile: dict, text_norm: str) -> float:
+        import re
+
+        score = 0.0
+        for key in ("keywords", "legal_concepts", "retrieval_queries"):
+            for value in query_profile.get(key, []) or []:
+                term_norm = self._normalize_for_match(str(value))
+                if len(term_norm) < 8:
+                    continue
+                if term_norm in text_norm:
+                    if any(marker in term_norm for marker in ("khong co", "chua co", "khong phai", "khong duoc")):
+                        score += 8.0
+                    elif " " in term_norm:
+                        score += 1.5
+
+                neg_match = re.search(r"\b(khong co|chua co)\s+(.{3,80})", term_norm)
+                if not neg_match:
+                    continue
+                tail = re.split(
+                    r"\b(su dung|tu nam|tu truoc|thi|duoc|va|hoac|nhung)\b",
+                    neg_match.group(2),
+                )[0].strip()
+                if len(tail) < 3:
+                    continue
+                if f"{neg_match.group(1)} {tail}" in text_norm:
+                    score += 10.0
+                elif self._has_positive_counterpart(text_norm, tail):
+                    score -= 4.0
+        return score
+
+    def _has_positive_counterpart(self, text_norm: str, tail: str) -> bool:
+        import re
+
+        tail_tokens = [
+            token
+            for token in re.findall(r"\w+", tail)
+            if len(token) > 1
+        ]
+        if not tail_tokens:
+            return False
+        tail_pattern = r"\s+".join(re.escape(token) for token in tail_tokens)
+        return bool(re.search(rf"\bco(?:\s+\w+){{0,8}}\s+{tail_pattern}\b", text_norm))
+
     def _total_content_chars(self, chunks: list[dict]) -> int:
         return sum(len(chunk.get("content", "") or "") for chunk in chunks)
 
@@ -397,6 +545,8 @@ class ChatService:
                 "base_score": self._round_float(chunk.get("base_score")),
                 "metadata_boost": self._round_float(chunk.get("metadata_boost")),
                 "rerank_score": self._round_float(chunk.get("rerank_score")),
+                "retrieval_prior_score": self._round_float(chunk.get("retrieval_prior_score")),
+                "rerank_final_score": self._round_float(chunk.get("rerank_final_score")),
                 "so_hieu": meta.get("so_hieu"),
                 "dieu": meta.get("dieu"),
                 "khoan": meta.get("khoan"),
@@ -466,6 +616,52 @@ class ChatService:
             return True
 
         return False
+
+    def _is_generation_provider_busy_error(self, exc: Exception) -> bool:
+        status_code = self._extract_error_status_code(exc)
+        if status_code in {429, 503}:
+            return True
+
+        text = self._normalize_for_match(str(exc))
+        busy_markers = [
+            "high demand",
+            "try again later",
+            "temporarily unavailable",
+            "service unavailable",
+            "overloaded",
+            "resource exhausted",
+            "unavailable",
+            "qua tai",
+            "tam thoi khong kha dung",
+        ]
+        return any(marker in text for marker in busy_markers)
+
+    def _extract_error_status_code(self, exc: Exception) -> int | None:
+        for attr in ("status_code", "code"):
+            parsed = self._parse_int(getattr(exc, attr, None))
+            if parsed is not None:
+                return parsed
+
+        response = getattr(exc, "response", None)
+        if response is not None:
+            for attr in ("status_code", "status"):
+                parsed = self._parse_int(getattr(response, attr, None))
+                if parsed is not None:
+                    return parsed
+
+        import re
+
+        match = re.search(r"\b(429|503)\b", str(exc))
+        if match:
+            return int(match.group(1))
+
+        return None
+
+    def _parse_int(self, value) -> int | None:
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return None
 
     def _normalize_for_match(self, value: str) -> str:
         text = (value or "").strip().lower()

@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import re
 import unicodedata
@@ -97,6 +97,112 @@ def _keyword_overlap_boost(keywords: list[str], ten_dieu: str, dieu: str, conten
     return min(overlap, 0.30)
 
 
+def _profile_terms(query_profile: dict) -> list[str]:
+    terms: list[str] = []
+    for key in ("keywords", "legal_concepts", "retrieval_queries"):
+        for value in query_profile.get(key, []) or []:
+            text = str(value).strip()
+            if text:
+                terms.append(text)
+    return terms
+
+
+def _constraint_signal(query_profile: dict, text: str) -> float:
+    text_norm = _normalize_for_match(text)
+    if not text_norm:
+        return 0.0
+
+    score = 0.0
+    for term in _profile_terms(query_profile)[:36]:
+        term_norm = _normalize_for_match(term)
+        if len(term_norm) < 8:
+            continue
+
+        if term_norm in text_norm:
+            if any(marker in term_norm for marker in ("khong co", "chua co", "khong phai", "khong duoc")):
+                score += 0.28
+            elif " " in term_norm:
+                score += 0.06
+
+        neg_match = re.search(r"\b(khong co|chua co)\s+(.{3,80})", term_norm)
+        if not neg_match:
+            continue
+
+        tail = re.split(r"\b(su dung|tu nam|tu truoc|thi|duoc|va|hoac|nhung)\b", neg_match.group(2))[0]
+        tail = tail.strip()
+        if len(tail) < 3:
+            continue
+
+        if f"{neg_match.group(1)} {tail}" in text_norm:
+            score += 0.34
+        elif _has_positive_counterpart(text_norm, tail):
+            score -= 0.22
+
+    return max(-0.30, min(score, 0.70))
+
+
+def _has_positive_counterpart(text_norm: str, tail: str) -> bool:
+    tail_tokens = [
+        token
+        for token in re.findall(r"\w+", tail)
+        if len(token) > 1
+    ]
+    if not tail_tokens:
+        return False
+    tail_pattern = r"\s+".join(re.escape(token) for token in tail_tokens)
+    return bool(re.search(rf"\bco(?:\s+\w+){{0,8}}\s+{tail_pattern}\b", text_norm))
+
+
+def _label_match_boost(query_profile: dict, metadata: dict) -> float:
+    boost = 0.0
+    meta_dieu = _normalize_for_match(metadata.get("dieu"))
+    meta_khoan = _normalize_for_match(metadata.get("khoan"))
+    meta_diem = _normalize_for_match(metadata.get("diem"))
+    meta_chuong = _normalize_for_match(metadata.get("chuong") or metadata.get("ten_chuong"))
+
+    mentioned_articles = [
+        _normalize_for_match(value)
+        for value in query_profile.get("mentioned_articles", [])
+        if str(value).strip()
+    ]
+    mentioned_clauses = [
+        _normalize_for_match(value)
+        for value in query_profile.get("mentioned_clauses", [])
+        if str(value).strip()
+    ]
+    mentioned_points = [
+        _normalize_for_match(value)
+        for value in query_profile.get("mentioned_points", [])
+        if str(value).strip()
+    ]
+    mentioned_chapters = [
+        _normalize_for_match(value)
+        for value in query_profile.get("mentioned_chapters", [])
+        if str(value).strip()
+    ]
+
+    if mentioned_articles and meta_dieu in mentioned_articles:
+        boost += 0.65
+    if mentioned_clauses and meta_khoan in mentioned_clauses:
+        boost += 0.12
+    if mentioned_points and meta_diem in mentioned_points:
+        boost += 0.08
+    if mentioned_chapters and any(chapter in meta_chuong for chapter in mentioned_chapters):
+        boost += 0.10
+
+    return boost
+
+
+def _intent_boost_weight(query_profile: dict) -> float:
+    try:
+        confidence = float(query_profile.get("confidence") or 0.0)
+    except (TypeError, ValueError):
+        confidence = 0.0
+    if query_profile.get("query_type") == "general_explanation":
+        return 0.0
+    return max(0.0, min(confidence, 0.60))
+
+
 def compute_metadata_boost(query_profile: dict, chunk: dict) -> float:
     meta = chunk.get("metadata", {})
     content = safe_text(chunk.get("content", ""))
@@ -108,6 +214,7 @@ def compute_metadata_boost(query_profile: dict, chunk: dict) -> float:
     query_type = query_profile.get("query_type")
     mentioned_law = safe_text(query_profile.get("mentioned_law"))
     keywords = [str(kw) for kw in query_profile.get("keywords", []) if len(str(kw)) >= 2]
+    intent_weight = _intent_boost_weight(query_profile)
 
     if mentioned_law:
         law_overlap = _law_mention_overlap(mentioned_law, meta)
@@ -115,41 +222,50 @@ def compute_metadata_boost(query_profile: dict, chunk: dict) -> float:
         if law_overlap < 0.15:
             boost -= 0.20
 
+    boost += _label_match_boost(query_profile, meta)
+
+    intent_boost = 0.0
     if query_type == "article_lookup":
         if cap_chunk == "dieu":
-            boost += 0.35
+            intent_boost += 0.35
         elif cap_chunk == "khoan":
-            boost += 0.12
+            intent_boost += 0.12
 
     elif query_type == "principle_lookup":
         if "nguyên tắc" in ten_dieu:
-            boost += 0.30
+            intent_boost += 0.30
         elif "nguyên tắc" in content[:300]:
-            boost += 0.14
+            intent_boost += 0.14
 
     elif query_type == "definition_lookup":
         if "giải thích từ ngữ" in ten_dieu:
-            boost += 0.30
+            intent_boost += 0.30
         elif _looks_like_definition(content):
-            boost += 0.12
+            intent_boost += 0.12
 
     elif query_type == "prohibited_acts":
         if "nghiêm cấm" in ten_dieu or "nghiêm cấm" in content[:260]:
-            boost += 0.20
+            intent_boost += 0.20
 
     elif query_type == "conditions":
         if "điều kiện" in ten_dieu or "điều kiện" in content[:260]:
-            boost += 0.20
+            intent_boost += 0.20
 
     elif query_type == "cases_circumstances":
         if "trường hợp" in ten_dieu or "trường hợp" in content[:260]:
-            boost += 0.20
+            intent_boost += 0.20
 
     elif query_type == "procedure_lookup":
         if any(x in ten_dieu for x in ["thủ tục", "trình tự", "hồ sơ", "quy trình"]):
-            boost += 0.20
+            intent_boost += 0.20
+
+    boost += intent_boost * intent_weight
 
     boost += _keyword_overlap_boost(keywords, ten_dieu, dieu, content)
+    boost += _constraint_signal(
+        query_profile=query_profile,
+        text=" ".join([ten_dieu, dieu, content[:1200]]),
+    )
 
     return boost
 
