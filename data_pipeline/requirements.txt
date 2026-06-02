@@ -3,6 +3,7 @@
 requests
 bs4
 pypdf
+python-docx
 pdfplumber
 pymupdf
 pyvi
