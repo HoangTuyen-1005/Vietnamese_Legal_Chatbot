@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 # ================= CẤU HÌNH HỆ THỐNG =================
 
-RAW_DIR = os.path.join("data", "raw")
-CHUDE_FILE = "ChuDe.txt"
+RAW_DIR = os.path.join("data_pipeline", "data", "raw")
+CHUDE_FILE = os.path.join("data_pipeline", "ChuDe.txt")
 BASE_URL = "https://thuvienphapluat.vn"
 
 # TÀI KHOẢN ĐĂNG NHẬP (Để tự động lấy Cookie mới)
@@ -57,7 +57,6 @@ def auto_login():
         # TVPL thường trả về chữ <ok> hoặc chuỗi rỗng nếu đăng nhập thành công
         if "<ok>" in response.text or response.text.strip() == "":
             print("[Thành công] Đã đăng nhập và lấy được Cookie mới!")
-            # Session đã tự động lưu Cookie (ASP.NET_SessionId, memberga...)
             return True
         else:
             print(f"[Thất bại] Sai tài khoản/mật khẩu hoặc web thay đổi cơ chế. Trả về: {response.text[:100]}")
@@ -96,11 +95,10 @@ def get_document_links(keyword):
         response.raise_for_status()
         soup = BeautifulSoup(response.content, 'html.parser')
         
-        fallback_needed = True # Mặc định là cần fallback nếu không qua được ải kiểm tra
+        fallback_needed = True 
         
         for a_tag in soup.find_all('a', href=True):
             raw_href = a_tag['href']
-            # Lấy tiêu đề và chuyển về chữ thường để kiểm tra
             title = (a_tag.get('title', '') or a_tag.text).strip().lower()
             clean_href = raw_href.split('?')[0] 
             
@@ -110,7 +108,7 @@ def get_document_links(keyword):
                 if "nghị định" in title or "thông tư" in title or "quyết định" in title:
                     print(f"-> [Phát hiện rác] Web trả về VBHN sai loại (Hướng dẫn): {a_tag.text.strip()[:60]}...")
                     fallback_needed = True
-                    break # Thoát vòng lặp, nhảy xuống Fallback
+                    break 
                 
                 # [BƯỚC 3a] HỢP LỆ -> TẢI FILE
                 full_link = urljoin(BASE_URL, clean_href)
@@ -120,8 +118,6 @@ def get_document_links(keyword):
         # [BƯỚC 3b & BƯỚC 4] KÍCH HOẠT FALLBACK
         if fallback_needed:
             print(f"-> [Fallback kích hoạt] Đổi bộ lọc sang tìm Luật/Pháp lệnh gốc hiện hành...")
-            
-            # Đổi type=10 (Mã định danh cho thể loại: Luật/Pháp lệnh)
             search_url_goc = f"http://thuvienphapluat.vn/page/tim-van-ban.aspx?keyword={encoded_keyword}&area=0&type=10&status=0&lan=1&org=0&signer=0&match=True&sort=1"
             
             response_goc = session.get(search_url_goc, timeout=15)
@@ -158,6 +154,12 @@ def download_document(doc_url, keyword):
             return
             
         href = match.group(1)
+        
+        # ================= THAY ĐỔI ĐỂ TẢI FILE .DOCX =================
+        # Ép tham số docx rỗng ban đầu chuyển thành docx=1 để tải bản Docx
+        if "docx=" in href:
+            href = href.replace("docx=", "docx=1")
+            
         download_url = urljoin(BASE_URL, href)
 
         session.headers.update({'Referer': doc_url})
@@ -170,13 +172,12 @@ def download_document(doc_url, keyword):
             print(f"   [Lỗi] Máy chủ yêu cầu xác thực. Cookie có thể đã hết hạn!")
             return
         
-        content_disp = file_response.headers.get('Content-Disposition')
-        if content_disp and 'filename=' in content_disp:
-            filename = content_disp.split('filename=')[-1].strip('"\'').encode('iso-8859-1').decode('utf-8', 'ignore')
-        else:
-            ext = ".doc" if "docx=" in download_url else ".pdf"
-            doc_name = doc_url.split('/')[-1].replace('.aspx', '')
-            filename = f"{doc_name}{ext}"
+        ext = ".docx" if "docx=1" in download_url else ".doc"
+        if ".pdf" in download_url:
+            ext = ".pdf"
+            
+        doc_name = doc_url.split('/')[-1].replace('.aspx', '')
+        filename = f"{doc_name}{ext}"
 
         filepath = os.path.join(RAW_DIR, filename)
         
