@@ -2,9 +2,6 @@
 
 import importlib
 import re
-import shutil
-import subprocess
-import tempfile
 import unicodedata
 from collections import Counter
 from dataclasses import dataclass
@@ -409,60 +406,6 @@ def clean_document_pages(
     return normalize_unicode(text).strip()
 
 
-def find_libreoffice_executable() -> str | None:
-    for command in ("soffice", "libreoffice"):
-        executable = shutil.which(command)
-        if executable:
-            return executable
-
-    windows_paths = [
-        Path("C:/Program Files/LibreOffice/program/soffice.exe"),
-        Path("C:/Program Files (x86)/LibreOffice/program/soffice.exe"),
-    ]
-    for executable in windows_paths:
-        if executable.exists():
-            return str(executable)
-
-    return None
-
-
-def convert_legacy_doc_to_docx(doc_path: Path, output_dir: Path) -> Path:
-    executable = find_libreoffice_executable()
-    if not executable:
-        raise RuntimeError(
-            f"Cannot read legacy .doc file '{doc_path.name}' directly. "
-            "Install LibreOffice and make 'soffice' available in PATH, then rerun."
-        )
-
-    result = subprocess.run(
-        [
-            executable,
-            "--headless",
-            "--convert-to",
-            "docx",
-            "--outdir",
-            str(output_dir),
-            str(doc_path),
-        ],
-        capture_output=True,
-        text=True,
-        timeout=120,
-        check=False,
-    )
-
-    converted_path = output_dir / f"{doc_path.stem}.docx"
-    if result.returncode != 0 or not converted_path.exists():
-        details = "\n".join(
-            part.strip()
-            for part in (result.stdout, result.stderr)
-            if part and part.strip()
-        )
-        raise RuntimeError(
-            f"LibreOffice could not convert '{doc_path.name}' to .docx."
-            + (f" Details: {details}" if details else "")
-        )
-
-    return converted_path
 
 
 def extract_text_from_docx(docx_path: Path) -> str:
@@ -493,18 +436,13 @@ def extract_text_from_docx(docx_path: Path) -> str:
 
 
 def extract_text_from_doc(doc_path: str) -> str:
-    """Extract text from .doc or .docx file."""
+    """Extract text from .docx file."""
     path = Path(doc_path)
 
     if path.suffix.lower() == ".docx":
         return extract_text_from_docx(path)
 
-    if path.suffix.lower() == ".doc":
-        with tempfile.TemporaryDirectory(prefix="doc_convert_") as tmpdir:
-            converted_path = convert_legacy_doc_to_docx(path, Path(tmpdir))
-            return extract_text_from_docx(converted_path)
-
-    raise RuntimeError(f"Unsupported Word document extension: {path.suffix}")
+    raise RuntimeError(f"Unsupported document extension: {path.suffix}. Only .docx files are supported.")
 
 
 def extract_text_from_pdf(pdf_path: str) -> str:
