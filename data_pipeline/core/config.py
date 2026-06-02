@@ -11,12 +11,10 @@ from shared.config_utils import find_env_file, normalize_legacy_path
 _ENV_FILE = find_env_file(Path(__file__).resolve().parent)
 
 _LEGACY_PATH_MAP = {
-    "data/raw": "data_pipeline/data/raw",
-    "data/cleaned": "data_pipeline/data/cleaned",
-    "data/processed": "data_pipeline/data/processed",
     "data/indexes/bm25_index.pkl": "data_pipeline/data/indexes/bm25_index.pkl",
     "data/indexes/bm25_docs.pkl": "data_pipeline/data/indexes/bm25_docs.pkl",
     "data/indexes/qdrant_db": "data_pipeline/data/indexes/qdrant_db",
+    "eval/eval_questions.json": "rag_engine/eval/eval_questions.json",
 }
 
 

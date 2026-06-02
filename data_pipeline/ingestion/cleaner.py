@@ -2,6 +2,9 @@
 
 import importlib
 import re
+import shutil
+import subprocess
+import tempfile
 import unicodedata
 from collections import Counter
 from dataclasses import dataclass
@@ -344,6 +347,29 @@ def merge_wrapped_lines(lines: Sequence[str]) -> List[str]:
     return merged
 
 
+def uppercase_ratio(line: str) -> float:
+    letters = [ch for ch in line if ch.isalpha()]
+    if not letters:
+        return 0.0
+    return sum(ch.isupper() for ch in letters) / len(letters)
+
+
+def strip_heading_footnote_markers(lines: Sequence[str]) -> List[str]:
+    cleaned: List[str] = []
+
+    for line in lines:
+        stripped = line.strip()
+        if (
+            re.search(r"\D\d{1,2}$", stripped)
+            and uppercase_ratio(stripped) >= 0.72
+            and len(stripped) <= 140
+        ):
+            stripped = re.sub(r"(?<=\D)\d{1,2}$", "", stripped).rstrip()
+        cleaned.append(stripped)
+
+    return cleaned
+
+
 def clean_document_pages(
     page_texts: Sequence[str],
     config: CleanerConfig | None = None,
@@ -365,10 +391,12 @@ def clean_document_pages(
 
     all_lines = trim_trailing_footnote_appendix(all_lines, config)
     merged = merge_wrapped_lines(all_lines)
+    merged = strip_heading_footnote_markers(merged)
 
     text = "\n".join(merged)
     text = re.sub(r"(?m)^\[\d+\].*$\n?", "", text)
     text = re.sub(r"\[(\d{1,4})\]", "", text)
+    text = re.sub(r"(?m)^([^\n\d]{6,140}[A-ZÀ-ỸĐ])\d{1,2}$", r"\1", text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
 
@@ -379,6 +407,104 @@ def clean_document_pages(
         text = text[:marker_index].rstrip()
 
     return normalize_unicode(text).strip()
+
+
+def find_libreoffice_executable() -> str | None:
+    for command in ("soffice", "libreoffice"):
+        executable = shutil.which(command)
+        if executable:
+            return executable
+
+    windows_paths = [
+        Path("C:/Program Files/LibreOffice/program/soffice.exe"),
+        Path("C:/Program Files (x86)/LibreOffice/program/soffice.exe"),
+    ]
+    for executable in windows_paths:
+        if executable.exists():
+            return str(executable)
+
+    return None
+
+
+def convert_legacy_doc_to_docx(doc_path: Path, output_dir: Path) -> Path:
+    executable = find_libreoffice_executable()
+    if not executable:
+        raise RuntimeError(
+            f"Cannot read legacy .doc file '{doc_path.name}' directly. "
+            "Install LibreOffice and make 'soffice' available in PATH, then rerun."
+        )
+
+    result = subprocess.run(
+        [
+            executable,
+            "--headless",
+            "--convert-to",
+            "docx",
+            "--outdir",
+            str(output_dir),
+            str(doc_path),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=120,
+        check=False,
+    )
+
+    converted_path = output_dir / f"{doc_path.stem}.docx"
+    if result.returncode != 0 or not converted_path.exists():
+        details = "\n".join(
+            part.strip()
+            for part in (result.stdout, result.stderr)
+            if part and part.strip()
+        )
+        raise RuntimeError(
+            f"LibreOffice could not convert '{doc_path.name}' to .docx."
+            + (f" Details: {details}" if details else "")
+        )
+
+    return converted_path
+
+
+def extract_text_from_docx(docx_path: Path) -> str:
+    try:
+        from docx import Document
+    except ImportError:
+        raise RuntimeError(
+            "python-docx is required to extract text from Word documents. "
+            "Install it with: pip install python-docx"
+        )
+
+    doc = Document(str(docx_path))
+    page_texts = []
+    current_page = []
+
+    for para in doc.paragraphs:
+        text = para.text.strip()
+        if text:
+            current_page.append(text)
+
+    if current_page:
+        page_texts.append("\n".join(current_page))
+
+    if not page_texts:
+        return ""
+
+    return clean_document_pages(page_texts)
+
+
+def extract_text_from_doc(doc_path: str) -> str:
+    """Extract text from .doc or .docx file."""
+    path = Path(doc_path)
+
+    if path.suffix.lower() == ".docx":
+        return extract_text_from_docx(path)
+
+    if path.suffix.lower() == ".doc":
+        with tempfile.TemporaryDirectory(prefix="doc_convert_") as tmpdir:
+            converted_path = convert_legacy_doc_to_docx(path, Path(tmpdir))
+            return extract_text_from_docx(converted_path)
+
+    raise RuntimeError(f"Unsupported Word document extension: {path.suffix}")
 
 
 def extract_text_from_pdf(pdf_path: str) -> str:
