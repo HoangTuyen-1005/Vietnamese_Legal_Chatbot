@@ -344,6 +344,29 @@ def merge_wrapped_lines(lines: Sequence[str]) -> List[str]:
     return merged
 
 
+def uppercase_ratio(line: str) -> float:
+    letters = [ch for ch in line if ch.isalpha()]
+    if not letters:
+        return 0.0
+    return sum(ch.isupper() for ch in letters) / len(letters)
+
+
+def strip_heading_footnote_markers(lines: Sequence[str]) -> List[str]:
+    cleaned: List[str] = []
+
+    for line in lines:
+        stripped = line.strip()
+        if (
+            re.search(r"\D\d{1,2}$", stripped)
+            and uppercase_ratio(stripped) >= 0.72
+            and len(stripped) <= 140
+        ):
+            stripped = re.sub(r"(?<=\D)\d{1,2}$", "", stripped).rstrip()
+        cleaned.append(stripped)
+
+    return cleaned
+
+
 def clean_document_pages(
     page_texts: Sequence[str],
     config: CleanerConfig | None = None,
@@ -365,10 +388,12 @@ def clean_document_pages(
 
     all_lines = trim_trailing_footnote_appendix(all_lines, config)
     merged = merge_wrapped_lines(all_lines)
+    merged = strip_heading_footnote_markers(merged)
 
     text = "\n".join(merged)
     text = re.sub(r"(?m)^\[\d+\].*$\n?", "", text)
     text = re.sub(r"\[(\d{1,4})\]", "", text)
+    text = re.sub(r"(?m)^([^\n\d]{6,140}[A-ZÀ-ỸĐ])\d{1,2}$", r"\1", text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
 
@@ -379,6 +404,45 @@ def clean_document_pages(
         text = text[:marker_index].rstrip()
 
     return normalize_unicode(text).strip()
+
+
+
+
+def extract_text_from_docx(docx_path: Path) -> str:
+    try:
+        from docx import Document
+    except ImportError:
+        raise RuntimeError(
+            "python-docx is required to extract text from Word documents. "
+            "Install it with: pip install python-docx"
+        )
+
+    doc = Document(str(docx_path))
+    page_texts = []
+    current_page = []
+
+    for para in doc.paragraphs:
+        text = para.text.strip()
+        if text:
+            current_page.append(text)
+
+    if current_page:
+        page_texts.append("\n".join(current_page))
+
+    if not page_texts:
+        return ""
+
+    return clean_document_pages(page_texts)
+
+
+def extract_text_from_doc(doc_path: str) -> str:
+    """Extract text from .docx file."""
+    path = Path(doc_path)
+
+    if path.suffix.lower() == ".docx":
+        return extract_text_from_docx(path)
+
+    raise RuntimeError(f"Unsupported document extension: {path.suffix}. Only .docx files are supported.")
 
 
 def extract_text_from_pdf(pdf_path: str) -> str:
