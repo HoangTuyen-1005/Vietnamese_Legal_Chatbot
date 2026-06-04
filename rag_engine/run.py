@@ -11,6 +11,5 @@ if __name__ == "__main__":
         "rag_engine.api.main:app",
         host=settings.RAG_ENGINE_HOST,
         port=settings.RAG_ENGINE_PORT,
-        reload=True,
+        reload=settings.DEBUG,
     )
-

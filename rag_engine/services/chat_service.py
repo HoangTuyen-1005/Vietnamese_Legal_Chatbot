@@ -1,3 +1,4 @@
+import re
 import time
 import unicodedata
 
@@ -15,8 +16,6 @@ from rag_engine.retrieval.refusal_policy import (
     REFUSAL_ANSWER,
     diagnose_rerank_refusal,
     diagnose_retrieval_refusal,
-    should_refuse_after_rerank,
-    should_refuse_after_retrieval,
 )
 
 
@@ -48,7 +47,7 @@ class ChatService:
             model_name=getattr(settings, "QUERY_PROFILE_MODEL_NAME", None),
             api_key=getattr(settings, "GEMINI_API_KEY", None),
             temperature=getattr(settings, "QUERY_PROFILE_TEMPERATURE", 0.0),
-            max_output_tokens=getattr(settings, "QUERY_PROFILE_MAX_OUTPUT_TOKENS", 1024),
+            max_output_tokens=getattr(settings, "QUERY_PROFILE_MAX_OUTPUT_TOKENS", 2048),
             logger=logger,
         )
 
@@ -487,8 +486,6 @@ class ChatService:
         return score
 
     def _constraint_context_score(self, query_profile: dict, text_norm: str) -> float:
-        import re
-
         score = 0.0
         for key in ("keywords", "legal_concepts", "retrieval_queries"):
             for value in query_profile.get(key, []) or []:
@@ -517,8 +514,6 @@ class ChatService:
         return score
 
     def _has_positive_counterpart(self, text_norm: str, tail: str) -> bool:
-        import re
-
         tail_tokens = [
             token
             for token in re.findall(r"\w+", tail)
@@ -588,12 +583,6 @@ class ChatService:
 
         return sources
 
-    def _should_refuse_answer(self, chunks: list[dict], query_profile: dict) -> bool:
-        return should_refuse_after_retrieval(chunks, query_profile=query_profile)
-
-    def _should_refuse_after_rerank(self, chunks: list[dict], query_profile: dict) -> bool:
-        return should_refuse_after_rerank(chunks, query_profile=query_profile)
-
     def _is_incomplete_generated_answer(self, answer: str) -> bool:
         text = (answer or "").strip()
         if not text:
@@ -648,8 +637,6 @@ class ChatService:
                 parsed = self._parse_int(getattr(response, attr, None))
                 if parsed is not None:
                     return parsed
-
-        import re
 
         match = re.search(r"\b(429|503)\b", str(exc))
         if match:

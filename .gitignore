@@ -5,12 +5,12 @@
 /data_pipeline/data/processed
 
 **/__pycache__
+*.py[cod]
 
 /qdrant_db_data
-
-*.
-
 .env
 
 /rag_engine/eval/ragas_runs
 /.gradio
+
+*.sqlite3

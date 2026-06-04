@@ -54,10 +54,14 @@ body,
         linear-gradient(135deg, #071116 0%, #0a151c 48%, #071116 100%) !important;
     color: var(--text) !important;
     height: 100dvh !important;
+    max-height: 100dvh !important;
+    width: 100% !important;
+    max-width: 100vw !important;
     overflow: hidden !important;
 }
 
 * {
+    box-sizing: border-box;
     scrollbar-width: thin;
     scrollbar-color: color-mix(in srgb, var(--accent) 55%, var(--border)) transparent;
 }
@@ -108,6 +112,7 @@ footer,
     display: flex !important;
     flex-direction: column !important;
     height: 100dvh !important;
+    max-height: 100dvh !important;
     min-height: 100dvh !important;
     overflow: hidden !important;
 }
@@ -275,6 +280,13 @@ footer,
     overflow: hidden !important;
 }
 
+#app-shell > *,
+#app-shell .row,
+#app-shell .column {
+    min-height: 0 !important;
+    min-width: 0 !important;
+}
+
 #sidebar,
 #workspace {
     background: var(--surface) !important;
@@ -285,11 +297,14 @@ footer,
     max-height: calc(100dvh - (var(--app-padding) * 2)) !important;
     min-height: 0 !important;
     min-width: 0 !important;
+    overflow: hidden !important;
 }
 
 #sidebar {
     display: flex !important;
     flex: 0 0 var(--sidebar-width) !important;
+    width: var(--sidebar-width) !important;
+    max-width: var(--sidebar-width) !important;
     flex-direction: column !important;
     gap: 0 !important;
     padding: var(--panel-padding) !important;
@@ -298,15 +313,28 @@ footer,
 
 #workspace {
     display: flex !important;
-    flex: 1 1 auto !important;
+    flex: 1 1 0 !important;
     flex-direction: column !important;
     gap: 10px !important;
     padding: var(--panel-padding) !important;
     overflow: hidden !important;
+    width: 100% !important;
+    max-width: calc(100vw - var(--sidebar-width) - var(--app-gap) - (var(--app-padding) * 2)) !important;
 }
 
 #sidebar > *,
 #workspace > * {
+    min-width: 0 !important;
+}
+
+#workspace > *,
+#workspace .column,
+#workspace .form,
+#workspace .block,
+#workspace .block-body,
+#workspace .wrap,
+#workspace .container {
+    min-height: 0 !important;
     min-width: 0 !important;
 }
 
@@ -355,7 +383,7 @@ footer,
 
 #history-section {
     display: flex !important;
-    flex: 1 1 auto !important;
+    flex: 1 1 0 !important;
     flex-direction: column !important;
     min-height: 0 !important;
     min-width: 0 !important;
@@ -395,13 +423,15 @@ footer,
 #history-section .form:has(#history-list),
 #history-section .container:has(#history-list),
 #history-section .block-body:has(#history-list) {
-    flex: 1 1 auto !important;
+    flex: 1 1 0 !important;
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;
     height: 100% !important;
+    max-height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: hidden !important;
 }
 
 #history-list {
@@ -465,13 +495,14 @@ footer,
 #history-list .wrap,
 #history-list .options {
     display: flex !important;
-    flex: 1 1 auto !important;
+    flex: 1 1 0 !important;
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 0 !important;
     width: 100% !important;
     min-height: 0 !important;
     height: 100% !important;
+    max-height: 100% !important;
     padding: 0 !important;
 }
 
@@ -487,7 +518,7 @@ footer,
 }
 
 #history-list .options {
-    flex: 1 1 auto !important;
+    flex: 1 1 0 !important;
     min-height: 0 !important;
     max-height: 100% !important;
     overflow-y: auto !important;
@@ -636,28 +667,37 @@ footer,
 
 #workspace .form:has(#chatbot-ui),
 #workspace .block:has(#chatbot-ui),
-#workspace .wrap:has(#chatbot-ui) {
+#workspace .wrap:has(#chatbot-ui),
+#workspace .container:has(#chatbot-ui),
+#workspace .block-body:has(#chatbot-ui) {
     flex: 1 1 0 !important;
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;
-    height: auto !important;
+    height: 100% !important;
+    max-height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: hidden !important;
 }
 
 #chatbot-ui > *,
 #chatbot-ui .wrap,
 #chatbot-ui .block,
 #chatbot-ui .block-body,
-#chatbot-ui .bubble-wrap {
+#chatbot-ui .container,
+#chatbot-ui .bubble-wrap,
+#chatbot-ui .chatbot {
     min-height: 0 !important;
     min-width: 0 !important;
     height: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
 }
 
 #chatbot-ui .bubble-wrap,
 #chatbot-ui .messages,
+#chatbot-ui .chatbot,
 #chatbot-ui [role="log"] {
     height: 100% !important;
     max-height: 100% !important;
@@ -673,6 +713,10 @@ footer,
 #chatbot-ui .message-wrap,
 #chatbot-ui .message-row {
     background: transparent !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
 }
 
 #chatbot-ui .message-row {
@@ -698,8 +742,11 @@ footer,
     border: 1px solid var(--border) !important;
     box-shadow: none !important;
     max-width: min(760px, calc(100% - 64px)) !important;
-    overflow-wrap: anywhere !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: pre-wrap !important;
     min-width: 0 !important;
+    overflow: visible !important;
 }
 
 #chatbot-ui .message-buttons,
@@ -726,6 +773,70 @@ footer,
 #chatbot-ui .message-bubble li,
 #chatbot-ui .message-bubble summary {
     color: inherit !important;
+}
+
+#chatbot-ui .message-bubble,
+#chatbot-ui .message-bubble .markdown,
+#chatbot-ui .message-bubble .prose,
+#chatbot-ui .message-bubble p,
+#chatbot-ui .message-bubble li,
+#chatbot-ui .message-bubble blockquote,
+#chatbot-ui .message-bubble summary,
+#chatbot-ui .message-bubble details {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+}
+
+#chatbot-ui .message-bubble details {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 260px !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    contain: inline-size !important;
+}
+
+#chatbot-ui .message-bubble details[open] {
+    display: block !important;
+}
+
+#chatbot-ui .message-bubble summary {
+    cursor: pointer !important;
+}
+
+#chatbot-ui .message-bubble blockquote {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+}
+
+#chatbot-ui .message-bubble pre,
+#chatbot-ui .message-bubble code,
+#chatbot-ui .message-bubble table {
+    max-width: 100% !important;
+}
+
+#chatbot-ui .message-bubble pre,
+#chatbot-ui .message-bubble table {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: pre-wrap !important;
+}
+
+#chatbot-ui .message-bubble table {
+    display: block !important;
+}
+
+#chatbot-ui .message-bubble code {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    white-space: pre-wrap !important;
 }
 
 #chatbot-ui .avatar-container img {
@@ -772,16 +883,21 @@ footer,
     align-items: center !important;
     flex-wrap: nowrap !important;
     overflow: hidden !important;
+    position: relative !important;
+    z-index: 2 !important;
 }
 
 #workspace .form:has(#composer-wrap),
 #workspace .block:has(#composer-wrap),
-#workspace .wrap:has(#composer-wrap) {
+#workspace .wrap:has(#composer-wrap),
+#workspace .container:has(#composer-wrap),
+#workspace .block-body:has(#composer-wrap) {
     flex: 0 0 auto !important;
     min-height: 0 !important;
     height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: hidden !important;
 }
 
 #composer-wrap > *,
