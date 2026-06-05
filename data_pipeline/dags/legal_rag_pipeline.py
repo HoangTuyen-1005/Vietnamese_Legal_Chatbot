@@ -15,25 +15,39 @@ default_args = {
 with DAG(
     'vietnam_legal_rag_etl_pipeline',
     default_args=default_args,
-    description='Hệ thống Hybrid ETL: Cào dữ liệu tại Local bằng IP nhà dân',
-    schedule_interval='0 0 * * *',  # Chạy tự động lúc 00:00 hàng ngày
+    description='Hệ thống trọn gói ETL: Cào dữ liệu -> Ingest (Cleaner & Chunker) -> Build Index Vector',
+    schedule_interval='0 0 * * *',  # Tự động chạy lúc 00:00 hàng ngày
     start_date=datetime(2026, 1, 1),
     catchup=False,
-    tags=['legal_chatbot', 'crawler', 'local'],
+    tags=['legal_chatbot', 'full_pipeline'],
 ) as dag:
 
-    # TASK DUY NHẤT: Gọi script cào dữ liệu chạy an toàn trong Docker Local
+    # 🟢 TASK 1: Cào dữ liệu pháp luật (Giữ nguyên cấu trúc đã chạy thành công)
     task_1_crawl_data = BashOperator(
-        task_id='Crawl_Law_Documents_Local',
-        # Ép đứng đúng thư mục gốc chứa toàn bộ dự án để đọc được ChuDe.txt
+        task_id='1_Crawl_Law_Documents',
         bash_command='cd /opt/airflow && python3 data_pipeline/dags/crawler.py',
         env={
-            # Trỏ đúng vào ngách thư mục data/raw đã map từ máy bạn vào Docker
             'RAW_DATA_DIR': '/opt/airflow/data_pipeline/data/raw',
-            'TVPL_USERNAME': 'dothang26905@gmail.com',
-            'TVPL_PASSWORD': 'dnt2692005',
             **os.environ
         }
     )
 
-    task_1_crawl_data
+    # 🔵 TASK 2: Ingest dữ liệu (Ép PYTHONPATH trực tiếp vào lệnh bash)
+    task_2_ingest_data = BashOperator(
+        task_id='2_Ingest_Documents',
+        bash_command='export PYTHONPATH=/opt/airflow:/opt/airflow/data_pipeline && cd /opt/airflow && python3 data_pipeline/scripts/ingest_pdf.py',
+    )
+
+   # 🟡 TASK 3: Build Index
+    task_3_build_index = BashOperator(
+        task_id='3_Build_Vector_Index',
+        bash_command='export PYTHONPATH=/opt/airflow:/opt/airflow/data_pipeline && cd /opt/airflow && python3 data_pipeline/scripts/build_index.py',
+        env={
+            # Dùng 'host.docker.internal' để Docker có thể nhìn xuyên ra máy thật của bạn
+            'QDRANT_HOST': 'host.docker.internal',
+            **os.environ
+        }
+    )
+
+    # ĐỊNH NGHĨA LUỒNG CHẢY TUẦN TỰ (Cào xong -> Trích xuất/Băm nhỏ -> Đẩy lên Kho lưu trữ)
+    task_1_crawl_data >> task_2_ingest_data >> task_3_build_index

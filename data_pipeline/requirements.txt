@@ -10,8 +10,10 @@ pymupdf
 pyvi
 rank-bm25
 qdrant-client
-sentence-transformers
+
 torch==2.5.1
+transformers>=4.34.0,<4.41.0
+sentence-transformers>=2.3.1,<3.0.0
 
 pydantic
 pydantic-settings

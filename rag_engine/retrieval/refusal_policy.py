@@ -19,48 +19,10 @@ RETRIEVAL_SCORE_FLOOR = 0.006
 RETRIEVAL_COVERAGE_FLOOR = 0.02
 RETRIEVAL_LAW_OVERLAP_FLOOR = 0.05
 
-UNSUPPORTED_SCOPE_PATTERNS = {
-    "family_law": (
-        r"\bket hon\b",
-        r"\bly hon\b",
-        r"\bkhai sinh\b",
-        r"\bvo chong\b",
-        r"\bhon nhan\b",
-        r"\btai san chung cua vo chong\b",
-    ),
-    "labor_law": (
-        r"\bnguoi lao dong\b",
-        r"\bhop dong lao dong\b",
-        r"\bnghi phep\b",
-        r"\bphep nam\b",
-        r"\bluong toi thieu\b",
-        r"\bthu viec\b",
-        r"\bnhan vien\b",
-    ),
-    "social_insurance": (
-        r"\bbao hiem xa hoi\b",
-        r"\bbao hiem that nghiep\b",
-    ),
-    "tax_law": (
-        r"\bquyet toan thue\b",
-        r"\bthue thu nhap\b",
-        r"\bthue thu nhap ca nhan\b",
-        r"\bthue thu nhap doanh nghiep\b",
-        r"\bthue gia tri gia tang\b",
-        r"\bma so thue\b",
-        r"\bhoa don dien tu\b",
-    ),
-    "traffic_law": (
-        r"\blai xe\b",
-        r"\bden do\b",
-        r"\bnong do con\b",
-        r"\bot o\b",
-        r"\bxe may\b",
-        r"\bnghi dinh 100\b",
-    ),
-}
-
 SUPPORTED_SCOPE_PATTERNS = (
+    r"\bluat\b",
+    r"\bbo luat\b",
+    r"\bphap luat\b",
     r"\bdan su\b",
     r"\bhinh su\b",
     r"\btoi pham\b",
@@ -123,37 +85,11 @@ def _scope_diagnostics(query_profile: dict | None) -> dict:
         }
 
     raw_query = _normalize_for_match(query_profile.get("raw_query"))
-    unsupported_matches: list[str] = []
-    for scope, patterns in UNSUPPORTED_SCOPE_PATTERNS.items():
-        if _pattern_matches(raw_query, patterns):
-            unsupported_matches.append(scope)
-
     supported_matches = _pattern_matches(raw_query, SUPPORTED_SCOPE_PATTERNS)
-    mentioned_law = _normalize_for_match(query_profile.get("mentioned_law"))
-    supported_law_matches = _pattern_matches(mentioned_law, SUPPORTED_SCOPE_PATTERNS)
-    has_hard_reference = bool(
-        query_profile.get("mentioned_law")
-        or query_profile.get("mentioned_law_codes")
-        or query_profile.get("mentioned_articles")
-        or query_profile.get("mentioned_clauses")
-        or query_profile.get("mentioned_points")
-        or query_profile.get("mentioned_chapters")
-    )
-
-    if (
-        unsupported_matches
-        and not supported_matches
-        and (not has_hard_reference or not supported_law_matches)
-    ):
-        status = "likely_out_of_scope"
-    elif unsupported_matches:
-        status = "mixed_scope"
-    else:
-        status = "in_scope_or_unknown"
 
     return {
-        "scope_status": status,
-        "scope_matches": unsupported_matches,
+        "scope_status": "in_scope_or_unknown",
+        "scope_matches": [],
         "supported_scope_matches": supported_matches,
     }
 
@@ -310,21 +246,6 @@ def diagnose_retrieval_refusal(
     coverage = _keyword_coverage(keywords, top_chunks)
     law_overlap = _max_law_overlap(mentioned_law, top_chunks) if mentioned_law else 0.0
 
-    if scope["scope_status"] == "likely_out_of_scope":
-        return {
-            "stage": "retrieval",
-            "should_refuse": True,
-            "reason": "unsupported_legal_domain_signal",
-            "top_score": top_score,
-            "top_combined_score": top_combined_score,
-            "coverage": coverage,
-            "law_overlap": law_overlap,
-            "metadata_boost": metadata_boost,
-            "distinct_sources": distinct_sources,
-            "mentioned_law": mentioned_law or None,
-            **scope,
-        }
-
     if mentioned_law and (
         law_overlap >= 0.20
         or coverage >= 0.08
@@ -401,19 +322,6 @@ def diagnose_rerank_refusal(
     coverage = _keyword_coverage(keywords, top_chunks)
     law_overlap = _max_law_overlap(mentioned_law, top_chunks) if mentioned_law else 0.0
     metadata_boost = _max_metadata_boost(top_chunks)
-
-    if scope["scope_status"] == "likely_out_of_scope":
-        return {
-            "stage": "rerank",
-            "should_refuse": True,
-            "reason": "unsupported_legal_domain_signal",
-            "top_rerank_score": top_rerank_score,
-            "coverage": coverage,
-            "law_overlap": law_overlap,
-            "metadata_boost": metadata_boost,
-            "mentioned_law": mentioned_law or None,
-            **scope,
-        }
 
     if (
         top_rerank_score >= 0.05

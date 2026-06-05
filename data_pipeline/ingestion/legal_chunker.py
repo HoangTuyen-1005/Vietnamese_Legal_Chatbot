@@ -22,7 +22,7 @@ RE_KHOAN = re.compile(r"(?im)^\s*(\d+)\.\s+")
 RE_DIEM = re.compile(r"(?im)^\s*([a-zA-ZđĐ])\)\s+")
 
 RE_SO_HIEU = re.compile(
-    r"(?im)\b(\d{1,4}/(?:\d{4}/)?[A-ZĐ0-9\-]+(?:/[A-Z0-9\-]+)?)\b"
+    r"(?im)\b(\d{1,4}\s*/\s*(?:\d{4}\s*/\s*)?[A-ZĐ0-9\-]+(?:\s*/\s*[A-Z0-9\-]+)?)\b"
 )
 RE_LOAI_VAN_BAN = re.compile(
     r"(?im)\b(Luật|Bộ luật|Nghị định|Thông tư|Thông tư liên tịch|Nghị quyết|Quyết định|Pháp lệnh|Hiến pháp)\b"
@@ -222,6 +222,29 @@ def infer_doc_type_from_filename(file_name: str) -> Optional[str]:
     return None
 
 
+def normalize_so_hieu(value: Optional[str]) -> Optional[str]:
+    value = safe_strip(value)
+    if not value:
+        return None
+    value = re.sub(r"\s*/\s*", "/", value)
+    value = re.sub(r"\s+", "", value)
+    return value.upper()
+
+
+def infer_so_hieu_from_filename(file_name: str) -> Optional[str]:
+    normalized = Path(file_name).stem.lower().replace("-", "_").replace(" ", "_")
+
+    vbhn_match = re.search(r"\b(\d{1,4})_vbhn_vpqh(?:_\d{4})?\b", normalized)
+    if vbhn_match:
+        return f"{int(vbhn_match.group(1)):02d}/VBHN-VPQH"
+
+    law_match = re.search(r"(?:^|_)(?:so_)?(\d{1,4})_(\d{4})_(qh\d+)(?=_|$)", normalized)
+    if law_match:
+        return f"{int(law_match.group(1))}/{law_match.group(2)}/{law_match.group(3).upper()}"
+
+    return None
+
+
 def infer_known_document_metadata(file_name: str) -> Dict[str, str]:
     normalized = Path(file_name).stem.lower().replace("-", "_").replace(" ", "_")
 
@@ -238,10 +261,18 @@ def infer_known_document_metadata(file_name: str) -> Dict[str, str]:
 def extract_document_metadata(text: str, file_name: str = "document.txt") -> Dict[str, Optional[str]]:
     header_zone = text[:5000]
     known_meta = infer_known_document_metadata(file_name)
+    filename_so_hieu = infer_so_hieu_from_filename(file_name)
+    is_consolidated = "van_ban_hop_nhat" in Path(file_name).stem.lower().replace("-", "_").replace(" ", "_")
 
     so_hieu_match = RE_SO_HIEU.search(header_zone)
     loai_match = RE_LOAI_VAN_BAN.search(header_zone)
     ngay_match = RE_NGAY_BAN_HANH.search(header_zone)
+
+    content_so_hieu = normalize_so_hieu(so_hieu_match.group(1)) if so_hieu_match else None
+    if filename_so_hieu and not is_consolidated:
+        so_hieu = filename_so_hieu
+    else:
+        so_hieu = content_so_hieu or filename_so_hieu or known_meta.get("so_hieu")
 
     ngay_ban_hanh = safe_strip(ngay_match.group(1)) if ngay_match else None
     loai_van_ban = normalize_doc_type(loai_match.group(1) if loai_match else None)
@@ -251,7 +282,7 @@ def extract_document_metadata(text: str, file_name: str = "document.txt") -> Dic
 
     return {
         "document_name": Path(file_name).stem,
-        "so_hieu": so_hieu_match.group(1) if so_hieu_match else known_meta.get("so_hieu"),
+        "so_hieu": so_hieu,
         "loai_van_ban": loai_van_ban or known_meta.get("loai_van_ban"),
         "ngay_ban_hanh": ngay_ban_hanh or known_meta.get("ngay_ban_hanh"),
     }

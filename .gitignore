@@ -1,8 +1,10 @@
 /venv
 
+/data_pipeline/data/backup
 /data_pipeline/data/cleaned
-/data_pipeline/data/indexes
+# /data_pipeline/data/indexes
 /data_pipeline/data/processed
+/data_pipeline/data/raw
 
 **/__pycache__
 *.py[cod]

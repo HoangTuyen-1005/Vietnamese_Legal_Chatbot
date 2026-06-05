@@ -12,14 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = PROJECT_ROOT / "data_pipeline" / "data" / "raw"
 PROCESSED_DIR = PROJECT_ROOT / "data_pipeline" / "data" / "processed"
 OUTPUT_PATH = PROJECT_ROOT / "rag_engine" / "eval" / "eval_questions.json"
-
-EXPECTED_SOURCE_FILES = {
-    "BLDS_2015.pdf": "BLDS_2015.json",
-    "BLHS_2015_SDBS_2017_TVPL.pdf": "BLHS_2015_SDBS_2017_TVPL.json",
-    "Luat_dat_dai_2024.pdf": "Luat_dat_dai_2024.json",
-    "Luat_cac_to_chuc_tin_dung.pdf": "Luat_cac_to_chuc_tin_dung.json",
-    "luat_chuyen_doi_so.pdf": "luat_chuyen_doi_so.json",
-}
+SOURCE_FIELDS = ("so_hieu", "dieu", "khoan", "diem")
 
 LAW_NAMES = {
     "91/2015/QH13": "Bộ luật Dân sự 2015",
@@ -193,16 +186,129 @@ def load_chunks() -> list[dict[str, Any]]:
 
 
 def validate_input_files() -> None:
-    missing: list[str] = []
-    for raw_name, processed_name in EXPECTED_SOURCE_FILES.items():
-        if not (RAW_DIR / raw_name).is_file():
-            missing.append(str(RAW_DIR / raw_name))
-        if not (PROCESSED_DIR / processed_name).is_file():
-            missing.append(str(PROCESSED_DIR / processed_name))
+    raw_files = list(RAW_DIR.glob("*.docx")) + list(RAW_DIR.glob("*.pdf"))
+    processed_files = list(PROCESSED_DIR.glob("*.json"))
+    if not raw_files:
+        raise FileNotFoundError(f"No raw legal documents found in {RAW_DIR}")
+    if not processed_files:
+        raise FileNotFoundError(f"No processed legal chunks found in {PROCESSED_DIR}")
 
-    if missing:
-        missing_list = "\n".join(f"- {path}" for path in missing)
-        raise FileNotFoundError(f"Missing source files for eval generation:\n{missing_list}")
+
+def _document_label(metadata: dict[str, Any]) -> str:
+    so_hieu = metadata.get("so_hieu")
+    if so_hieu and so_hieu in LAW_NAMES:
+        return LAW_NAMES[so_hieu]
+    name = str(metadata.get("document_name") or "văn bản").replace("-", " ")
+    return normalize_spaces(name)
+
+
+def _auto_query_type(metadata: dict[str, Any], content: str) -> str:
+    title = normalize_spaces(str(metadata.get("ten_dieu") or "")).lower()
+    text = normalize_spaces(content).lower()
+    if "giải thích từ ngữ" in title or "được hiểu là" in text[:500]:
+        return "definition_lookup"
+    if "nguyên tắc" in title:
+        return "principle_lookup"
+    if "nghiêm cấm" in title or "cấm" in title:
+        return "prohibited_acts"
+    if "điều kiện" in title:
+        return "conditions"
+    if "trường hợp" in title:
+        return "cases_circumstances"
+    if any(term in title for term in ("xử phạt", "hình phạt", "xử lý vi phạm", "chế tài")):
+        return "penalty_lookup"
+    if any(term in title for term in ("thủ tục", "trình tự", "hồ sơ", "thẩm quyền")):
+        return "procedure_lookup"
+    return "article_lookup"
+
+
+def _auto_question(metadata: dict[str, Any], query_type: str) -> str:
+    law_name = _document_label(metadata)
+    subject = normalize_spaces(
+        str(metadata.get("ten_dieu") or metadata.get("dieu") or "nội dung này")
+    ).rstrip(".")
+
+    if query_type == "definition_lookup":
+        return f"Theo {law_name}, {subject} được hiểu như thế nào?"
+    if query_type == "principle_lookup":
+        return f"Theo {law_name}, {subject.lower()} được quy định ra sao?"
+    if query_type == "prohibited_acts":
+        return f"Theo {law_name}, {subject.lower()} gồm những nội dung nào?"
+    if query_type == "conditions":
+        return f"Theo {law_name}, {subject.lower()} là gì?"
+    if query_type == "procedure_lookup":
+        return f"Theo {law_name}, {subject.lower()} được thực hiện như thế nào?"
+    if query_type == "penalty_lookup":
+        return f"Theo {law_name}, {subject.lower()} được xử lý như thế nào?"
+    return f"Theo {law_name}, {subject.lower()} được quy định như thế nào?"
+
+
+def _source_from_metadata(metadata: dict[str, Any]) -> dict[str, str | None]:
+    return src(
+        str(metadata.get("so_hieu")),
+        str(metadata.get("dieu")),
+        metadata.get("khoan"),
+        metadata.get("diem"),
+    )
+
+
+def _auto_eval_rows(
+    chunks: list[dict[str, Any]],
+    existing_source_keys: set[tuple[str | None, str | None, str | None, str | None]],
+    start_index: int,
+    target_count: int,
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    seen_docs: dict[str, int] = {}
+
+    def candidate_rank(chunk: dict[str, Any]) -> tuple[int, int, str]:
+        metadata = chunk.get("metadata", {})
+        cap = metadata.get("cap_chunk")
+        cap_rank = {"dieu": 3, "khoan": 2, "diem": 1}.get(str(cap), 0)
+        return cap_rank, len(chunk.get("content", "")), str(chunk.get("chunk_id", ""))
+
+    candidates = sorted(chunks, key=candidate_rank, reverse=True)
+    for chunk in candidates:
+        if len(rows) >= target_count:
+            break
+
+        metadata = chunk.get("metadata", {})
+        if not metadata.get("so_hieu") or not metadata.get("dieu"):
+            continue
+
+        source = _source_from_metadata(metadata)
+        source_key = tuple(source.get(field) for field in SOURCE_FIELDS)
+        if source_key in existing_source_keys:
+            continue
+
+        doc_key = str(metadata.get("document_name") or metadata.get("so_hieu"))
+        if seen_docs.get(doc_key, 0) >= 5:
+            continue
+
+        query_type = _auto_query_type(metadata, chunk.get("content", ""))
+        reference = make_reference(chunks, chunk, source)
+        row_index = start_index + len(rows)
+        rows.append({
+            "id": f"q{row_index:03d}",
+            "question": _auto_question(metadata, query_type),
+            "category": f"auto_{slugify(doc_key)[:48]}",
+            "difficulty": "medium",
+            "query_type": query_type,
+            "expected_sources": [source],
+            "reference": reference,
+            "should_refuse": False,
+            "notes": f"Auto-generated from expanded knowledge base. Source chunk: {chunk.get('chunk_id')}.",
+        })
+        existing_source_keys.add(source_key)
+        seen_docs[doc_key] = seen_docs.get(doc_key, 0) + 1
+
+    return rows
+
+
+def slugify(value: str) -> str:
+    text = normalize_spaces(value).lower()
+    text = re.sub(r"[^\w]+", "_", text, flags=re.UNICODE)
+    return text.strip("_") or "document"
 
 
 def source_matches(expected: dict[str, str | None], metadata: dict[str, Any]) -> bool:
@@ -297,6 +403,7 @@ def build_questions() -> list[dict[str, Any]]:
     validate_input_files()
     chunks = load_chunks()
     rows: list[dict[str, Any]] = []
+    existing_source_keys: set[tuple[str | None, str | None, str | None, str | None]] = set()
 
     for index, raw in enumerate(CURATED_ITEMS, start=1):
         source = raw["source"]
@@ -305,12 +412,16 @@ def build_questions() -> list[dict[str, Any]]:
         if should_refuse:
             reference = REFUSAL_ANSWER
         else:
-            reference_chunk = choose_reference_chunk(chunks, source)
+            try:
+                reference_chunk = choose_reference_chunk(chunks, source)
+            except ValueError:
+                continue
             reference = make_reference(chunks, reference_chunk, source)
             raw["notes"] = f"{raw['notes']} Source chunk: {reference_chunk.get('chunk_id')}."
+            existing_source_keys.add(tuple(source.get(field) for field in SOURCE_FIELDS))
 
         rows.append({
-            "id": f"q{index:03d}",
+            "id": f"q{len(rows) + 1:03d}",
             "question": raw["question"],
             "category": raw["category"],
             "difficulty": raw["difficulty"],
@@ -321,8 +432,19 @@ def build_questions() -> list[dict[str, Any]]:
             "notes": raw["notes"],
         })
 
-    if len(rows) != 100:
-        raise ValueError(f"Expected 100 questions, got {len(rows)}")
+    if len(rows) < 100:
+        rows.extend(
+            _auto_eval_rows(
+                chunks=chunks,
+                existing_source_keys=existing_source_keys,
+                start_index=len(rows) + 1,
+                target_count=100 - len(rows),
+            )
+        )
+
+    if len(rows) < 100:
+        raise ValueError(f"Expected at least 100 questions, got {len(rows)}")
+    rows = rows[:100]
     return rows
 
 

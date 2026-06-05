@@ -1,6 +1,6 @@
 version: '3.8'
 x-airflow-common: &airflow-common
-  image: apache/airflow:2.7.1-python3.10
+  build: . 
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
@@ -10,10 +10,23 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     AIRFLOW__WEBSERVER__SECRET_KEY: 'khoa_bi_mat_cua_thang_123'
-    _PIP_ADDITIONAL_REQUIREMENTS: 'databricks-sdk'
+    
+    QDRANT_URL: "${QDRANT_URL}"
+    QDRANT_API_KEY: "${QDRANT_API_KEY}"
+    QDRANT_COLLECTION: "${QDRANT_COLLECTION}"
+
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+
   volumes:
     - ./data_pipeline/dags:/opt/airflow/dags
     - ./data_pipeline:/opt/airflow/data_pipeline
+    - ./shared:/opt/airflow/shared
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     postgres:

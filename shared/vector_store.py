@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import inspect
 from typing import List, Optional
 
 import torch
@@ -34,6 +35,14 @@ def _build_search_text(content: str, metadata: dict) -> str:
     if header:
         return f"{header}\n{content or ''}".strip()
     return str(content or "").strip()
+
+
+def _supports_sentence_transformer_model_kwargs() -> bool:
+    try:
+        params = inspect.signature(SentenceTransformer.__init__).parameters
+    except (TypeError, ValueError):
+        return False
+    return "model_kwargs" in params
 
 
 class VectorStore:
@@ -73,18 +82,15 @@ class VectorStore:
 
     def _init_embedding_model(self) -> None:
         device = "cuda" if torch.cuda.is_available() else "cpu"
+        init_kwargs = {"device": device}
 
-        if device == "cuda":
-            self.embedding_model = SentenceTransformer(
-                self.settings.EMBEDDING_MODEL_NAME,
-                device=device,
-                model_kwargs={"torch_dtype": torch.float16},
-            )
-        else:
-            self.embedding_model = SentenceTransformer(
-                self.settings.EMBEDDING_MODEL_NAME,
-                device=device,
-            )
+        if device == "cuda" and _supports_sentence_transformer_model_kwargs():
+            init_kwargs["model_kwargs"] = {"torch_dtype": torch.float16}
+
+        self.embedding_model = SentenceTransformer(
+            self.settings.EMBEDDING_MODEL_NAME,
+            **init_kwargs,
+        )
 
     def create_collection_if_not_exists(self) -> None:
         if self.client is None or self.embedding_model is None:
@@ -126,7 +132,7 @@ class VectorStore:
         self._law_catalog_cache = None
         self._metadata_chunk_cache.clear()
 
-    def index_chunks(self, chunks: List[dict], batch_size: int = 256) -> None:
+    def index_chunks(self, chunks: List[dict], batch_size: int = 32) -> None:
         if self.client is None or self.embedding_model is None:
             raise RuntimeError("VectorStore is not initialized.")
 
