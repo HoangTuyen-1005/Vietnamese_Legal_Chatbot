@@ -10,6 +10,8 @@ from qdrant_client.http import models
 from qdrant_client.http.models import FieldCondition, Filter, MatchValue
 from sentence_transformers import SentenceTransformer
 
+PAYLOAD_INDEX_FIELDS = ("so_hieu", "dieu")
+
 
 def _stable_point_id(chunk_id: str) -> int:
     """
@@ -45,6 +47,11 @@ def _supports_sentence_transformer_model_kwargs() -> bool:
     return "model_kwargs" in params
 
 
+def _keyword_payload_schema():
+    payload_schema_type = getattr(models, "PayloadSchemaType", None)
+    return getattr(payload_schema_type, "KEYWORD", "keyword")
+
+
 class VectorStore:
     def __init__(self, settings):
         self.settings = settings
@@ -53,6 +60,7 @@ class VectorStore:
         self.collection_name = settings.QDRANT_COLLECTION
         self._law_catalog_cache: list[dict] | None = None
         self._metadata_chunk_cache: dict[tuple[str, str | None, int], list[dict]] = {}
+        self._payload_indexes_ready = False
 
         self._init_client()
         self._init_embedding_model()
@@ -111,6 +119,35 @@ class VectorStore:
                     distance=models.Distance.COSINE,
                 ),
             )
+            self._payload_indexes_ready = False
+
+        self.ensure_payload_indexes()
+
+    def ensure_payload_indexes(self) -> None:
+        if self.client is None:
+            raise RuntimeError("VectorStore is not initialized.")
+        if self._payload_indexes_ready:
+            return
+
+        create_payload_index = getattr(self.client, "create_payload_index", None)
+        if create_payload_index is None:
+            self._payload_indexes_ready = True
+            return
+
+        for field_name in PAYLOAD_INDEX_FIELDS:
+            try:
+                create_payload_index(
+                    collection_name=self.collection_name,
+                    field_name=field_name,
+                    field_schema=_keyword_payload_schema(),
+                    wait=True,
+                )
+            except Exception as exc:
+                message = str(exc).lower()
+                if "already" not in message and "exist" not in message:
+                    raise
+
+        self._payload_indexes_ready = True
 
     def recreate_collection(self) -> None:
         """
@@ -128,6 +165,7 @@ class VectorStore:
         if exists:
             self.client.delete_collection(self.collection_name)
 
+        self._payload_indexes_ready = False
         self.create_collection_if_not_exists()
         self._law_catalog_cache = None
         self._metadata_chunk_cache.clear()
@@ -217,6 +255,8 @@ class VectorStore:
     ) -> List[dict]:
         if self.client is None:
             raise RuntimeError("VectorStore is not initialized.")
+
+        self.ensure_payload_indexes()
 
         cache_key = (str(so_hieu), str(dieu) if dieu else None, int(limit))
         cached = self._metadata_chunk_cache.get(cache_key)
